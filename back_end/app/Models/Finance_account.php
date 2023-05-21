@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class finance_account extends Model
 {
     use HasFactory;
-    protected $guarded = ['account_id'];
+    protected $guarded = ['account_id', "user_id", 'account_type'];
     protected $primaryKey = 'account_id';
 
     public function user()

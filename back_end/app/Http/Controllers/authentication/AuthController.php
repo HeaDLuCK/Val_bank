@@ -49,7 +49,7 @@ class AuthController extends Controller
             ]);
             $fields['avatar_image']->storeAs('public/images', $user->id . '.' . explode('/', $fields['avatar_image']->getMimeType())[1]);
             DB::commit();
-            return ["status" => 300, 'message' => 'account successfully created'];
+            return response()->json(['message' => 'account successfully created'], 201);
         } catch (QueryException $e) {
             DB::rollback();
             $error = '';
@@ -58,7 +58,7 @@ class AuthController extends Controller
             } else {
                 $error = "cant insert data in database check inputs";
             }
-            return ["status" => 500, 'message' => $error];
+            return response()->json(['message' => $error], 500);
         }
     }
 
@@ -73,9 +73,9 @@ class AuthController extends Controller
         );
         $user = User::where('username', request('username'))->first();
         if ($user != null and Hash::check(request('password'), $user->getAuthPassword())) {
-            return ["status" => 300, "token" => $user->createToken(time())->plainTextToken];
+            return response()->json(["token" => $user->createToken(time())->plainTextToken], 202);
         } else {
-            return ["status" => 400, "message" => 'verify your username and password'];
+            return response()->json(["message" => 'verify your username and password'], 401);
         }
     }
 
@@ -83,6 +83,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->user()->currentAccessToken()->delete();
-        return ["status" => 200, "message" => "log out"];
+        return response()->json(["message" => "log out"], 200);
     }
 }

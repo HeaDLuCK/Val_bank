@@ -9,13 +9,13 @@ class Transaction extends Model
 {
     use HasFactory;
     // protected $primayKey = 'transaction_id';
-    public function transactionsAsDepositor()
+    public function depositorAccount()
     {
-        return $this->hasMany(Transaction::class, 'dep_acc', 'account_id');
+        return $this->belongsTo(finance_account::class, 'dep_account', 'account_id');
     }
 
-    public function transactionsAsReceiver()
+    public function receiverAccount()
     {
-        return $this->hasMany(Transaction::class, 'arr_acc', "account_id");
+        return $this->belongsTo(finance_account::class, 'arr_account', "account_id");
     }
 }
