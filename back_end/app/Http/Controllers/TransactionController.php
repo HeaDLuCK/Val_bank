@@ -86,15 +86,23 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         validator($request->all(), [
-            "arr_account" => 'required|string',
-            "amount" => 'required|decimal:2',
+            "dep_account" => 'required|integer',
+            "arr_account" => 'required|integer',
+            "amount" => 'required|decimal:1,9',
             "type" => 'required|string',
             "description" => 'string'
         ])->validate();
+        $accounts = Auth()->user()->finance_account->map(function ($elem) {
+            return $elem->account_id;
+        })->toArray();
+        /* if dep account is in accounts and arr account is not in accounts then we can do transaction */
         DB::beginTransaction();
         try {
-            if (Auth()->user()->finance_account->account_id != $request->arr_account) {
-                $dep_acc = finance_account::find(Auth()->user()->finance_account->account_id);
+            if (
+                in_array($request->dep_account, $accounts) and
+                !in_array($request->arr_account, $accounts)
+            ) {
+                $dep_acc = finance_account::find($request->dep_account);
                 $arr_acc = finance_account::find($request->arr_account);
                 if ($request->amount > $dep_acc->balance) {
                     throw new Exception('enough  balance');
@@ -104,16 +112,17 @@ class TransactionController extends Controller
                     $dep_acc->save();
                     $arr_acc->save();
                     $transaction = new Transaction();
-                    $transaction->dep_acc = $dep_acc->id;
-                    $transaction->arr_acc = $arr_acc->id;
+                    $transaction->dep_account = $dep_acc->account_id;
+                    $transaction->arr_account = $arr_acc->account_id;
                     $transaction->amount = $request->amount;
-                    $transaction->type = $request->amount;
+                    $transaction->type = $request->type;
                     $transaction->description = $request->description;
+                    $transaction->save();
                     DB::commit();
                     return response()->json(["message" => 'transaction successfully done'], 200);
                 }
             } else {
-                return response()->json(["message" => 'cant send to your self'], 500);
+                return response()->json(["message" => 'cant send to your self/ or bad request'], 500);
             }
         } catch (Exception $e) {
             DB::rollback();

@@ -27,7 +27,7 @@ class UserController extends Controller
             $elem->user_detail->avatar_image = $base64;
             return $elem;
         });
-        return response()->json(["payload" => $data],200);
+        return response()->json(["payload" => $data], 200);
     }
 
     /**
@@ -35,60 +35,64 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-
-        if (!(is_null(User::with('user_detail')->find($id)))) {
-            $data = User::with('user_detail')->find($id);
-            $contents = Storage::disk('public')->get('images/' . $data->user_detail->avatar_image);
-            $base64 = base64_encode($contents);
-            $data->user_detail->avatar_image = $base64;
-            return response()->json(["payload" => $data],200);
+        if (!(User::find($id))) {
+            return response()->json(["message" => "user not found"], 404);
         }
+
+        $data = User::with('user_detail')->find($id);
+        $contents = Storage::disk('public')->get('images/' . $data->user_detail->avatar_image);
+        $base64 = base64_encode($contents);
+        $data->user_detail->avatar_image = $base64;
+        
+        return response()->json(["payload" => $data], 200);
     }
 
     public function update(Request $request, string $id)
     {
+        if (!(User::find($id))) {
+            return response()->json(["message" => "user not found"], 404);
+        }
 
         validator($request->all(), [
-            'username' => 'string',
-            'password' => 'string|confirmed|min:8|max:30',
-            'first_name' => 'string',
-            'last_name' => 'string',
-            'cin' => 'string',
-            'email' => 'email:rfc,dns',
-            'phone_number' => 'string',
-            'address' => 'string',
-            'avatar_image' => 'image|mimes:jpg,png,jpeg'
+            'username' => 'sometimes|string',
+            'password' => 'sometimes|string|confirmed|min:8|max:30',
+            'first_name' => 'sometimes|string',
+            'last_name' => 'sometimes|string',
+            'cin' => 'sometimes|string',
+            'email' => 'sometimes|email:rfc,dns',
+            'phone_number' => 'sometimes|string',
+            'address' => 'sometimes|string',
+            'avatar_image' => 'sometimes|image|mimes:jpg,png,jpeg'
         ])->validate();
 
-        if (!(is_null(User::with('user_detail')->find($id)))) {
-            DB::beginTransaction();
-            try {
-                $user = User::with('user_detail')->find($id);
 
-                $user->password = $request->password ? bcrypt($request->password) : $user->password;
+        DB::beginTransaction();
+        try {
+            $user = User::with('user_detail')->find($id);
 
-                $user->user_detail->first_name = $request->first_name ?? $user->user_detail->first_name;
+            $user->password = $request->password ? bcrypt($request->password) : $user->password;
 
-                $user->user_detail->last_name = $request->last_name ?? $user->user_detail->last_name;
+            $user->user_detail->first_name = $request->input('first_name', $user->user_detail->first_name);
 
-                $user->user_detail->cin = $request->cin ?? $user->user_detail->cin;
+            $user->user_detail->last_name = $request->input('last_name', $user->user_detail->last_name);
 
-                $user->user_detail->email = $request->email ?? $user->user_detail->email;
+            $user->user_detail->cin = $request->input('cin', $user->user_detail->cin);
 
-                $user->user_detail->phone_number = $request->phone_number ?? $user->user_detail->phone_number;
+            $user->user_detail->email = $request->input('email', $user->user_detail->email);
 
-                $user->user_detail->address = $request->address ?? $user->user_detail->address;
+            $user->user_detail->phone_number = $request->input('phone_number', $user->user_detail->phone_number);
 
-                if ($request->hasFile('avatar_image')) {
-                    $request->avatar_image->storeAs('public/images', $user->id . '.' . explode('/', $request->avatar_image->getMimeType())[1]);
-                }
-                $user->push();
-                DB::commit();
-                return response()->json(["message" => "infomation updated"], 202);
-            } catch (QueryException) {
-                DB::rollback();
-                return response()->json(["message" => "you cant update try again"], 300);
+            $user->user_detail->address = $request->input('address', $user->user_detail->address);
+
+            if ($request->hasFile('avatar_image')) {
+                $request->avatar_image->storeAs('public/images', $user->id . '.' . explode('/', $request->avatar_image->getMimeType())[1]);
             }
+            $user->push();
+            DB::commit();
+            return response()->json(["message" => "infomation updated"], 202);
+        } catch (QueryException) {
+            DB::rollback();
+            return response()->json(["message" => "you cant update try again"], 300);
         }
     }
 
@@ -98,9 +102,11 @@ class UserController extends Controller
     public function destroy(string $id)
     {
 
-        if (is_null(User::find($id))) {
-            User::find($id)->user_detail()->delete();
-            return response()->json(["message" => "deleted successfully"], 200);
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(["message" => "user not found"], 404);
         }
+        $user->user_detail()->delete();
+        return response()->json(["message" => "deleted successfully"], 200);
     }
 }

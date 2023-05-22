@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finance_account;
-use App\Models\Transaction;
-use App\Models\User;
-use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FinanceAccountController extends Controller
@@ -17,7 +15,7 @@ class FinanceAccountController extends Controller
      */
     public function index()
     {
-        // return Finance_account::with(['transactionsAsDepositor'])->get();
+        return response()->json(["payload" => Finance_account::where("user_id", Auth()->id())], 200);
     }
 
 
@@ -28,7 +26,7 @@ class FinanceAccountController extends Controller
     {
         validator($request->all(), [
             "account_name" => 'required|string',
-            "balance" => 'required|decimal:2',
+            "balance" => 'required|decimal:1,9',
             "account_type" => 'required|string',
             "account_status" => 'required|boolean'
         ])->validate();
@@ -65,9 +63,9 @@ class FinanceAccountController extends Controller
     public function update(Request $request, finance_account $finance_account)
     {
         validator($request->all(), [
-            "account_name" => 'required|string',
-            "balance" => 'required|decimal:2',
-            "account_status" => 'required|boolean'
+            "account_name" => 'sometimes|string',
+            "balance" => 'required|decimal:1,9',
+            "account_status" => 'sometimes|boolean'
         ])->validate();
         DB::beginTransaction();
         try {

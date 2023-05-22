@@ -48,7 +48,6 @@ route::prefix('data')->middleware('auth:sanctum')->group(function () {
     // transaction api
     Route::apiResource('transaction', TransactionController::class)->except('store');
     Route::apiResource('transaction', TransactionController::class)->only('store')->middleware('transaction');
-    // Route::get('transaction/category/{category}', [TransactionController::class, 'show_by_category'])->name('transaction.by_category');
 
 
     Route::apiResource('finance_account', FinanceAccountController::class);

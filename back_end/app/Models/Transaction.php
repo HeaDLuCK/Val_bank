@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
-    // protected $primayKey = 'transaction_id';
+    protected $primaryKey  = 'transaction_id';
     public function depositorAccount()
     {
         return $this->belongsTo(finance_account::class, 'dep_account', 'account_id');

@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TransactionController extends Controller
 {
@@ -66,7 +67,7 @@ class TransactionController extends Controller
         validator($request->all(), [
             "dep_account" => 'required|string',
             "arr_account" => 'required|string',
-            "amount" => 'required|decimal:2',
+            "amount" => 'required|decimal:1,9',
             "type" => 'required|string',
             "description" => 'string'
         ])->validate();
@@ -86,10 +87,10 @@ class TransactionController extends Controller
                         $dep_acc->save();
                         $arr_acc->save();
                         $transaction = new Transaction();
-                        $transaction->dep_acc = $dep_acc->id;
-                        $transaction->arr_acc = $arr_acc->id;
+                        $transaction->dep_acc = $dep_acc->account_id;
+                        $transaction->arr_acc = $arr_acc->account_id;
                         $transaction->amount = $request->amount;
-                        $transaction->type = $request->amount;
+                        $transaction->type = $request->type;
                         $transaction->description = $request->description;
                         DB::commit();
                         return response()->json(["message" => 'transaction successfully done'], 200);
@@ -112,6 +113,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
+
         return response()->json(["payload" => $transaction], 200);
     }
 
@@ -126,26 +128,27 @@ class TransactionController extends Controller
     {
 
         validator($request->all(), [
-            "arr_account" => 'required|string',
-            "amount" => 'required|decimal:2',
-            "type" => 'required|string',
-            "description" => 'string'
+            "arr_account" => 'sometimes|string',
+            "amount" => 'sometimes|decimal:1,9',
+            "type" => 'sometimes|string',
+            "description" => 'sometimes|string'
         ])->validate();
         DB::beginTransaction();
         try {
-            $new_acc_arr = finance_account::find($request->arr_acount);
+            $new_acc_arr = finance_account::find($request->input('arr_account', $transaction->arr_account));
             $helper = false;
-            if ($transaction->arr_acount != $request->arr_account) {
+            if ($transaction->arr_account != $request->input('arr_account', $transaction->arr_account)) {
                 $helper = true;
                 if (!(is_null($new_acc_arr))) {
-                    $old_acc_arr = finance_account::find($transaction->arr_acount);
+                    $old_acc_arr = finance_account::find($transaction->arr_account);
                     $old_acc_arr->balance = $old_acc_arr->balance - $transaction->amount;
                     $old_acc_arr->save();
                 } else {
                     throw new Exception('undefiend user');
                 }
             }
-            if ($transaction->amount != $request->amount) {
+
+            if ($transaction->amount != $request->input('amount', $transaction->amount)) {
                 $dep_acc = finance_account::find($transaction->dep_acount);
                 $rest = $request->amount - $transaction->amount;
                 if ($dep_acc->balance < $rest) {
@@ -162,10 +165,10 @@ class TransactionController extends Controller
                     }
                 }
             }
-            $transaction->arr_account = $request->arr_acount;
-            $transaction->amount = $request->amount;
-            $transaction->type = $request->type;
-            $transaction->description = $request->description;
+            $transaction->arr_account = $request->input('arr_account', $transaction->arr_account);
+            $transaction->amount = $request->input('amount', $transaction->amount);
+            $transaction->type =  $request->input('type', $transaction->type);
+            $transaction->description =  $request->input('description', $transaction->description);
             $transaction->save();
             DB::commit();
             return response()->json(['message' => "transaction updated successfully"], 202);
@@ -185,8 +188,8 @@ class TransactionController extends Controller
     {
         DB::beginTransaction();
         try {
-            $dep_acc = finance_account::find($transaction->dep_acc);
-            $arr_acc = finance_account::find($transaction->arr_acc);
+            $dep_acc = finance_account::find($transaction->dep_account);
+            $arr_acc = finance_account::find($transaction->arr_account);
             $dep_acc->balance = $dep_acc->balance + $transaction->amount;
             $dep_acc->save();
             $arr_acc->balance = $arr_acc->balance - $transaction->amount;
