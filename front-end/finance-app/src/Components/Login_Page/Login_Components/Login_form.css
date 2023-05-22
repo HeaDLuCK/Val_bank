@@ -1,0 +1,138 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+.Login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #37647d;
+}
+.Login .divs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.Login .divs .form{
+    background: #FFFFFF;
+    height: 380px;
+    width: 450px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.Login .divs .signup{
+    background: #4C8BAD;
+    height: 380px;
+    width: 250px;
+    flex-direction: column;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.form h3{
+    font-size: 22px;
+    margin-bottom: 20px;
+    letter-spacing: 1.2px;
+}
+.form .inputs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+.inputs input{
+    width: 300px;
+    height: 45px;
+    border: 1.7px solid #4C8BAD;
+    outline: none;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 15px;
+}
+.inputs i{
+    position: absolute;
+    top: 80px;
+    right: 15px;
+}
+.inputs .btn1{
+    color: #4C8BAD;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #4C8BAD;
+    font-size: 12px;
+    margin-right: -180px;
+    
+}
+.inputs .btn2{
+    border: none;
+    outline: none;
+    background: #64B6E3;
+    height: 45px;
+    width: 140px;
+    border-radius: 30px;
+    color: #FFFFFF;
+    margin: 20px;
+    font-size: 15px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.inputs .btn2:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.inputs input:first-child{
+    margin-bottom: 20px;
+}
+.divs .signup{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 30px;
+}
+.signup h4{
+    font-size: 22px;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+.signup p{
+    color: #FFFFFF;
+    font-size: 14px;
+    margin: 20px 0;
+    text-align: center;
+}
+.signup button{
+    border: none;
+    outline: none;
+    background: #FFFFFF;
+    height: 42px;
+    width: 170px;
+    border-radius: 50px;
+    color: #4C8BAD;
+    margin: 30px 5px 0;
+    font-size: 15px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.signup button a{
+    text-decoration: none;
+    color: #4C8BAD;
+}
+.signup button:hover{
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+.divs .signup img{
+    width: 120px;
+    height: auto;
+}
+
+
+

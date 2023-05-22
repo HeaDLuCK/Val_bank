@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+.header{
+    width: 100%;
+    background:#4C8BAD;
+    height: 110px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 55px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    mix-blend-mode: normal;
+}
+.header .logo{
+    color: #FFFFFF;
+}
+.header .logo img{
+    width: 120px;
+    height: auto;
+    margin-left: -20px;
+}
+.header .type ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* gap: 20px; */
+    list-style: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 1.5px;
+}
+.header .type ul li{
+    display: block;
+    padding: 15px;
+    margin: 0 10px;
+    position: relative;
+    transition: all 2s;
+}
+.header .type ul li a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.header .type ul li , .header .type ul li::before, .header .type ul li::after{
+    transition: all .5s;
+}
+.header .type ul li::after{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: #aaa;
+    height: 1px;
+}
+.header .type ul li:hover:after{
+    width: 100%;
+}
+.header .type ul li::after{
+    text-align: left;
+    content: '.';
+    margin: 0;
+    opacity: 0;
+}
+.header .type ul li a:hover{
+    color: #37647D;
+}
+.header .type ul li:hover{
+    cursor: pointer;
+    color: #37647D;
+    z-index: 1;
+}
+.header .type ul li:hover:after{
+    z-index: -10;
+    animation: fill 1s forwards;
+    -webkit-animation: fill 1s forwards;
+    -moz-animation: fill 1s forwards;
+    opacity: 1;
+}
+/* @keyframes fill {
+    0% {
+      width: 0%;
+      height: 1px;
+    }
+    50% {
+      width: 100%;
+      height: 1px;
+    }
+    100% {
+      width: 100%;
+      height: 100%;
+      background: #73abc9;
+    }
+  } */
+
+.header .btn{
+    width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header .btn button{
+    width: 120px;
+    height: 40px;
+    border-radius: 84px;
+    font-size: 14px;
+    letter-spacing: 1.3px;
+    font-weight: 600;
+    text-align: center;
+    color: #FFFFFF;
+}
+.header .btn button a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.header .btn button:first-child{
+    background: #37647D;
+    border: #37647D;
+}
+.header .btn button:first-child:hover{
+    background: #97D9FD;
+    /* border: 2px solid #37647D; */
+}
+.header .btn button:last-child{
+    background: #97D9FD;
+    border: 2px solid #37647D;
+}
+.header .btn button:last-child:hover{
+    background:#37647D;
+    border: 2px solid #97D9FD;
+}
+
