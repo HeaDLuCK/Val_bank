@@ -1,0 +1,85 @@
+ .Contact_Form{
+    margin: 20px 120px;
+    height: 500px;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.Contact_Form .form{
+    width: 290px;
+    height: calc(100% - 40px);
+    border-right: 1px solid #9b9b9b;
+    text-align: center;
+    margin: 20px 0;
+}
+.Contact_Form .form .contactSide{
+    /* margin: 0 20px; */
+    width: 250px;
+}
+.Contact_Form .form .contactSide .divs{
+    margin: 45px;
+}
+.Contact_Form .form .contactSide .divs i{
+    color: #4C8BAD;
+    font-size: 19px;
+}
+.Contact_Form .form .contactSide .divs h5{
+    font-size: 15px;
+}
+.Contact_Form .form .contactSide .divs p{
+    color: #9b9b9b;
+    font-size: 13px;
+}
+.Contact_Form .formInputs{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    height: calc(100% - 20px);
+    margin: 25px;
+    padding: 10px;
+    align-items: center;
+}
+.Contact_Form .formInputs h3{
+    color: #4C8BAD;
+    font-size: 22px;
+}
+.Contact_Form .formInputs p{
+    font-size: 14px;
+    color: #9b9b9b;
+    margin-bottom: 10px ;
+}
+.Contact_Form .formInputs .inputsContact{
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Contact_Form .formInputs .inputsContact input, .Contact_Form .formInputs .inputsContact textarea{
+    width: 400px;
+    height: 45px;
+    border: none;
+    outline: none;
+    background: #dadada;
+    margin: 12px 0;
+    border-radius: 20px;
+    padding: 20px 25px;
+}
+.Contact_Form .formInputs .inputsContact textarea{
+    resize: none;
+    height: 100px;
+}
+.Contact_Form .formInputs button{
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: #4C8BAD;
+    color: #FFFFFF;
+    border-radius: 20px;
+    font-size: 15px;
+}

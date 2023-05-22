@@ -1,0 +1,43 @@
+.SignUp{
+    width: 100%;
+    height: 230px;
+    background: #FFFFFF;
+    padding: 30px;
+}
+.SignUp .title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.SignUp .title h2{
+    font-weight: 400;
+    font-size: 34px;
+    text-transform: uppercase;
+    color: #000000;
+}
+.SignUp .btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+.SignUp .btn button{
+    width:520px;
+    height: 53px;
+    border-radius:84px;
+    border: none;
+    outline: none;
+    background:#64B6E3;
+    color: #EBECEF;
+    text-align: center;
+    font-size: 22px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.SignUp .btn button a{
+    text-decoration: none;
+    color: #EBECEF;
+}
+.SignUp .btn button:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}

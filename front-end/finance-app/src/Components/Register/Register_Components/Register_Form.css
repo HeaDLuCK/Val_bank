@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+.Register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #37647d;
+}
+.Register .centrediv{
+    background: #FFFFFF;
+    height: 420px;
+    width: 700px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    border-radius: 9px;
+    position: relative;
+}
+.Register .slick-slider, .Register .slick-list,.Register .slick-track{
+    width: 100%;
+    height: calc(100% - 40px);
+}
+.Register .slick-prev{
+    left:6px;
+}
+.Register .slick-next{
+    right:40px;
+}
+.Register .slick-prev, .Register .slick-next{
+    font-size: 69px;
+    top: 87%;
+    /* width: 74px;
+    height: 53px;
+    background: #64B6E3;
+    border-radius: 40px; */
+    z-index: 1;
+}
+.Register .slick-prev::before,.Register .slick-next::before{
+    color: #64B6E3;
+    font-size: 54px;
+}
+.Register .slick-dots li button::before{
+    font-size: 13px;
+    color: #37647d;
+    opacity: 1;
+    margin-top: -10px;
+}
+.Register .slick-dots li:hover button::before{
+    color: #64B6E3;
+}
+.Register .slick-dots li.slick-active button::before{
+    color: #64B6E3;
+}
+.centrediv .etapeone .inputs_gp{
+    height: 400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+.centrediv .etapeone input, .etapetwo .inputs_gp .gp1 input, .etapetwo .inputs_gp .gp2 input, .etapetree .inputs_gp .gp11 input,.etapetree .inputs_gp .gp22 input {
+    width: 260px;
+    height: 45px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    border: 1px solid #4C8BAD;
+    outline: none;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 15px;
+}
+
+/* SLIDE 2 */
+.centrediv .etapetwo .inputs_gp, .centrediv .etapetree .inputs_gp{
+    height: 400px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+}
+.etapetwo .inputs_gp .gp1, .etapetwo .inputs_gp .gp2, .etapetree .inputs_gp .gp11, .etapetree .inputs_gp .gp22{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+/* SLIDE 3 */
+.etapetree .inputs_gp .gp11, .etapetree .inputs_gp .gp22{
+    margin: 20px 0;
+}
+.etapetree .inputs_gp .gp11 input,.etapetree .inputs_gp .gp22 input, .etapetree .inputs_gp .gp22 select{
+    margin: 20px 10px;
+}
+
+/* SLIDE 4 */
+.etapefour{
+    text-align: center;
+    padding: 20px 10px;
+}
+.etapefour h3{
+    font-size: 25px;
+    font-weight: 200;
+    margin: 10px;
+}
+.etapefour .avatars{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+.etapefour .avatars img{
+    width: 80px;
+    height: auto;
+}
+.etapefour .avatars .orline{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.etapefour input{
+    width: 260px;
+    height: 25px;
+    margin: 10px;
+    border: 1px solid #4C8BAD;
+    outline: none;
+    padding: 20px;
+    border-radius: 25px;
+    font-size: 15px;
+}
+
+
+/* footer */
+.Register .footer_register{
+    width: 100%;
+    height: 50px;
+    background: #37647d;
+    border: 3px solid #FFFFFF;
+    position: absolute;
+    bottom: 0;
+}
+.Register .footer_register img{
+    width: 70px;
+    height: auto;
+    margin: 0px 0 0 30px;
+}
+.register_btn{
+    width: 180px;
+    height: 35px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    background: #64B6E3;
+    color: #FFFFFF;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+ 
