@@ -1,38 +1,17 @@
 import React, { useRef, useState } from 'react';
+import axios from 'axios';
 import Slider from 'react-slick';
 import male from './male_avatar.png';
 import female from './female_avatar.png';
 import './Register_Form.css';
-// import logo from '../../Home_Page/Home_Components/Header/logo.png'
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
-  // const [username, setUsername] = useState("");
-  // const [password, setPaswword] = useState("");
-  // const [firstname, setFirstname] = useState("");
-  // const [lastname, setLastname] = useState("");
-  // const [city, setCity] = useState("");
-  // const [adresse, setAdresse] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [codepostal, setCodepostal] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [dateN, setDateN] = useState("");
-  // const [cin, setCin] = useState("");
-  // const [gender, setGender] = useState("");
-  // const [avatar, setAvatar] = useState("");
 
   const sliderRef = useRef(null);
+  const navigate = useNavigate();
 
-  // const handleNext = () => {
-  //   sliderRef.current.slickNext();
-  // };
-
-  // const handlePrev = () => {
-  //   sliderRef.current.slickPrev();
-  // };
-
-  const handleSubmit = () => {
-     
-  };
 
   const settings = {
     dots: true,
@@ -45,31 +24,92 @@ const RegisterForm = () => {
     slidesToScroll: 1
   };
 
+  const [registerInput, setRegister] = useState({
+    username:'',
+    password:'',
+    confirm_password:'',
+    first_name:'',
+    city:'',
+    phone_number:'',
+    last_name:'',
+    adresse:'',
+    code_postal:'',
+    email:'',
+    cin:'',
+    birthday:'',
+    gender:'',
+    avatar:'',
+    error_list:{}
+  })
+  const handleInput = (e) =>{
+    e.persist();
+    setRegister({...registerInput, [e.target.name]: e.target.value})
+  }
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      const data = {
+        username : registerInput.username,
+        password : registerInput.password,
+        confirm_password : registerInput.confirm_password,
+        first_name : registerInput.first_name,
+        phone_number : registerInput.phone_number,
+        city : registerInput.city,
+        last_name : registerInput.last_name,
+        adresse : registerInput.adresse,
+        code_postal : registerInput.code_postal,
+        email:registerInput.email,
+        cin:registerInput.cin,
+        birthday:registerInput.birthday,
+        gender:registerInput.gender,
+        avatar:registerInput.avatar,
+      }
+      axios.get('sanctum/crsf-cookie').then(response =>{
+        axios.post('/api/register', data).then(res =>{
+          if (res.data.status === 201) {
+            localStorage.setItem('token', res.data.token);
+            swal("Success", res.data.message, "success");
+            navigate('/');
+          }
+          else{
+              setRegister({...registerInput, error_list:res.data.errors})
+          }
+        });
+      });
+    };
   return (
     <div className='Register'>
-      <form className='centrediv'>
+      <form className='centrediv' onSubmit={handleSubmit}>
           <h2>Register</h2>
         <Slider ref={sliderRef} {...settings}>
           {/* etape 1 */}
         <div className='etapeone'>
           <div className='inputs_gp'>
-            <input type="text" placeholder='username'/>
-            <input type="text" placeholder='password'/>
-            <input type="text" placeholder='confirm password'/>
+            <input type="text" placeholder='username' name='username' onChange={handleInput} value={registerInput.username} />
+            <span>{registerInput.error_list.username}</span>
+            <input type="text" placeholder='password' name='password' onChange={handleInput} value={registerInput.password} />
+            <span>{registerInput.error_list.password}</span>
+            <input type="text" placeholder='confirm password' name='confirm_password' onChange={handleInput} value={registerInput.confirm_password}/>
+            <span>{registerInput.error_list.confirm_password}</span>
           </div>
         </div>
         {/* etape 2 */}
         <div className='etapetwo'>
           <div className='inputs_gp'>
               <div className='gp1'>
-                <input type="text" placeholder='first name'/>
-                <input type="text" placeholder='city'/>
-                <input type="text" placeholder='phone number'/>
+                <input type="text" placeholder='first name' name='first_name' onChange={handleInput} value={registerInput.first_name}/>
+                <span>{registerInput.error_list.first_name}</span>
+                <input type="text" placeholder='city' name='city' onChange={handleInput} value={registerInput.city}/>
+                <span>{registerInput.error_list.city}</span>
+                <input type="text" placeholder='phone number' name='phone_number' onChange={handleInput} value={registerInput.phone_number}/>
+                <span>{registerInput.error_list.phone_number}</span>
               </div>
             <div className='gp2'>
-              <input type="text" placeholder='last name'/>
-              <input type="text" placeholder='adresse'/>
-              <input type="text" placeholder='code postal'/>
+              <input type="text" placeholder='last name' name='last_name' onChange={handleInput} value={registerInput.last_name}/>
+              <span>{registerInput.error_list.last_name}</span>
+              <input type="text" placeholder='adresse' name='adresse' onChange={handleInput} value={registerInput.adresse}/>
+              <span>{registerInput.error_list.adresse}</span>
+              <input type="text" placeholder='code postal' name='code_postal' onChange={handleInput} value={registerInput.code_postal}/>
+              <span>{registerInput.error_list.code_postal}</span>
             </div>
           </div>
         </div>
@@ -77,12 +117,16 @@ const RegisterForm = () => {
         <div className='etapetree'>
           <div className='inputs_gp'>
             <div className='gp11'>
-                <input type="text" placeholder='Email adresse'/>
-                <input type="text" placeholder='CIN'/>
+                <input type="text" placeholder='Email adresse' name='email' onChange={handleInput} value={registerInput.email}/>
+                <span>{registerInput.error_list.email}</span>
+                <input type="text" placeholder='CIN' name='cin' onChange={handleInput} value={registerInput.cin}/>
+                <span>{registerInput.error_list.cin}</span>
             </div>
             <div className='gp22'>
-                <input type="text" placeholder='Date of birth'/>
-                <input type="text" placeholder='Gender'/>
+                <input type="text" placeholder='Date of birth' name='birthday' onChange={handleInput} value={registerInput.birthday}/>
+                <span>{registerInput.error_list.birthday}</span>
+                <input type="text" placeholder='Gender' name='gender' onChange={handleInput} value={registerInput.gender}/>
+                <span>{registerInput.error_list.gender}</span>
             </div>
           </div>
         </div>
@@ -98,9 +142,9 @@ const RegisterForm = () => {
               <p>OR</p>
               <div className='line2'></div>
           </div>
-          <input type="text" placeholder='Choose image' />
+          <input type="text" placeholder='Choose image' name='avatar' onChange={handleInput} value={registerInput.avatar}/>
           <div>
-          <button className='register_btn' onClick={handleSubmit}>Submit</button>
+          <button className='register_btn'>Submit</button>
           </div>
         </div>
         </Slider>
