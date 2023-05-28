@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\authentication;
 
+use App\Enums\GenderEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\User_detail;
@@ -9,22 +10,27 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Enum;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
+        // return $request;
         $fields = $request->validate(
             [
                 'username' => 'required|string',
                 'password' => 'required|string|confirmed|min:8|max:30',
                 'first_name' => 'required|string',
                 'last_name' => 'required|string',
-                'birthday' => 'required',
+                'birthday' => 'required|date',
                 'cin' => 'required|string',
                 'email' => 'required|email:rfc,dns',
                 'phone_number' => 'required|string',
-                'address' => 'string',
+                'city' => 'required|string',
+                'address' => 'required|string',
+                'gender' => [new Enum(GenderEnum::class)],
+                'code_postal' => 'required|string',
                 'avatar_image' => 'required|image|mimes:jpg,png,jpeg'
             ]
         );
@@ -45,6 +51,9 @@ class AuthController extends Controller
                 'email' => $fields['email'],
                 'phone_number' => $fields['phone_number'],
                 'address' => $fields['address'],
+                'city' => $fields['city'],
+                'gender' => $fields['gender'],
+                'code_postal' => $fields['code_postal'],
                 'avatar_image' => $user->id . '.' . explode('/', $fields['avatar_image']->getMimeType())[1]
             ]);
             $fields['avatar_image']->storeAs('public/images', $user->id . '.' . explode('/', $fields['avatar_image']->getMimeType())[1]);
@@ -58,7 +67,7 @@ class AuthController extends Controller
             } else {
                 $error = "cant insert data in database check inputs";
             }
-            return response()->json(['message' => $error], 500);
+            return response()->json(['message' => $error], 400);
         }
     }
 
@@ -73,7 +82,7 @@ class AuthController extends Controller
         );
         $user = User::where('username', request('username'))->first();
         if ($user != null and Hash::check(request('password'), $user->getAuthPassword())) {
-            return response()->json(["token" => $user->createToken(time())->plainTextToken], 202);
+            return response()->json(["user_role" => $user->role, "token" => $user->createToken(time())->plainTextToken], 202);
         } else {
             return response()->json(["message" => 'verify your username and password'], 401);
         }

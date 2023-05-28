@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\finance_account;
 use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -19,20 +19,42 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
+        validator($request->all(), [
+            "date" => 'sometimes|date',
+            "name" => 'sometimes|string',
+            "account" => 'sometimes|integer',
+        ])->validate();
         $limit = $request->limit ?? 10;
         $page = $request->page ?? 1;
         $data = User::find(Auth()->id());
-        $ids = collect($data->finance_account)->map(function ($elem) {
-            return $elem->account_id;
-        })->toArray();
-        $count = $transaction = Transaction::whereIn('dep_account', $ids)
-            ->orwhereIn('arr_account', $ids)
-            ->count();
+        $query = Transaction::query();
+        if ($request->has('date')) {
+            $query->whereDate('created_at', "=", Carbon::parse($request->date)->toDateString());
+        }
+        if ($request->has('account')) {
+            $ids = [$request->account];
+            $query->where(function ($query) use ($ids) {
+                $query->whereIn('dep_account', $ids)
+                    ->orwhereIn('arr_account', $ids);
+            });
+        } else {
+            $ids = collect($data->finance_account)->map(function ($elem) {
+                return $elem->account_id;
+            })->toArray();
+            $query->where(function ($query) use ($ids) {
+                $query->whereIn('dep_account', $ids)
+                    ->orwhereIn('arr_account', $ids);
+            });
+        }
+        $transaction = clone $query;
+        $count = $query->count();
+        if ($count == 0) {
+            return response()->json(["check your account select  "], 404);
+        }
+
         $lastPage = ceil($count / $limit);
         if ($page <= $lastPage) {
-            $transaction = Transaction::whereIn('dep_account', $ids)
-                ->orwhereIn('arr_account', $ids)
-                ->orderBy('transaction_id', 'desc')
+            $transaction = $transaction->orderBy('transaction_id', 'desc')
                 ->offset(($page - 1) * $limit)
                 ->take($limit)
                 ->get();
@@ -78,7 +100,8 @@ class TransactionController extends Controller
         }
     }
 
-
+    /*
+    */
 
     /**
      * Store a newly created resource in storage.

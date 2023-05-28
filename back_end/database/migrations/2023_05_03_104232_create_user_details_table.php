@@ -19,6 +19,9 @@ return new class extends Migration
             $table->date("birthday");
             $table->string('email')->unique();
             $table->string('phone_number')->unique()->nullable();
+            $table->enum("gender", ['male', 'female']);
+            $table->string("city");
+            $table->string("code_postal");
             $table->string("address")->nullable();
             $table->string("cin");
             $table->string("avatar_image");

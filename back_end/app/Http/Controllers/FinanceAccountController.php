@@ -64,7 +64,7 @@ class FinanceAccountController extends Controller
     {
         validator($request->all(), [
             "account_name" => 'sometimes|string',
-            "balance" => 'required|decimal:1,9',
+            "balance" => 'sometimes|decimal:1,9',
             "account_status" => 'sometimes|boolean'
         ])->validate();
         DB::beginTransaction();

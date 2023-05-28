@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\authentication\AuthController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\FinanceAccountController;
 use App\Http\Controllers\NoCrud\NoCrudController;
 use App\Http\Controllers\TransactionController;
@@ -31,6 +32,7 @@ use Laravel\Sanctum\Sanctum;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::apiResource('/bills', BillController::class);
 
 
 route::prefix('data')->middleware('auth:sanctum')->group(function () {

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->enum("role", ["admin", "user"])->default("user");
-            $table->rememberToken();
+            $table->string('company');
+            $table->string('pay_code');
+            $table->decimal('amount', 9, 2);
+            $table->date('date_of_bill');
+            $table->date('payment_deadline');
+            $table->date('pFayment_Date')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bills');
     }
 };
