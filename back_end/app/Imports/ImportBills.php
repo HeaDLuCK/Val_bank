@@ -21,8 +21,8 @@ class ImportBills implements ToModel, WithHeadingRow
             "company" => $row["company"],
             "pay_code" => $row["pay_code"],
             "amount" => $row["amount"],
-            "date of bill" => Carbon::instance(Date::excelToDateTimeObject($row["date_of_bill"])),
-            "حayment deadline" => Carbon::instance(Date::excelToDateTimeObject($row["payment_deadline"])),
+            "date_of_bill" => Carbon::instance(Date::excelToDateTimeObject($row["date_of_bill"])),
+            "payment_deadline" => Carbon::instance(Date::excelToDateTimeObject($row["payment_deadline"])),
         ]);
     }
 }

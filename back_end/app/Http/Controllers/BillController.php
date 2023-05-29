@@ -15,7 +15,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(["payload" => Bill::all()], 200);
     }
 
 
@@ -40,7 +40,10 @@ class BillController extends Controller
      */
     public function show(Bill $bill)
     {
-        //
+        if (!$bill) {
+            return response()->json(["message" => "bill not found"], 404);
+        }
+        return response()->json(["payload" => $bill], 200);
     }
 
 
@@ -49,7 +52,15 @@ class BillController extends Controller
      */
     public function update(Request $request, Bill $bill)
     {
-        //
+        if (!$bill) {
+            return response()->json(["message" => "bill not found"], 404);
+        }
+        validator($request->all(), [
+            "payment_date" => 'required|date'
+        ])->validate();
+        $bill->payment_date = $request->payment_date;
+        $bill->save();
+        return response()->json(["message" => "bill updated successfully"], 201);
     }
 
     /**
@@ -57,6 +68,10 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        //
+        if (!$bill) {
+            return response()->json(["message" => "bill not found"], 404);
+        }
+        $bill->delete();
+        return response()->json(["message" => "bill deleted successfully"], 201);
     }
 }

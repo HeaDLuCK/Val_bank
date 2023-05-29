@@ -4,17 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
-export default function LoginForm(){
+export default function LoginForm() {
     const navigate = useNavigate();
     const [loginInput, setLogin] = useState({
-        username:'',
-        password:'',
-        error_list:{}
+        username: '',
+        password: '',
+        error_list: {}
     })
-    const handleInput = (e) =>{
+    const handleInput = (e) => {
         e.persist();
         setLogin({
-            ...loginInput, [e.target.name ]: e.target.value
+            ...loginInput, [e.target.name]: e.target.value
         })
 
     }
@@ -24,38 +24,40 @@ export default function LoginForm(){
             username: loginInput.username,
             password: loginInput.password
         }
-        console.log(data);
-        axios.post('api/login', data, {
-            headers:{
-            'content-type': 'multipart/form-data',
+        axios.post('/api/login', data, {
+            headers: {
+                'content-type': 'application/json',
             }
-          }).then(res =>{
-            if(res.status === 200){
+        }).then(res => {
+            if (res.status === 202) {
                 localStorage.setItem('token', res.token)
                 swal('Success', res.data.message, 'success')
-                navigate('/')
+                navigate('/dashboard')
             }
-            else if(res.status === 401){
-                swal('Warning', res.data.message, 'warning')
-            }
-            else{
+
+        }).catch(err => {
+            console.clear();
+            if (err.response.status === 401) {
+                swal('Warning', err.response.data.message, 'warning')
                 setLogin({
-                    ...loginInput,error_list : res.data.errors
+                    ...loginInput, error_list: {}
+                })
+            } else {
+                setLogin({
+                    ...loginInput, error_list: err.response.data.errors
                 })
             }
-
-        });
-
-      };
-    return(
+        })
+    };
+    return (
         <div className='Login'>
             <div className='divs'>
                 <form className='form' onSubmit={handleSubmit}>
                     <h3>Login To Your Account</h3>
                     <div className='inputs'>
-                        <input type="text" placeholder='username' name='username' onChange={handleInput} value={loginInput.username}/>
+                        <input type="text" placeholder='username' name='username' onChange={handleInput} value={loginInput.username} />
                         <span>{loginInput.error_list.username}</span>
-                        <input type="password" placeholder='password' name='password' onChange={handleInput} value={loginInput.password}/>
+                        <input type="password" placeholder='password' name='password' onChange={handleInput} value={loginInput.password} />
                         <span>{loginInput.error_list.password}</span>
                         <button className='btn1'>forgot password ?</button>
                         <button type="submit" className='btn2'>SIGN IN</button>

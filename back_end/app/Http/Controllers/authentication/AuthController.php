@@ -82,7 +82,7 @@ class AuthController extends Controller
         );
         $user = User::where('username', request('username'))->first();
         if ($user != null and Hash::check(request('password'), $user->getAuthPassword())) {
-            return response()->json(["user_role" => $user->role, "token" => $user->createToken(time())->plainTextToken], 202);
+            return response()->json(["user_role" => $user->role, "token" => $user->createToken(time())->plainTextToken, "message" => "You are successfully logged in "], 202);
         } else {
             return response()->json(["message" => 'verify your username and password'], 401);
         }

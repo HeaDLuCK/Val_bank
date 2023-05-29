@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('amount', 9, 2);
             $table->date('date_of_bill');
             $table->date('payment_deadline');
-            $table->date('pFayment_Date')->nullable();
+            $table->date('payment_date')->nullable();
             $table->timestamps();
         });
     }
