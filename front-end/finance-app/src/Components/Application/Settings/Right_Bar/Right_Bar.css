@@ -4,6 +4,7 @@
     background: #FFFFFF;
     margin: 0 0 0 40px;
     padding: 20px 15px;
+    flex: 1;
 }
 .Accounts_div .notifications, .Accounts_div .accounts .accounts_head{
     display: flex;

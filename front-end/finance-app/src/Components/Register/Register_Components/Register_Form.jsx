@@ -8,7 +8,6 @@ import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
-
   const sliderRef = useRef(null);
   const navigate = useNavigate();
   const [image, setImage] = useState(null)
@@ -18,7 +17,7 @@ const RegisterForm = () => {
     arrows: true,
     infinite: false,
     swipe: false,
-    draggable: false,
+    draggable: false, 
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1
@@ -69,7 +68,6 @@ const RegisterForm = () => {
       gender: registerInput.gender,
       avatar_image: image,
     }
-
     axios.post('/api/register', data, {
       headers: {
         'content-type': 'multipart/form-data',
@@ -157,7 +155,6 @@ const RegisterForm = () => {
             </div>
           </div >
         </Slider >
-
       </form >
     </div >
   );

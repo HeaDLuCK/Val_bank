@@ -23,8 +23,6 @@ export default function Change_Password(){
             <p>At least 8 characters long contains letters, numbers and characters</p>
             <Form
       name="changePasswordForm"
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       layout="vertical"
     >
       <Form.Item

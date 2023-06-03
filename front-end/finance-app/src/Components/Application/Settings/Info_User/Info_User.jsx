@@ -1,43 +1,105 @@
 import './Info_User.css';
-import user from '../../Account_div/user.png';
-export default function Info_User(){
-    return(
+import avatar from '../../Account_div/user.png';
+import { useEffect, useState } from 'react';
+export default function Info_User() {
+    const [data, setData] = useState({});
+    useEffect(() => {
+        axios.get('/api/data')
+        .then(res => {
+            setData(res.payload.data)
+        }).catch(err => {
+            console.log(err);
+        });
+    }, []);
+    return (
         <div className='Info_user'>
-            <form action="">
-                <div className='top_div'>
-                    <div className='profile'>
+            <div className='top_div'>
+                <form className='profile'>
+                    <div className='formHeader'>
                         <h5>Profile</h5>
-                        <div  className='body_profile'>
-                            <div className='avatar'>
-                                <img src={user} alt="avatar" />
-                                <div className='btn-file'>
-                                    <input type="text" />
-                                </div>
+                        <button type='submit'>Save</button>
+                    </div>
+                    <div className='form_body'>
+                        <div className='avatar'>
+                            <img src={avatar} alt="avatar" />
+                            <div className='btn-file'>
+                                <input type="file" name='avatar_image' value={data.avatar_image} />
                             </div>
-                            <div className='fullname'>
-                                <div className='name'>
-                                    <label htmlFor="name">First Name</label>
-                                    <input type="text" id='name' />
-                                </div>
-                                <div className='name'>
-                                    <label htmlFor="lastname">Last Name</label>
-                                    <input type="text" id='lastname' />
-                                </div>
+                        </div>
+                        <div className='fullname'>
+                            <div className='name'>
+                                <label htmlFor="name">First Name</label>
+                                <input type="text" id='name' name='first_name' value={data.first_name} />
+                            </div>
+                            <div className='name'>
+                                <label htmlFor="lastname">Last Name</label>
+                                <input type="text" id='lastname' name='last_name' value={data.last_name} />
                             </div>
                         </div>
                     </div>
-                    <div className='files'>
-                        <h5>Files</h5>
+                </form>
+                <form className='files'>
+                    <div className='formHeader'>
+                       <h5>Files</h5> 
+                       <button type='submit'>Save</button>
                     </div>
-                </div>
-                <div className='bottom_div'>
-                    <div className='adresse'></div>
-                    <div className='contact_div'>
-                        <div className='phone_number'></div>
-                        <div className='security'></div>
+                    <div className='form_body'>
+                        <div>
+                            <label htmlFor="">RIB</label>
+                            <button>Download</button>
+                        </div>
+                        <div>
+                            <label htmlFor="">Activities</label>
+                            <button>Download</button>
+                        </div>
                     </div>
+                </form>
+            </div>
+            <div className='bottom_div'>
+                <form className='adresse'>
+                    <div className='formHeader'>
+                        <h5>Adresse</h5>
+                        <button type='submit'>Save</button>
+                    </div>
+                    <div className='form_body'>
+                        <div>
+                            <label htmlFor="">Adresse line</label>
+                            <input type="text" placeholder='hay el mohamadi' name='address' value={data.address} />
+                        </div>
+                        <div>
+                            <label htmlFor="">City/town</label>
+                            <input type="text" placeholder='agadir' name='city' value={data.city} />
+                        </div>
+                        <div>
+                            <label htmlFor="">Postal/zipCode</label>
+                            <input type="text" placeholder='80000' name='code_postal' value={data.code_postal} />
+                        </div>
+
+                    </div>
+                </form>
+                <div className='contact_div'>
+                    <form className='phone_number'>
+                        <div className='formHeader'>
+                           <h5>Phone Number</h5> 
+                           <button type='submit'>Save</button>
+                        </div>
+                        <div className='form_body'>
+                            <label htmlFor="">Phone Number</label>
+                            <input type="text" placeholder='0627518809' name='phone_number' value={data.phone_number} />
+                        </div>
+                    </form>
+                    <form className='security'>
+                        <div className='formHeader'>
+                            <h5>Security</h5> 
+                           <button type='submit'>Save</button>
+                        </div>
+                        <div className='form_body'>
+                            <label htmlFor="">Password</label>
+                            <input type="text" placeholder='***********' name='password' />
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }
