@@ -1,9 +1,6 @@
 import './Info_User.css';
 import avatar from '../../Account_div/user.png';
 import { useEffect, useState } from 'react';
-import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 export default function Info_User() {
     const [data, setData] = useState({});
     const [image, setImage] = useState(null);
@@ -16,7 +13,7 @@ export default function Info_User() {
         }).catch(err => {
             console.log(err);
         });
-    }, []);  
+    }, []);
     return (
         <div className='Info_user'>
             <div className='top_div'>
@@ -27,9 +24,9 @@ export default function Info_User() {
                     </div>
                     <div className='form_body'>
                         <div className='avatar'>
-                            <img src={avatar} alt="avatar" />
+                            <img src={`data:image/png;base64,${data.avatar_image}`} alt="avatar" />
                             <div className='btn-file'>
-                                <input type="file" name='avatar_image' onChange={handleInput} value={image.avatar_image} />
+                                <input type="file" name='avatar_image' value={data.avatar_image} />
                             </div>
                         </div>
                         <div className='fullname'>
@@ -46,8 +43,8 @@ export default function Info_User() {
                 </form>
                 <form className='files' onSubmit={handleSubmit}>
                     <div className='formHeader'>
-                       <h5>Files</h5> 
-                       <button type='submit'>Save</button>
+                        <h5>Files</h5>
+                        <button type='submit'>Save</button>
                     </div>
                     <div className='form_body'>
                         <div>
@@ -86,8 +83,8 @@ export default function Info_User() {
                 <div className='contact_div'>
                     <form className='phone_number' onSubmit={handleSubmit}>
                         <div className='formHeader'>
-                           <h5>Phone Number</h5> 
-                           <button type='submit'>Save</button>
+                            <h5>Phone Number</h5>
+                            <button type='submit'>Save</button>
                         </div>
                         <div className='form_body'>
                             <label htmlFor="">Phone Number</label>
@@ -97,7 +94,7 @@ export default function Info_User() {
                     <form className='security' onSubmit={handleSubmit}>
                         <div className='formHeader'>
                             <h5>Security</h5> 
-                           <button onClick={() => { navigate('/settings_password') }}>Change</button>
+                           <button type='submit'>Save</button>
                         </div>
                         <div className='form_body'>
                             <label htmlFor="">Password</label>

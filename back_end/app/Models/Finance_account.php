@@ -24,4 +24,9 @@ class finance_account extends Model
     {
         return $this->hasMany(Transaction::class, 'arr_account', 'account_id');
     }
+
+    public function has_permission()
+    {
+        return $this->automatic_payment;
+    }
 }

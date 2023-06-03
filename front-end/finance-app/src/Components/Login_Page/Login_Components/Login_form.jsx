@@ -30,7 +30,7 @@ export default function LoginForm() {
             }
         }).then(res => {
             if (res.status === 202) {
-                localStorage.setItem('token', res.token)
+                localStorage.setItem('header', { headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` } })
                 swal('Success', res.data.message, 'success')
                 navigate('/dashboard')
             }

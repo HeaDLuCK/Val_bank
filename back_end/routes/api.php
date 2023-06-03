@@ -46,7 +46,8 @@ route::prefix('data')->middleware('auth:sanctum')->group(function () {
 
 
     // user api
-    Route::apiResource('user', UserController::class);
+    Route::get('user', [UserController::class, 'index']);
+    Route::post('user', [UserController::class, 'update']);
     // transaction api
     Route::apiResource('transaction', TransactionController::class)->except('store');
     Route::apiResource('transaction', TransactionController::class)->only('store')->middleware('transaction');
