@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->string('company');
-            $table->string('pay_code');
+            $table->string('pay_code')->unique();
             $table->decimal('amount', 9, 2);
             $table->date('date_of_bill');
             $table->date('payment_deadline');

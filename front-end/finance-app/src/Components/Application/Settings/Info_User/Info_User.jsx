@@ -1,15 +1,18 @@
 import './Info_User.css';
 import avatar from '../../Account_div/user.png';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 export default function Info_User() {
     const [data, setData] = useState({});
     useEffect(() => {
-        axios.get('/api/data')
-        .then(res => {
-            setData(res.payload.data)
-        }).catch(err => {
-            console.log(err);
-        });
+        axios.get('/api/data/user', localStorage.getItem('header'))
+            .then(res => {
+                setData(res.data.payload.user_detail)
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            });
     }, []);
     return (
         <div className='Info_user'>
@@ -21,9 +24,9 @@ export default function Info_User() {
                     </div>
                     <div className='form_body'>
                         <div className='avatar'>
-                            <img src={avatar} alt="avatar" />
+                            <img src={`data:image/png;base64,${data.avatar_image}`} alt="avatar" />
                             <div className='btn-file'>
-                                <input type="file" name='avatar_image' value={data.avatar_image} />
+                                {/* <input type="file" name='avatar_image' value={data.avatar_image} /> */}
                             </div>
                         </div>
                         <div className='fullname'>
@@ -40,8 +43,8 @@ export default function Info_User() {
                 </form>
                 <form className='files'>
                     <div className='formHeader'>
-                       <h5>Files</h5> 
-                       <button type='submit'>Save</button>
+                        <h5>Files</h5>
+                        <button type='submit'>Save</button>
                     </div>
                     <div className='form_body'>
                         <div>
@@ -80,8 +83,8 @@ export default function Info_User() {
                 <div className='contact_div'>
                     <form className='phone_number'>
                         <div className='formHeader'>
-                           <h5>Phone Number</h5> 
-                           <button type='submit'>Save</button>
+                            <h5>Phone Number</h5>
+                            <button type='submit'>Save</button>
                         </div>
                         <div className='form_body'>
                             <label htmlFor="">Phone Number</label>
@@ -90,8 +93,8 @@ export default function Info_User() {
                     </form>
                     <form className='security'>
                         <div className='formHeader'>
-                            <h5>Security</h5> 
-                           <button type='submit'>Save</button>
+                            <h5>Security</h5>
+                            <button type='submit'>Save</button>
                         </div>
                         <div className='form_body'>
                             <label htmlFor="">Password</label>

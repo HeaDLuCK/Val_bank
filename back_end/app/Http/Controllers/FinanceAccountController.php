@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Finance_account;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FinanceAccountController extends Controller
