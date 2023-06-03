@@ -48,7 +48,6 @@ const RegisterForm = () => {
       setRegister({ ...registerInput, [e.target.name]: e.target.value })
     }
 
-
   }
   const handleSubmit = (e) => {
     e.preventDefault();
