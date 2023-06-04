@@ -10,10 +10,6 @@ function Activities() {
                 <button>Date</button>
                 <button>Accounts</button>
             </div>
-            <div className='search'>
-                <input type="text" placeholder='Search By Name'/>
-                <i class="fa fa-search"></i>
-            </div>
         </div>
         <div className='activitiesdivs'>
             {/* ---------------------- */}

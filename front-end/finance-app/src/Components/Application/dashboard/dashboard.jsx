@@ -7,13 +7,14 @@ import Menu_Dash from '../Menu_Dash/Menu_Dash';
 import SideBar from '../SideBar/SideBar';
 import './dashboard.css';
 
+
 function Dashbord() {
   return (
     <div className='ALL'>
       <div className='dashbord'>
         <SideBar />
         <div className='container'>
-            <Header_Dashboard title='Dashboard' data=''/>
+            <Header_Dashboard title='Dashboard'/>
             <Menu_Dash/>
             <Middle_div /> 
         </div>
