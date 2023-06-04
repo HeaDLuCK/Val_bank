@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Dash_Middle_Div.css';
-// import { Chart } from "react-google-charts";
+import { Chart } from "react-google-charts";
 import axios from 'axios';
 import {
     Chart as ChartJS,
@@ -19,9 +19,12 @@ ChartJS.register(
 
 export default function Middle_div() {
     const [dates, setDates] = useState({ "startDate": "2023-06-04" });
+    const [balance, setBalance] = useState();
+    const [recieve, setRecieve] = useState([]);
+    const [deposit, setDeposit] = useState([]);
     const [account, setAccount] = useState(localStorage.getItem('accounts')[0]);
-
     const [expenses, setExpenses] = useState([]);
+
     const handleInput = (e) => {
         setDates({ ...dates, [e.target.name]: e.target.value })
         console.log(dates);
@@ -37,6 +40,9 @@ export default function Middle_div() {
             })
             .then(res => {
                 setExpenses(res.data.payload.expenses)
+                setBalance(res.data.payload.balance)
+                setRecieve(res.data.payload.recieve)
+                setDeposit(res.data.payload.deposit)
             }).catch(err => {
                 console.log(err);
             });
@@ -55,7 +61,7 @@ export default function Middle_div() {
 
     }
 
-    const optionss = {
+    const options = {
         title: "Transactions Overview",
         pieHole: 0.4,
         is3D: false,
@@ -65,6 +71,20 @@ export default function Middle_div() {
             }
         }
     };
+
+     const dataa = [
+        ["Year", "recieved", "deposit"],
+        recieve.map(e => {
+            return([`${e.date}`, e.sent, deposit.filter(j => j.date === e.date).map(i => i.sent)])
+        })
+      ];
+      
+         const optionss = {
+        chart: {
+          title: "Company Performance",
+          subtitle: "deposit, Expenses, and Profit: 2014-2017",
+        },
+      };
     return (
         <div className='middle_div'>
             <input type="date" name='date1' value={dates.date1} onChange={handleInput} />
@@ -72,18 +92,24 @@ export default function Middle_div() {
             <div className='middle'>
                 <div className='Balence'>
                     <h4>Total Balence</h4>
-                    <h1><span>$</span>12,872</h1>
+                    <h1><span>DH</span>{balance}</h1>
                     <p>+3.22%</p>
                 </div>
                 <div className='Expenses'>
                     <Doughnut
                         data={data}
-                        options={optionss}
+                        options={options}
                     />
                 </div>
             </div>
             <div className='Transactions'>
-
+            <Chart
+                chartType="Bar"
+                width="100%"
+                height="300px"
+                data={dataa}
+                options={optionss}
+            />
             </div>
         </div>
     )
