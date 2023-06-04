@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Enum;
 
+use function PHPSTORM_META\map;
+
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -82,7 +84,14 @@ class AuthController extends Controller
         );
         $user = User::where('username', request('username'))->first();
         if ($user != null and Hash::check(request('password'), $user->getAuthPassword())) {
-            return response()->json(["user_role" => $user->role, "token" => $user->createToken(time())->plainTextToken, "message" => "You are successfully logged in "], 202);
+            return response()->json([
+                "accounts" => $user->finance_account->map(function ($account) {
+                    return $account->account_id;
+                }),
+                "user_role" => $user->role,
+                "token" => $user->createToken(time())->plainTextToken,
+                "message" => "You are successfully logged in "
+            ], 202);
         } else {
             return response()->json(["message" => 'verify your username and password'], 401);
         }

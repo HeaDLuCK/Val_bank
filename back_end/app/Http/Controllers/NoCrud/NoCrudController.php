@@ -78,18 +78,18 @@ class NoCrudController extends Controller
         //     "startDate" => "required|date",
         //     "endDate" => "required|date"
         // ]);
+        // return auth()->id();
         $accounts = User::find(auth()->id())->finance_account->map(function ($elem) {
             return $elem->account_id;
         })->toArray();
         if (in_array($request->account_id, $accounts)) {
             $startDate = Carbon::createFromFormat('Y-m-d', $request->startDate)->startOfDay();
-            $endDate = $request->endDate != null ? Carbon::createFromFormat('Y-m-d', $request->endDate)->endOfDay() : Carbon::now();
+            $endDate = $request->endDate != null ? Carbon::createFromFormat('Y-m-d', $request->endDate)->endOfDay() : Carbon::now()->endOfDay();
             $expenses = Transaction::where("dep_account", $request->account_id)
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->groupBy("type")
                 ->selectRaw('type,sum(amount) as expense')
                 ->get();
-
             $transactionAsReciever = Transaction::Where("arr_account", $request->account_id)
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->groupBy("created_at")
@@ -112,10 +112,10 @@ class NoCrudController extends Controller
                 "payload" => [
                     "balance" => finance_account::find($request->account_id)->balance,
                     "expenses" => $expenses,
+                    "recieved" => $transactionAsReciever,
+                    "deposit" => $transactionAsDepositor
 
-                ],
-                "recieved" => $transactionAsReciever,
-                "deposit" => $transactionAsDepositor
+                ]
             ], 200);
         } else {
             return response()->json(["message" => "cant reach this data"], 500);

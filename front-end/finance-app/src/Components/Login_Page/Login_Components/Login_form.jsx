@@ -31,6 +31,7 @@ export default function LoginForm() {
         }).then(res => {
             if (res.status === 202) {
                 localStorage.setItem('token', res.data.token)
+                localStorage.setItem('accounts', res.data.accounts)
                 swal('Success', res.data.message, 'success')
                 navigate('/dashboard')
             }

@@ -72,7 +72,7 @@ class UserController extends Controller
             }
             $user->push();
             DB::commit();
-            return response()->json(["message" => "infomation updated"], 200);
+            return response()->json(["message" => "infomation updated"], 201);
         } catch (QueryException) {
             DB::rollback();
             return response()->json(["message" => "you cant update try again"], 500);

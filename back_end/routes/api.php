@@ -58,5 +58,5 @@ route::prefix('data')->middleware('auth:sanctum')->group(function () {
 
     // non crud methods
     Route::get('/profile', [NoCrudController::class, 'profile']);
-    Route::get('/dashboard/{account_id}', [NoCrudController::class, 'dashboard']);
+    Route::post('/dashboard/{account_id}', [NoCrudController::class, 'dashboard']);
 });

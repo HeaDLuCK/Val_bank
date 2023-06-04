@@ -18,26 +18,32 @@ ChartJS.register(
 )
 
 export default function Middle_div() {
-    const[dates, setDates] = useState({});
-    const [expenses, setExpenses] = useState();
-    const handleInput = (e) =>{
+    const [dates, setDates] = useState({ "startDate": "2023-06-04" });
+    const [account, setAccount] = useState(localStorage.getItem('accounts')[0]);
+
+    const [expenses, setExpenses] = useState([]);
+    const handleInput = (e) => {
         setDates({ ...dates, [e.target.name]: e.target.value })
         console.log(dates);
     }
-    
+
     useEffect(() => {
-        axios.post('/api/data/dashboard',dates,
-            { headers: { "Authorization": `Bearer ${localStorage.getItem('token')}`, 'content-type': 'multipart/form-data' } })
+        axios.post(`/api/data/dashboard/${account}`, dates,
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                    'content-type': 'multipart/form-data'
+                }
+            })
             .then(res => {
                 setExpenses(res.data.payload.expenses)
             }).catch(err => {
                 console.log(err);
             });
-    }, [dates]);
-
+    }, [dates, account]);
     const data = {
         labels: expenses.map(e => {
-             return [e.type]   //`${[e.type]}`
+            return [e.type]   //`${[e.type]}`
         }
         ),
         datasets: [{
