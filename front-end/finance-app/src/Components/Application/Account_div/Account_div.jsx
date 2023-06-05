@@ -1,11 +1,32 @@
+import { useEffect, useState } from 'react';
 import './Accounts_div.css';
 import user from './user.png';
+import axios from 'axios';
 export default function Accounts_div(){
+
+    const[avatar, setAvatar] = useState(user);
+    const[receivers, setReceivers] = useState([]);
+    const[transactions, setTransactions] = useState([]);
+    useEffect(() => {
+        axios.get(`/api/data/dashboard`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => {
+                setAvatar(res.data.payload.avatar)
+                setReceivers(res.data.payload.receiver)
+                setTransactions(res.data.payload.transaction)
+            }).catch(err => {
+                console.log(err);
+            });
+    }, []);
     return(
         <div className='Accounts_div'>
             <div className='notifications'>
                 <i class="fa-regular fa-bell"></i>
-                <img src={user} alt="user" />
+                <img src={avatar} alt="user" />
             </div>
             <div className='accounts'>
                 <div className='accounts_head'>
@@ -21,65 +42,27 @@ export default function Accounts_div(){
             <div className='receivers'>
                 <h5>Receivers</h5>
                 <div className='cercles'>
-                    <img src={user} alt="user" />
-                    <img src={user} alt="user" />
-                    <img src={user} alt="user" />
-                    <img src={user} alt="user" />
+                {receivers.map(img => {
+                    return(
+                        <img src={img.avatar} alt="user" />
+                    )
+                })}
                 </div>
             </div>
             <div className='recent_activity'>
                 <h5>Recent Activity</h5>
-            
-                <div className='activities'>
-                    <div className='activity'>
-                        <img src={user} alt="user" />
-                        <div className='descreption_activity'>
-                            <h5>USERNAME</h5>
-                            <p>22 oct 2022</p>
+                {transactions.map(transaction =>{
+                    <div className='activities'>
+                        <div className='activity'>
+                            <img src={transaction.avatar} alt="user" />
+                            <div className='descreption_activity'>
+                                <h5>{transaction.name}</h5>
+                                <p>{transaction.date}</p>
+                            </div>
                         </div>
+                        <span>{transaction.amount} DH</span>
                     </div>
-                    <span>22.90$</span>
-                </div>
-                <div className='activities'>
-                    <div className='activity'>
-                        <img src={user} alt="user" />
-                        <div className='descreption_activity'>
-                            <h5>USERNAME</h5>
-                            <p>22 oct 2022</p>
-                        </div>
-                    </div>
-                    <span>22.90$</span>
-                </div>
-                <div className='activities'>
-                    <div className='activity'>
-                        <img src={user} alt="user" />
-                        <div className='descreption_activity'>
-                            <h5>USERNAME</h5>
-                            <p>22 oct 2022</p>
-                        </div>
-                    </div>
-                    <span>22.90$</span>
-                </div>
-                <div className='activities'>
-                    <div className='activity'>
-                        <img src={user} alt="user" />
-                        <div className='descreption_activity'>
-                            <h5>USERNAME</h5>
-                            <p>22 oct 2022</p>
-                        </div>
-                    </div>
-                    <span>22.90$</span>
-                </div>
-                <div className='activities'>
-                    <div className='activity'>
-                        <img src={user} alt="user" />
-                        <div className='descreption_activity'>
-                            <h5>USERNAME</h5>
-                            <p>22 oct 2022</p>
-                        </div>
-                    </div>
-                    <span>22.90$</span>
-                </div>
+                })}
             </div>
         </div>
     )

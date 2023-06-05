@@ -1,5 +1,7 @@
 import './Right_Bar.css';
 import user from '../../Account_div/user.png';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 export default function Right_Bar(){
     return(
         <div className='Accounts_div'>

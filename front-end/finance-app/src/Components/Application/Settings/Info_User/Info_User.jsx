@@ -32,6 +32,7 @@ export default function Info_User() {
         city: data.city,
         code_postal: data.code_postal,
         phone_number: data.phone_number,
+        email: data.email,
         }
         axios.post('/api/data/user', dataa, {
             headers: {
@@ -62,11 +63,11 @@ export default function Info_User() {
                         <div className='fullname'>
                             <div className='name'>
                                 <label htmlFor="name">First Name</label>
-                                <input type="text" id='name' name='first_name' onChange={handleInput}  value={data.first_name} />
+                                <input type="text" id='name' name='first_name' onChange={handleInput}  value={data.first_name} placeholder='First Name'/>
                             </div>
                             <div className='name'>
                                 <label htmlFor="lastname">Last Name</label>
-                                <input type="text" id='lastname' name='last_name' onChange={handleInput} value={data.last_name} />
+                                <input type="text" id='lastname' name='last_name' onChange={handleInput} value={data.last_name} placeholder='Last Name'/>
                             </div>
                         </div>
                     </div>
@@ -77,11 +78,11 @@ export default function Info_User() {
                         <button type='submit'>Save</button>
                     </div>
                     <div className='form_body'>
-                        <div>
+                        <div className='file'>
                             <label htmlFor="">RIB</label>
                             <button>Download</button>
                         </div>
-                        <div>
+                        <div className='file'>
                             <label htmlFor="">Activities</label>
                             <button>Download</button>
                         </div>
@@ -95,15 +96,15 @@ export default function Info_User() {
                         <button type='submit'>Save</button>
                     </div>
                     <div className='form_body'>
-                        <div>
+                        <div className='input-label'>
                             <label htmlFor="">Adresse line</label>
                             <input type="text" placeholder='hay el mohamadi' name='address' onChange={handleInput}  value={data.address} />
                         </div>
-                        <div>
+                        <div className='input-label'>
                             <label htmlFor="">City/town</label>
                             <input type="text" placeholder='agadir' name='city' onChange={handleInput} value={data.city} />
                         </div>
-                        <div>
+                        <div className='input-label'>
                             <label htmlFor="">Postal/zipCode</label>
                             <input type="text" placeholder='80000' name='code_postal' onChange={handleInput}  value={data.code_postal} />
                         </div>
@@ -123,12 +124,12 @@ export default function Info_User() {
                     </form>
                     <form className='security' onSubmit={handleSubmit}>
                         <div className='formHeader'>
-                            <h5>Security</h5>
+                            <h5>Contact</h5>
                             <button type='submit'>Save</button>
                         </div>
                         <div className='form_body'>
-                            <label htmlFor="">Password</label>
-                            <input type="text" placeholder='***********' name='password' />
+                            <label htmlFor="">E-mail</label>
+                            <input type="text" placeholder='omaimaabidy@gmail.com' name='email' onChange={handleInput}  value={data.email} />
                         </div>
                     </form>
                 </div>

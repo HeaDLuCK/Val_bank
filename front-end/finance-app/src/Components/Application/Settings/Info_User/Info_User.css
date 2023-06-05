@@ -30,36 +30,62 @@
     outline: none;
     cursor: pointer;
     font-weight: bold;
+    background: none;
+}
+.form_body{
+    padding: 10px;
 }
 .Info_user .top_div .profile .form_body{
+    gap: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 60px;
-    padding: 10px;
 }
-.Info_user .top_div .profile .form_body .avatar{
+.Info_user .top_div .profile .form_body .avatar, .Info_user .top_div .profile .form_body .fullname{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .Info_user .top_div .profile .form_body .fullname{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap: 10px;
-    padding:15px
+    padding:15px;
 }
 .Info_user .top_div .profile .form_body .fullname .name{
-    gap: 20px;
+    width: 100%;
+    gap: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.profile .form_body .fullname .name input{
+    outline: none;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 10px;
 }
 .Info_user .top_div .files{
     width: 40%;
     height: 100%;
     background: #FFFFFF;
     border-radius: 5px;
+}
+.files .file{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 13px;
+}
+.files .file button{
+    background: #FFFFFF;
+    padding: 4px;
+    border: 2px solid #64B6E3;
+    outline: none;
+    color: #64B6E3;
+    border-radius: 20px;
+}
+.files .file button:hover{
+    background: #eeeeee;
 }
 .Info_user .bottom_div{
     margin-top: 40px;
@@ -74,9 +100,36 @@
     background: #FFFFFF;
     border-radius: 5px;
 }
+.Info_user .bottom_div .adresse .form_body{
+    padding: 10px;
+}
+.adresse .form_body .input-label{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.adresse .form_body .input-label input{
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
+}
 .Info_user .bottom_div .contact_div{
     width: 50%;
     height: 100%;
+}
+.Info_user .bottom_div .contact_div .form_body{
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.Info_user .bottom_div .contact_div .form_body input{
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
 }
 .Info_user .bottom_div .contact_div .phone_number{
     width: 100%;
