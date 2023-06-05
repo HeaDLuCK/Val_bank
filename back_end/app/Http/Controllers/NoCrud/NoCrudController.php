@@ -26,12 +26,17 @@ class NoCrudController extends Controller
             ->orderBy('transaction_id', 'desc')
             ->take(5)
             ->get();
-        $transaction = collect($transaction)->map(function ($elem) use ($ids) {
+
+        $receiver = [];
+        $transaction = collect($transaction)->map(function ($elem) use ($ids, $receiver) {
             if (in_array($elem->depositorAccount->account_id, $ids)) {
                 $main = $elem->receiverAccount->user->user_detail;
                 $contents = Storage::disk('public')->get('images/' . $main->avatar_image);
                 $base64 = base64_encode($contents);
-
+                array_push($receiver, [
+                    "account_id" => $elem->receiverAccount->account_id,
+                    "avatar" => $base64
+                ]);
                 $fullname = $main->first_name . " " . $main->last_name;
                 return [
                     "transaction_id" => $elem->transaction_id,
@@ -67,6 +72,7 @@ class NoCrudController extends Controller
                     'created_at',
                     'updated_at'
                 ]),
+                "receiver" => $receiver,
                 "transactions" =>   $transaction
             ]
         ], 200);
@@ -90,10 +96,10 @@ class NoCrudController extends Controller
                 ->groupBy("type")
                 ->selectRaw('type,sum(amount) as expense')
                 ->get();
-            $transactionAsReciever = Transaction::Where("arr_account", $request->account_id)
+            $transactionAsReceiver = Transaction::Where("arr_account", $request->account_id)
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->groupBy("created_at")
-                ->selectRaw('created_at as date,sum(amount) as recieve')
+                ->selectRaw('created_at as date,sum(amount) as receive')
                 ->get()->map(function ($elem) {
                     $elem->date = Carbon::parse($elem->date)->format('Y-m-d');
                     return $elem->toArray();
@@ -112,7 +118,7 @@ class NoCrudController extends Controller
                 "payload" => [
                     "balance" => finance_account::find($request->account_id)->balance,
                     "expenses" => $expenses,
-                    "recieved" => $transactionAsReciever,
+                    "receiver" => $transactionAsReceiver,
                     "deposit" => $transactionAsDepositor
 
                 ]
