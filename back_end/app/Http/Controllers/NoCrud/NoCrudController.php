@@ -27,13 +27,13 @@ class NoCrudController extends Controller
             ->take(5)
             ->get();
 
-        $receiver = [];
-        $transaction = collect($transaction)->map(function ($elem) use ($ids, $receiver) {
+        $receivers = [];
+        $transaction = collect($transaction)->map(function ($elem) use ($ids,&$receivers) {
             if (in_array($elem->depositorAccount->account_id, $ids)) {
                 $main = $elem->receiverAccount->user->user_detail;
                 $contents = Storage::disk('public')->get('images/' . $main->avatar_image);
                 $base64 = base64_encode($contents);
-                array_push($receiver, [
+                array_push($receivers, [
                     "account_id" => $elem->receiverAccount->account_id,
                     "avatar" => $base64
                 ]);
@@ -72,7 +72,7 @@ class NoCrudController extends Controller
                     'created_at',
                     'updated_at'
                 ]),
-                "receiver" => $receiver,
+                "receivers" => $receivers,
                 "transactions" =>   $transaction
             ]
         ], 200);
