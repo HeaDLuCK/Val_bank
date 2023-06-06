@@ -7,11 +7,11 @@ import swal from 'sweetalert';
 import { useEffect, useState } from "react";
 // import user from './user.png';
 
-export default function Accounts(){
+export default function Accounts() {
     const dispatch = useDispatch()
     const [dataAccounts, setDataAccounts] = useState([]);
     const navigate = useNavigate()
-    const handleClick = () =>{
+    const handleClick = () => {
         navigate('/add_accounts')
     }
     useEffect(() => {
@@ -22,13 +22,14 @@ export default function Accounts(){
                 }
             })
             .then(res => {
-                setDataAccounts(res.data.payload ) 
+                console.log(res);
+                setDataAccounts(res.data.payload)
             }).catch(err => {
                 console.log(err);
             });
     }, []);
-    const HandleDelete = (id) =>{
-        axios.delete('api/data/finance_account/', id, {
+    const HandleDelete = (id) => {
+        axios.delete(`api/data/finance_account/${id}`, {
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Bearer ${localStorage.getItem('token')}`,
@@ -36,19 +37,20 @@ export default function Accounts(){
         }).then(res => {
             if (res.status === 200) {
                 dispatch(Delete(id))
-                swal('Success', res.message, 'success')
-                navigate('/accounts')}
+                swal('Success', res.data.message, 'success')
+                navigate('/accounts')
+            }
         }).catch(err => {
-                swal('Warning', err.message, 'warning')
+            swal('Warning', err.data.message, 'warning')
         })
-        
+
     }
-    return(
+    return (
         <div className='AccountsCards'>
             <h3>My Accounts :</h3>
             <div className='MyAccountsDiv'>
-                {dataAccounts.map(e =>{
-                    return(
+                {dataAccounts.map(e => {
+                    return (
                         <div className='MyAccount'>
                             <div className='infos'>
                                 <h3>Balance</h3>
@@ -58,14 +60,14 @@ export default function Accounts(){
                                 <p className='balance'>{e.account_status} </p>
                             </div>
                             <div className='dateCreation'>
-                                <p>Crée le : <span>20 Nov 2020</span></p> 
+                                <p>Crée le : <span>20 Nov 2020</span></p>
                             </div>
-                            <td><Link to={`/update/:${e.id}`}><button>Edit</button></Link><button onClick={() =>HandleDelete(e.id)}>Delete</button></td>
-                        </div> 
+                            <td><Link to={`/form_update_account/${e.account_id}`}><button>Edit</button></Link><button onClick={() => HandleDelete(e.account_id)}>Delete</button></td>
+                        </div>
                     )
-                   
+
                 })
-                
+
                 }
                 <div className='LastDivAccount'>
                     <div className='AddAccount' onClick={handleClick}>
@@ -76,7 +78,7 @@ export default function Accounts(){
                     </div>
                 </div>
             </div>
-             
+
         </div>
     )
 }

@@ -10,7 +10,7 @@ export default function Accounts_div() {
     const [receivers, setReceivers] = useState([]);
     const [transactions, setTransactions] = useState([]);
     useEffect(() => {
-        axios.get(`api/data/finance_account/`,
+        axios.get(`api/data/profile/`,
             {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`
@@ -21,11 +21,12 @@ export default function Accounts_div() {
                 setAvatar(res.data.payload.avatar)
                 setReceivers(res.data.payload.receivers)
                 setTransactions(res.data.payload.transactions)
-                setDataAccounts(res.data.payload.finance_account)
+                setDataAccounts(res.data.payload.accounts)
             }).catch(err => {
                 console.log(err);
             });
     }, []);
+    console.log(dataAccounts)
     return (
         <div className='Accounts_div'>
             <div className='notifications'>

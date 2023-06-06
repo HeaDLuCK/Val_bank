@@ -17,12 +17,13 @@ class ImportBills implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        return new Bill([
-            "company" => $row["company"],
-            "pay_code" => $row["pay_code"],
-            "amount" => $row["amount"],
-            "date_of_bill" => Carbon::instance(Date::excelToDateTimeObject($row["date_of_bill"])),
-            "payment_deadline" => Carbon::instance(Date::excelToDateTimeObject($row["payment_deadline"])),
-        ]);
+        $test = new Bill();
+        $test->company = $row["company"];
+        $test->pay_code = $row["pay_code"];
+        $test->amount = $row["amount"];
+        $test->date_of_bill = Carbon::instance(Date::excelToDateTimeObject($row["date_of_bill"]));
+        $test->payment_deadline = Carbon::instance(Date::excelToDateTimeObject($row["payment_deadline"]));
+        $test->save();
+        return $test;
     }
 }

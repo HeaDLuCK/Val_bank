@@ -8,6 +8,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isNull;
+
 class FinanceAccountController extends Controller
 {
     /**
@@ -15,7 +17,8 @@ class FinanceAccountController extends Controller
      */
     public function index()
     {
-        return response()->json(["payload" => Finance_account::where("user_id", Auth()->id())], 200);
+        $data=Finance_account::where("user_id", Auth()->id())->get();
+        return response()->json(["payload" =>$data ], 200);
     }
 
 

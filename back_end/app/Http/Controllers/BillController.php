@@ -27,12 +27,13 @@ class BillController extends Controller
         validator($request->all(), [
             "facture" => 'required|file|mimes:xls,xlsx'
         ])->validate();
-        try {
+        // try {
             Excel::import(new ImportBills, $request->file('facture'));
             return response()->json(["message" => "data inserted successfully"], 200);
-        } catch (Exception) {
-            return response()->json(["message" => "check your file data  the column need to be company,amount,date_of_bill,payment_deadline"], 500);
-        }
+        // } catch (Exception $e) {
+        //     return $e;
+        //     return response()->json(["message" => "check your file data  the column need to be company,amount,date_of_bill,payment_deadline"], 500);
+        // }
     }
 
     /**
