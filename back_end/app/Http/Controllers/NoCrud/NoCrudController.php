@@ -118,7 +118,7 @@ class NoCrudController extends Controller
                 "payload" => [
                     "balance" => finance_account::find($request->account_id)->balance,
                     "expenses" => $expenses,
-                    "receiver" => $transactionAsReceiver,
+                    "received" => $transactionAsReceiver,
                     "deposit" => $transactionAsDepositor
 
                 ]
