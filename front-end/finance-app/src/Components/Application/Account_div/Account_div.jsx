@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import './Accounts_div.css';
 import user from './user.png';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 export default function Accounts_div() {
-
+    const Accounts = useSelector((x) => x.Accounts) 
+    const navigate = useNavigate();
     const [avatar, setAvatar] = useState(user);
     const [receivers, setReceivers] = useState([]);
     const [transactions, setTransactions] = useState([]);
@@ -32,12 +35,18 @@ export default function Accounts_div() {
             <div className='accounts'>
                 <div className='accounts_head'>
                     <h5>My accounts</h5>
-                    <i class="fa-regular fa-square-plus"></i>
+                    <i class="fa-regular fa-square-plus" onClick={() => { navigate('/add_accounts') }}></i>
                 </div>
                 <div className='accounts_body'>
-                    <div className='square'></div>
-                    <div className='square'></div>
-                    <div className='square'></div>
+                {Accounts.map(e =>{
+                    return(
+                        <div className='square'>
+                         <p>{e.account_name}</p>
+                        </div> 
+                    )
+                    
+                })  
+                }
                 </div>
             </div>
             <div className='receivers'>

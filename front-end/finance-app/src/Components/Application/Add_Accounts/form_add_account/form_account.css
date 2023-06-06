@@ -1,0 +1,20 @@
+.form-account{
+    width: calc(100% - 100px);
+    height: 500px;
+    background: #ffffff;
+    margin-left: 70px;
+    border-radius: 20px;
+    padding: 30px;
+}
+.header-add-account{
+    display: flex;
+    justify-content: space-between;
+}
+.header-add-account button{
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}

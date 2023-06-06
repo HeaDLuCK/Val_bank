@@ -9,6 +9,9 @@ import Finance_Accounts from "./Components/Application/Finance_Accounts/Finance_
 import Settings_User from "./Components/Application/Settings/Settings_User/Settings_User";
 import Settings_Password from "./Components/Application/Settings/Settings_Pass/Settings_password";
 import axios from 'axios';
+import Add_Accounts from "./Components/Application/Add_Accounts/Add_Accounts";
+import Form_account from "./Components/Application/Add_Accounts/form_add_account/form_acount";
+import Form_Update_account from "./Components/Application/Add_Accounts/form_add_account/form_update_account";
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 axios.defaults.headers.post['Accept'] = 'application/json';
@@ -26,6 +29,9 @@ function App() {
         <Route path="/accounts" element={<Finance_Accounts />} />
         <Route path="/settings_user" element={<Settings_User />} />
         <Route path="/settings_password" element={<Settings_Password />} />
+        <Route path="/add_accounts" element={<Add_Accounts />} />
+        <Route path="/form_account" element={<Form_account />} />
+        <Route path="/form_update_account/:id" element={<Form_Update_account />} />
       </Routes>
     </BrowserRouter>
 
