@@ -1,16 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import './Accounts.css';
 import { Delete } from "../../config/actions";
 import axios from 'axios';
 import swal from 'sweetalert';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import user from './user.png';
 
 export default function Accounts(){
     const dispatch = useDispatch()
-    const Accounts = useSelector((x) => x.Accounts)
-    const [dataAccounts, setDataAccounts] = useSelector(Accounts);
+    const [dataAccounts, setDataAccounts] = useState([]);
     const navigate = useNavigate()
     const handleClick = () =>{
         navigate('/add_accounts')
@@ -23,11 +22,11 @@ export default function Accounts(){
                 }
             })
             .then(res => {
-                setDataAccounts(res.data.payload ) //-----
+                setDataAccounts(res.data.payload ) 
             }).catch(err => {
                 console.log(err);
             });
-    }, [Accounts]);
+    }, []);
     const HandleDelete = (id) =>{
         axios.delete('api/data/finance_account/', id, {
             headers: {

@@ -3,10 +3,9 @@ import './Accounts_div.css';
 import user from './user.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 export default function Accounts_div() {
-    const Accounts = useSelector((x) => x.Accounts) 
     const navigate = useNavigate();
+    const [dataAccounts, setDataAccounts] = useState([]);
     const [avatar, setAvatar] = useState(user);
     const [receivers, setReceivers] = useState([]);
     const [transactions, setTransactions] = useState([]);
@@ -22,6 +21,7 @@ export default function Accounts_div() {
                 setAvatar(res.data.payload.avatar)
                 setReceivers(res.data.payload.receivers)
                 setTransactions(res.data.payload.transactions)
+                setDataAccounts(res.data.payload.finance_account)
             }).catch(err => {
                 console.log(err);
             });
@@ -38,7 +38,7 @@ export default function Accounts_div() {
                     <i class="fa-regular fa-square-plus" onClick={() => { navigate('/add_accounts') }}></i>
                 </div>
                 <div className='accounts_body'>
-                {Accounts.map(e =>{
+                {dataAccounts.map(e =>{
                     return(
                         <div className='square'>
                          <p>{e.account_name}</p>
