@@ -11,7 +11,7 @@ export default function Accounts_div() {
     const [receivers, setReceivers] = useState([]);
     const [transactions, setTransactions] = useState([]);
     useEffect(() => {
-        axios.get(`/api/data/profile`,
+        axios.get(`api/data/finance_account/`,
             {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`

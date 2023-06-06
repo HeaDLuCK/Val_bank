@@ -4,17 +4,32 @@ import './Accounts.css';
 import { Delete } from "../../config/actions";
 import axios from 'axios';
 import swal from 'sweetalert';
+import { useEffect } from "react";
 // import user from './user.png';
 
 export default function Accounts(){
     const dispatch = useDispatch()
     const Accounts = useSelector((x) => x.Accounts)
+    const [dataAccounts, setDataAccounts] = useSelector(Accounts);
     const navigate = useNavigate()
     const handleClick = () =>{
         navigate('/add_accounts')
     }
+    useEffect(() => {
+        axios.get(`api/data/finance_account/`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => {
+                setDataAccounts(res.data.payload ) //-----
+            }).catch(err => {
+                console.log(err);
+            });
+    }, [Accounts]);
     const HandleDelete = (id) =>{
-        axios.delete('/api/data/profile', id, {
+        axios.delete('api/data/finance_account/', id, {
             headers: {
                 'content-type': 'application/json',
                 "Authorization": `Bearer ${localStorage.getItem('token')}`,
@@ -33,7 +48,7 @@ export default function Accounts(){
         <div className='AccountsCards'>
             <h3>My Accounts :</h3>
             <div className='MyAccountsDiv'>
-                {Accounts.map(e =>{
+                {dataAccounts.map(e =>{
                     return(
                         <div className='MyAccount'>
                             <div className='infos'>

@@ -33,7 +33,7 @@ export default function Form_account(){
             account_type:accounts.account_type,
             account_status:accounts.account_status,
         }
-        axios.post('/api/data/profile', data, {
+        axios.post('api/data/finance_account/', data, {
             headers: {
                 'content-type': 'multipart/form-data',
                 "Authorization": `Bearer ${localStorage.getItem('token')}`,
