@@ -6,7 +6,7 @@ import SideBar from '../SideBar/SideBar';
 import './Add_Accounts.css';
 import Form_Update_account from './form_add_account/form_update_account';
 
-function Add_Accounts() {
+function Update_Accounts() {
   return (
       <div className='ALL'>
         <div className='dashbord'>
@@ -22,4 +22,4 @@ function Add_Accounts() {
       
   );
 }
-export default Add_Accounts;
+export default Update_Accounts;
