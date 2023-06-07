@@ -1,6 +1,19 @@
 .middle_div{
     margin-bottom: 30px ;
 }
+.middle_div .dates-dashboard{
+    display: flex;
+    justify-content: flex-end;
+    gap: 50px;
+}
+.dates-dashboard input{
+    width: 100px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background: none;
+    margin-top: -135px;
+}
 .Balence{
     width: calc(50% - 5px);
     height: 100%;

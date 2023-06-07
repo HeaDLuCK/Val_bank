@@ -6,15 +6,51 @@
     border-radius: 20px;
     padding: 30px;
 }
-.header-add-account{
+.form-account .inputs-add-account{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
 }
-.header-add-account button{
-    background: none;
+.form-account .inputs-add-account input{
+    width: 300px;
+    height: 50px;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    background: #dadada;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.form-account h3{
+    text-align: center;
+    font-size: 23px;
+    letter-spacing: 1px;
+    color: #4C8BAD;
+    padding: 10px;
+    border-bottom: 1px solid #dadada;
+}
+.btns-add-account{
+    margin-top: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+.btns-add-account .btn{
+    border-radius: 20px;
+    height: 45px;
+    width: 220px;
+    background: #4C8BAD;
     border: none;
     outline: none;
-    font-size: 15px;
-    font-weight: bold;
+    color: #ffffff;
+    font-size: 17px;
     cursor: pointer;
+}
+.btns-add-account .btn.my-accounts{
+    background: rgb(107, 204, 107);
 }

@@ -1,6 +1,6 @@
 .AccountsCards{
     width: 100%;
-    height: 400px;
+    height: auto;
     border-radius: 20px;
     margin: 20px;
     padding: 20px;
@@ -15,8 +15,9 @@
     gap: 15px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-end;
+    height: auto;
 }
 .AccountsCards .MyAccountsDiv .MyAccount{
     width: calc(100% / 3 - 10px);
@@ -26,7 +27,6 @@
     display: flex;
     justify-content: center;
     position: relative;
-    /* padding: 10px; */
 }
 .MyAccountsDiv .MyAccount .dateCreation{
     width: 100%;
@@ -81,17 +81,32 @@
     width: 100%;
     text-align: center;
 }
-.MyAccountsDiv .MyAccount .infos h3{
-    margin-bottom: -2px;
-    font-weight: 500;
+.MyAccountsDiv .MyAccount .infos .account-solde{
+    font-size: 15px;
+}
+.MyAccountsDiv .MyAccount .infos .delete-edit-btn{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.MyAccountsDiv .MyAccount .infos .delete-edit-btn i{
+    color: red;
+}
+.MyAccountsDiv .MyAccount .infos .delete-edit-btn button{
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 0.4px;
 }
 .MyAccount .infos .balance{
     font-size: 32px;
-    color: #20c220;
+    margin-bottom: 70px;
+    color: #64B6E3;
 }
 .MyAccount .infos .balance span{
     font-size: 17px;
-    color: #20c220;
 }
 .MyAccount .infos .userInfo{
     margin: 10px 5px;

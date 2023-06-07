@@ -22,7 +22,7 @@ export default function Middle_div() {
     const [balance, setBalance] = useState();
     const [recieve, setRecieve] = useState([]);
     const [deposit, setDeposit] = useState([]);
-    const [account, setAccount] = useState(localStorage.getItem('accounts')[0]);
+    // const [account, setAccount] = useState(localStorage.getItem('accounts')[0]);
     const [expenses, setExpenses] = useState([]);
 
     const handleInput = (e) => {
@@ -30,23 +30,23 @@ export default function Middle_div() {
         console.log(dates);
     }
 
-    useEffect(() => {
-        axios.post(`/api/data/dashboard/${account}`, dates,
-            {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                    'content-type': 'multipart/form-data'
-                }
-            })
-            .then(res => {
-                setExpenses(res.data.payload.expenses)
-                setBalance(res.data.payload.balance)
-                setRecieve(res.data.payload.received)
-                setDeposit(res.data.payload.deposit)
-            }).catch(err => {
-                console.log(err);
-            });
-    }, [dates, account]);
+    // useEffect(() => {
+    //     axios.post(`/api/data/dashboard/${account}`, dates,
+    //         {
+    //             headers: {
+    //                 "Authorization": `Bearer ${localStorage.getItem('token')}`,
+    //                 'content-type': 'multipart/form-data'
+    //             }
+    //         })
+    //         .then(res => {
+    //             setExpenses(res.data.payload.expenses)
+    //             setBalance(res.data.payload.balance)
+    //             setRecieve(res.data.payload.received)
+    //             setDeposit(res.data.payload.deposit)
+    //         }).catch(err => {
+    //             console.log(err);
+    //         });
+    // }, [dates, account]);
     const data = {
         labels: expenses.map(e => {
             return [e.type]   //`${[e.type]}`
@@ -114,8 +114,11 @@ export default function Middle_div() {
     };
     return (
         <div className='middle_div'>
-            <input type="date" name='date1' value={dates.date1} onChange={handleInput} />
-            <input type="date" name='date2' value={dates.date2} onChange={handleInput} />
+            <div className='dates-dashboard'>
+                <input type="date" name='date1' value={dates.date1} onChange={handleInput} />
+                <input type="date" name='date2' value={dates.date2} onChange={handleInput} />
+            </div>
+            
             <div className='middle'>
                 <div className='Balence'>
                     <h4>Total Balence</h4>

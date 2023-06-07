@@ -1,7 +1,6 @@
 import './Activities.css';
 import user from '../Account_div/user.png';
 function Activities() {
-  return (
     <div className='ActivitiesTransaction'>
         <h3>Activity</h3>
         <div className='filterandsearch'>
@@ -75,7 +74,6 @@ function Activities() {
         </div>
     </div>
 
-  );
 }
 
 export default Activities;

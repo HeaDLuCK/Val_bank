@@ -53,22 +53,24 @@ export default function Accounts() {
                     return (
                         <div className='MyAccount'>
                             <div className='infos'>
-                                <h3>Balance</h3>
-                                <p className='balance'>{e.balance} <span>DH</span></p>
-                                <p className='balance'>{e.account_name}</p>
-                                <p className='balance'>{e.account_type} </p>
-                                <p className='balance'>{e.account_status} </p>
+                                <div className="delete-edit-btn">
+                                    <Link to={`/form_update_account/${e.account_id}`}><button>Edit</button></Link>
+                                    <i class="fa fa-trash" aria-hidden="true" onClick={() => HandleDelete(e.account_id)}></i>
+                                </div>
+                                <p className='account-solde'>Solde :</p>
+                                <p className='balance'>{e.balance}<span>DH</span></p>
+                                <p className='account-type'>{e.account_type}</p>
                             </div>
                             <div className='dateCreation'>
-                                <p>Crée le : <span>20 Nov 2020</span></p>
+                                <p>Status: <span>{e.account_status}</span></p>
                             </div>
-                            <td><Link to={`/form_update_account/${e.account_id}`}><button>Edit</button></Link><button onClick={() => HandleDelete(e.account_id)}>Delete</button></td>
                         </div>
                     )
 
                 })
 
                 }
+                
                 <div className='LastDivAccount'>
                     <div className='AddAccount' onClick={handleClick}>
                         <i class="fa fa-plus"> </i>
