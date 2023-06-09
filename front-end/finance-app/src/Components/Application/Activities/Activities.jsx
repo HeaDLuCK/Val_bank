@@ -43,8 +43,9 @@ function Activities() {
                 console.log(err);
             });
     }, [account, date]);
-
+return(
     <div className='ActivitiesTransaction'>
+        
         <h3>Activity</h3>
         <div className='filterandsearch'>
             <div className='filter'>
@@ -79,8 +80,9 @@ function Activities() {
                 </div>
             )
         })}
-        </div>
-    </div>
+        </div> 
+       
+    </div>)
 
 }
 

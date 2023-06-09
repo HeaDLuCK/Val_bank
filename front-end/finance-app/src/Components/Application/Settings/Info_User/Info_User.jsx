@@ -128,7 +128,7 @@ export default function Info_User() {
                             <button type='submit'>Save</button>
                         </div>
                         <div className='form_body'>
-                            <label htmlFor="">E-mail</label>
+                            <label htmlFor="">Email</label>
                             <input type="text" placeholder='omaimaabidy@gmail.com' name='email' onChange={handleInput}  value={data.email} />
                         </div>
                     </form>

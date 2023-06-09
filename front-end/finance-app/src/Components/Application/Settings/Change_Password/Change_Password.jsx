@@ -1,13 +1,47 @@
 import './Change_Password.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button } from 'antd';
+import axios from 'axios';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
+
 export default function Change_Password(){
-    const onFinish = (values) => {
-        console.log('Received values:', values);
-        // 
-      };
+  const navigate = useNavigate('/');
+const [currentPassword, setCurrentPassword] = useState('');
+const [newPassword, setNewPassword] = useState('');
+const [confirmPassword, setConfirmPassword] = useState('');
+    const onFinish = async (e) => {
+        e.preventDefault(e);
+        console.log(currentPassword,newPassword);
+        if (!currentPassword || !newPassword || !confirmPassword) {
+          swal('Warning', "Please fill in all fields", 'warning');
+        }
     
-      const onFinishFailed = (errorInfo) => {
+        if (newPassword !== confirmPassword) {
+          swal('Warning', 'New password and confirm password do not match', 'warning');
+        }
+        else{
+            axios.post('/api/password', currentPassword,newPassword, {
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem('token')}`,
+              'content-type': 'multipart/form-data'
+            }
+            }).then(res => {
+                if (res.status === 202) {
+                    // localStorage.setItem('token', res.data.token)
+                    // localStorage.setItem('accounts', res.data.accounts)
+                    swal('Success', res.data.message, 'success')
+                    navigate('/dashboard')
+                }
+
+            }).catch(err => {
+                    swal('Warning', err.response.data.message, 'warning')
+            })
+            };
+        }
+      
+    
+      const onFinishFailed =  (errorInfo) => {
         console.log('Validation failed:', errorInfo);
       };
       const validatePassword = (_, value) => {
@@ -34,7 +68,10 @@ export default function Change_Password(){
           },
         ]}
       >
-        <Input.Password placeholder='Current Password'/>
+        <Input.Password placeholder='Current Password' 
+          type="password"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}/>
       </Form.Item>
 
       <Form.Item
@@ -49,7 +86,10 @@ export default function Change_Password(){
           },
         ]}
       >
-        <Input.Password placeholder='New Password'/>
+        <Input.Password placeholder='New Password' 
+        type="password"
+        value={newPassword}
+        onChange={(e) => setNewPassword(e.target.value)}/>
       </Form.Item>
 
       <Form.Item
@@ -70,14 +110,18 @@ export default function Change_Password(){
           }),
         ]}
       >
-        <Input.Password placeholder='Confirm New Password' />
+        <Input.Password placeholder='Confirm New Password' 
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Cancel
         </Button>
-        <Button type="primary" htmlType="submit" className='submit-btn'>
+        <Button type="primary" htmlType="submit" className='submit-btn' onClick={(e) => onFinish(e)}>
           Submit
         </Button>
       </Form.Item>
