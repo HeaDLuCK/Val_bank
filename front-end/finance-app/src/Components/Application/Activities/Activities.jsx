@@ -6,7 +6,7 @@ function Activities() {
     const[accounts, setAccounts] = useState([])
     const[account, setAccount] = useState()
     const[date, setDate] = useState()
-    const[transaction, setTransaction] = useState()
+    const[transaction, setTransaction] = useState([])
     const handleInput = (e) =>{
         e.persist();
         setAccount(
@@ -17,7 +17,7 @@ function Activities() {
         )
     }
     useEffect(() => {
-        axios.get(`api/data/finance_account/`,
+        axios.get(`api/data/transaction`,
             {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`
@@ -30,7 +30,7 @@ function Activities() {
             });
     }, [account, date]);
     useEffect(() => {
-        axios.post(`api/data/transaction`, account, date,
+        axios.post(`api/data/finance_account/`, account, date,
             {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`,

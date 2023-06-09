@@ -29,31 +29,33 @@ export default function Accounts_div() {
     }, []);
     console.log(dataAccounts)
 
-    const profile_div = () =>{
+    const profile_div = () => {
         const div_pass = document.querySelector('.profile_div');
         console.log(div_pass);
-        if(!div_pass.classList.contains('active')){
+        if (!div_pass.classList.contains('active')) {
             return div_pass.classList.add('active')
-        }else{
+        } else {
             return div_pass.classList.remove('active')
         }
     }
-    const handleLogout = () =>{
-        axios.post('/api/logout',{
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                'content-type': 'multipart/form-data',
-            }
-        }).then(res =>{
-            console.log(res);
-            localStorage.removeItem('token');
-            navigate('/')
-        }).catch(err =>{
-            console.log(err);
-            swal('Warning', err.message, 'warning');
-        })}
-        
-    
+    const handleLogout = () => {
+        console.log(localStorage.getItem('token'));
+        axios.delete(`api/logout/`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
+            }).then(res => {
+                console.log(res);
+                // localStorage.removeItem('token');
+                navigate('/')
+            }).catch(err => {
+                console.log(err);
+                swal('Warning', err.message, 'warning');
+            })
+    }
+
+
     return (
         <div className='Accounts_div'>
             {/* {users.map(u => {
@@ -72,7 +74,7 @@ export default function Accounts_div() {
                     <button >Accounts</button>
                     <button className='logout_btn' onClick={handleLogout}>LogOut</button>
                 </div>
-                
+
             </div>
             {/* )})}  */}
             <div className='notifications'>
@@ -85,15 +87,15 @@ export default function Accounts_div() {
                     <i class="fa-regular fa-square-plus" onClick={() => { navigate('/add_accounts') }}></i>
                 </div>
                 <div className='accounts_body'>
-                {dataAccounts.map(e =>{
-                    return(
-                        <div className='square'>
-                         <p>{e.account_name}</p>
-                        </div> 
-                    )
-                    
-                })  
-                }
+                    {dataAccounts.map(e => {
+                        return (
+                            <div className='square'>
+                                <p>{e.account_name}</p>
+                            </div>
+                        )
+
+                    })
+                    }
                 </div>
             </div>
             <div className='receivers'>

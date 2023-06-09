@@ -91,7 +91,7 @@ class TransactionController extends Controller
             });
             return response()->json([
                 "payload" => [
-                    "data" => $transaction,
+                    "transactions" => $transaction,
                     "last_page" => $lastPage
                 ]
             ], 200);
