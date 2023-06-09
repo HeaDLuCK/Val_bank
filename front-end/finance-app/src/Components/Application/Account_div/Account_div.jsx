@@ -3,6 +3,7 @@ import './Accounts_div.css';
 import user from './user.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 export default function Accounts_div() {
     const navigate = useNavigate();
     const [dataAccounts, setDataAccounts] = useState([]);
@@ -27,11 +28,56 @@ export default function Accounts_div() {
             });
     }, []);
     console.log(dataAccounts)
+
+    const profile_div = () =>{
+        const div_pass = document.querySelector('.profile_div');
+        console.log(div_pass);
+        if(!div_pass.classList.contains('active')){
+            return div_pass.classList.add('active')
+        }else{
+            return div_pass.classList.remove('active')
+        }
+    }
+    const handleLogout = () =>{
+        axios.post('/api/logout',{
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                'content-type': 'multipart/form-data',
+            }
+        }).then(res =>{
+            console.log(res);
+            localStorage.removeItem('token');
+            navigate('/')
+        }).catch(err =>{
+            console.log(err);
+            swal('Warning', err.message, 'warning');
+        })}
+        
+    
     return (
         <div className='Accounts_div'>
+            {/* {users.map(u => {
+                        return ( */}
+            <div className='profile_div'>
+                <div className='header_profile_div'>
+                    <div className='image_profile'>
+                        <img src={`data:image/png;base64,${avatar}`} alt="user" />
+                    </div>
+                </div>
+                <div className='body_profile_div'>
+                    <h5>Omayma ABIDY</h5>
+                    <p>User</p>
+                </div>
+                <div className='btns_profile_div'>
+                    <button >Accounts</button>
+                    <button className='logout_btn' onClick={handleLogout}>LogOut</button>
+                </div>
+                
+            </div>
+            {/* )})}  */}
             <div className='notifications'>
                 <i class="fa-regular fa-bell"></i>
-                <img src={`data:image/png;base64,${avatar}`} alt="user" />
+                <img src={`data:image/png;base64,${avatar}`} alt="user" onClick={profile_div} />
             </div>
             <div className='accounts'>
                 <div className='accounts_head'>
