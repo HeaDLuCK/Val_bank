@@ -10,6 +10,7 @@ import {
 } from 'chart.js';
 
 import { Doughnut } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
 
 ChartJS.register(
     ArcElement,
@@ -22,6 +23,7 @@ export default function Middle_div() {
     const [balance, setBalance] = useState();
     const [recieve, setRecieve] = useState([]);
     const [deposit, setDeposit] = useState([]);
+    const account = useSelector(state => state.idAccount);
     // const [account, setAccount] = useState(localStorage.getItem('accounts')[0]);
     const [expenses, setExpenses] = useState([]);
 

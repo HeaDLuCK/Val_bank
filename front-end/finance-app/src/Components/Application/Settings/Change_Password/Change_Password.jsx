@@ -45,9 +45,7 @@ export default function Change_Password() {
   }
 
 
-  const onFinishFailed = (errorInfo) => {
-    console.log('Validation failed:', errorInfo);
-  };
+  
   const validatePassword = (_, value) => {
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (passwordRegex.test(value)) {

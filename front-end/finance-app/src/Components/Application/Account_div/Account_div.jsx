@@ -4,8 +4,11 @@ import user from './user.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
+import { idAccount } from '../../config/actions';
+import { useDispatch } from 'react-redux';
 export default function Accounts_div() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [dataAccounts, setDataAccounts] = useState([]);
     const [avatar, setAvatar] = useState(user);
     const [receivers, setReceivers] = useState([]);
@@ -55,23 +58,24 @@ export default function Accounts_div() {
             })
     }
 
+    const handleAccount = (id) =>{
+        console.log(id);
+        dispatch(
+            idAccount(id)
+        )
+    }
 
     return (
         <div className='Accounts_div'>
             {/* {users.map(u => {
                         return ( */}
             <div className='profile_div'>
-                <div className='header_profile_div'>
-                    <div className='image_profile'>
-                        <img src={`data:image/png;base64,${avatar}`} alt="user" />
-                    </div>
-                </div>
                 <div className='body_profile_div'>
                     <h5>Omayma ABIDY</h5>
                     <p>User</p>
                 </div>
                 <div className='btns_profile_div'>
-                    <button >Accounts</button>
+                    <button onClick={() => { navigate('/settings_user') }}>Settings</button>
                     <button className='logout_btn' onClick={handleLogout}>LogOut</button>
                 </div>
 
@@ -89,13 +93,12 @@ export default function Accounts_div() {
                 <div className='accounts_body'>
                     {dataAccounts.map(e => {
                         return (
-                            <div className='square'>
+                            <div className='square' onClick={() => handleAccount(e.id)}>
                                 <p>{e.account_name}</p>
                             </div>
                         )
-
                     })
-                    }
+                    } 
                 </div>
             </div>
             <div className='receivers'>

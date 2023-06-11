@@ -10,28 +10,26 @@ export default function Form_account() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [accounts, setAccounts] = useState({
+    const [account, setAccount] = useState({
         account_name: '',
         balance: '',
         account_type: '',
         account_status: '',
     })
-    const count = useSelector(x => x.Accounts.length)
     const handleInput = (e) => {
         e.persist();
-        setAccounts({
-            ...accounts, [e.target.name]: e.target.value
+        setAccount({
+            ...account, [e.target.name]: e.target.value
         })
-
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(accounts);
+        console.log(account);
         const data = {
-            account_name: accounts.account_name,
-            balance: parseInt(accounts.balance).toFixed(2),
-            account_type: accounts.account_type,
-            account_status: accounts.account_status,
+            account_name: account.account_name,
+            balance: parseInt(account.balance).toFixed(2),
+            account_type: account.account_type,
+            account_status: account.account_status,
         }
         axios.post('api/data/finance_account/', data, {
             headers: {
@@ -43,10 +41,10 @@ export default function Form_account() {
             if (res.status === 200) {
                 dispatch(
                     AddAccount({
-                        account_name: accounts.account_name,
-                        balance: accounts.balance,
-                        account_type: accounts.account_type,
-                        account_status: accounts.account_status,
+                        account_name: account.account_name,
+                        balance: account.balance,
+                        account_type: account.account_type,
+                        account_status: account.account_status,
                     }))
                 swal('Success', res.data.message, 'success')
                 navigate('/accounts')
@@ -63,10 +61,10 @@ export default function Form_account() {
         <form className='form-account' onSubmit={handleSubmit}>
                 <h3>Add New Account</h3>
             <div className='inputs-add-account'>
-                <input type="text" placeholder='Account Name' name='account_name' onChange={handleInput} value={accounts.account_name} />
-                <input type="number" placeholder='Balance' name='balance' onChange={handleInput} value={accounts.balance} />
-                <input type="text" placeholder='Account Type' name='account_type' onChange={handleInput} value={accounts.account_type} />
-                <input type="text" placeholder='Account status' name='account_status' onChange={handleInput} value={accounts.account_status} />
+                <input type="text" placeholder='Account Name' name='account_name' onChange={handleInput} value={account.account_name} />
+                <input type="number" placeholder='Balance' name='balance' onChange={handleInput} value={account.balance} />
+                <input type="text" placeholder='Account Type' name='account_type' onChange={handleInput} value={account.account_type} />
+                <input type="text" placeholder='Account status' name='account_status' onChange={handleInput} value={account.account_status} />
             </div>
             <div className='btns-add-account'>
                 <button className='btn my-accounts' onClick={() => { navigate('/accounts') }}>My Accounts</button>

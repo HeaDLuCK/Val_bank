@@ -1,15 +1,16 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import './Accounts.css';
-import { Delete } from "../../config/actions";
+import { Delete, getData } from "../../config/actions";
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useEffect, useState } from "react";
+
 // import user from './user.png';
 
 export default function Accounts() {
+    const data = useSelector((state) => state.data.Accounts);
     const dispatch = useDispatch()
-    const [dataAccounts, setDataAccounts] = useState([]);
     const navigate = useNavigate()
     const handleClick = () => {
         navigate('/add_accounts')
@@ -23,7 +24,7 @@ export default function Accounts() {
             })
             .then(res => {
                 console.log(res);
-                setDataAccounts(res.data.payload)
+                dispatch(getData(res.data))
             }).catch(err => {
                 console.log(err);
             });
@@ -49,7 +50,7 @@ export default function Accounts() {
         <div className='AccountsCards'>
             <h3>My Accounts :</h3>
             <div className='MyAccountsDiv'>
-                {dataAccounts.map(e => {
+                {data.map(e => {
                     return (
                         <div className='MyAccount'>
                             <div className='infos'>

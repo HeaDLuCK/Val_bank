@@ -1,13 +1,11 @@
 
-const initialState = {
-    Accounts:[ 
-        { id: 1, account_name: "aa", balance: "11" , account_type:"", account_status:""}, 
-        { id: 2, account_name: "bb", balance: "22" , account_type:"", account_status:""}, 
-    ] 
-  };
+
+const initialState ={Accounts:[], idAccount:0} 
   
   const reducer = (state = initialState, action) => {
     switch(action.type){
+        case 'Get':
+            return {...state, Accounts:[action.payload]};
         case 'Add':
             return {...state, Accounts:[...state.Accounts, action.payload]}
         case "Edit":
@@ -21,6 +19,8 @@ const initialState = {
             return state
         case "Delete":
             return {...state, Accounts:[...state.Accounts.filter((u)=>u.id!==parseInt(action.payload))]}
+        case "idAccount":
+            return {...state, idAccount:parseInt(action.payload)}
         default:
            return state
     }

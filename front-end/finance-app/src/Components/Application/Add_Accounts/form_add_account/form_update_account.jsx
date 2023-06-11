@@ -9,6 +9,7 @@ export default function Form_Update_account(){
     const {id} = useParams();
     const account = useSelector(data => data.Accounts.find((u)=>u.id === parseInt(id)))
     
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -29,13 +30,12 @@ export default function Form_Update_account(){
         e.preventDefault();
         console.log(accounts);
         const data = {
-            id:id,
             account_name:accounts.account_name,
             balance:accounts.balance,
             account_type:accounts.account_type,
             account_status:accounts.account_status,
         }
-        axios.post('api/data/finance_account/', data, {
+        axios.put(`api/data/finance_account/${id}`, data, {
             headers: {
                 'content-type': 'multipart/form-data',
                 "Authorization": `Bearer ${localStorage.getItem('token')}`,
