@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 // import user from './user.png';
 
 export default function Accounts() {
-    const data = useSelector((state) => state.data.Accounts);
+    const data = useSelector((state) => state.Accounts);
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleClick = () => {
@@ -24,7 +24,8 @@ export default function Accounts() {
             })
             .then(res => {
                 console.log(res);
-                dispatch(getData(res.data))
+                console.log(data);
+                dispatch(getData(res.data.payload))
             }).catch(err => {
                 console.log(err);
             });
@@ -50,7 +51,7 @@ export default function Accounts() {
         <div className='AccountsCards'>
             <h3>My Accounts :</h3>
             <div className='MyAccountsDiv'>
-                {data.map(e => {
+                {data.length >0 && data.map(e => {
                     return (
                         <div className='MyAccount'>
                             <div className='infos'>
@@ -71,7 +72,7 @@ export default function Accounts() {
                 })
 
                 }
-                
+
                 <div className='LastDivAccount'>
                     <div className='AddAccount' onClick={handleClick}>
                         <i class="fa fa-plus"> </i>

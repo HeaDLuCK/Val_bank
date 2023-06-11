@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\NoCrud\NoCrudController as NoCrudNoCrudController;
 use App\Http\Controllers\admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\authentication\AuthController;
@@ -39,6 +40,7 @@ route::prefix('data')->middleware('auth:sanctum')->group(function () {
     // admin api
     route::prefix('admin')->middleware('admin')->group(function () {
         Route::apiResource('user', AdminUserController::class);
+        Route::get('user/switch/{id}', [NoCrudNoCrudController::class, 'SwitchStatus']);
         Route::apiResource('transaction', AdminTransactionController::class)->except('store');
         Route::apiResource('transaction', AdminTransactionController::class)->only('store')->middleware('transaction');
     });

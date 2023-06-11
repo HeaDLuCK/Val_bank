@@ -14,38 +14,47 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $limit = $request->limit ?? 10;
+        $page = $request->page ?? 1;
         //
-        $data = User::with('user_detail')->get();
-        // map function
-        $data->map(function ($elem) {
-            $image = $elem->user_detail->avatar_image;
-            $contents = Storage::disk('public')->get('images/' . $image);
-            $base64 = base64_encode($contents);
-            // $elem->user_detail->avatar_image
-            $elem->user_detail->avatar_image = $base64;
-            return $elem;
-        });
-        return response()->json(["payload" => $data], 200);
+        $count = User::count();
+        $lastPage = ceil($count / $limit);
+        if ($request->page <= $lastPage) {
+            $data = User::with('user_detail')->offset(($page  - 1) * $limit)
+                ->take($limit)
+                ->get();
+            // map function
+            $data->map(function ($elem) {
+                $elem->user_detail->total_accounts = count($elem->finance_account);
+                if (count($elem->finance_account)) {
+                    $elem->finance_account->map(function ($t) use ($elem) {
+                        $elem->user_detail->total_transactions = count($t->transactionsAsDepositor);
+                    });
+                } else {
+                    $elem->user_detail->total_transactions = 0;
+                }
+                $image = $elem->user_detail->avatar_image;
+                $contents = Storage::disk('public')->get('images/' . $image);
+                $base64 = base64_encode($contents);
+                $elem->user_detail->avatar_image = $base64;
+                return $elem->makeHidden('finance_account');
+            });
+            return response()->json([
+                "payload" => [
+                    "last_page" => $lastPage,
+                    "data" => $data
+                ]
+            ], 200);
+        } else {
+            return response()->json(["message" => "no more data"], 204);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        if (!(User::find($id))) {
-            return response()->json(["message" => "user not found"], 404);
-        }
-
-        $data = User::with('user_detail')->find($id);
-        $contents = Storage::disk('public')->get('images/' . $data->user_detail->avatar_image);
-        $base64 = base64_encode($contents);
-        $data->user_detail->avatar_image = $base64;
-        
-        return response()->json(["payload" => $data], 200);
-    }
 
     public function update(Request $request, string $id)
     {
@@ -106,7 +115,7 @@ class UserController extends Controller
         if (!$user) {
             return response()->json(["message" => "user not found"], 404);
         }
-        $user->user_detail()->delete();
+        $user->delete();
         return response()->json(["message" => "deleted successfully"], 200);
     }
 }

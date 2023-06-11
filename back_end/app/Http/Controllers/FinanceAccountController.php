@@ -66,9 +66,10 @@ class FinanceAccountController extends Controller
     public function update(Request $request, finance_account $finance_account)
     {
         validator($request->all(), [
-            "account_name" => 'sometimes|string',
-            "balance" => 'sometimes|decimal:1,9',
-            "account_status" => 'sometimes|boolean'
+            "account_name" => 'required|string',
+            "balance" => 'required|decimal:1,9',
+            "account_type" => 'required|string',
+            "account_status" => 'required|boolean'
         ])->validate();
         DB::beginTransaction();
         try {

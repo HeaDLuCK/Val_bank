@@ -87,7 +87,7 @@ class AuthController extends Controller
             return response()->json([
                 "accounts" => $user->finance_account->map(function ($account) {
                     return $account->account_id;
-                }),
+                })->toArray()[0],
                 "user_role" => $user->role,
                 "token" => $user->createToken(time())->plainTextToken,
                 "message" => "You are successfully logged in "

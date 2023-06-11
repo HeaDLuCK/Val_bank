@@ -19,36 +19,36 @@ ChartJS.register(
 )
 
 export default function Middle_div() {
-    const [dates, setDates] = useState({ "startDate": "2023-06-04" });
+    const dateH = new Date().setMonth(new Date().getMonth() - 1)
+    const [dates, setDates] = useState({ startDate: new Date(dateH).toJSON().slice(0, 10), endDate: new Date().toJSON().slice(0, 10) });
     const [balance, setBalance] = useState();
     const [recieve, setRecieve] = useState([]);
     const [deposit, setDeposit] = useState([]);
     const account = useSelector(state => state.idAccount);
-    // const [account, setAccount] = useState(localStorage.getItem('accounts')[0]);
     const [expenses, setExpenses] = useState([]);
-
     const handleInput = (e) => {
         setDates({ ...dates, [e.target.name]: e.target.value })
         console.log(dates);
     }
-
-    // useEffect(() => {
-    //     axios.post(`/api/data/dashboard/${account}`, dates,
-    //         {
-    //             headers: {
-    //                 "Authorization": `Bearer ${localStorage.getItem('token')}`,
-    //                 'content-type': 'multipart/form-data'
-    //             }
-    //         })
-    //         .then(res => {
-    //             setExpenses(res.data.payload.expenses)
-    //             setBalance(res.data.payload.balance)
-    //             setRecieve(res.data.payload.received)
-    //             setDeposit(res.data.payload.deposit)
-    //         }).catch(err => {
-    //             console.log(err);
-    //         });
-    // }, [dates, account]);
+    // console.log(account);
+    useEffect(() => {
+        console.log("change");
+        axios.post(`/api/data/dashboard/${account}`, dates,
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                    'content-type': 'multipart/form-data'
+                }
+            })
+            .then(res => {
+                setExpenses(res.data.payload.expenses)
+                setBalance(res.data.payload.balance)
+                setRecieve(res.data.payload.received)
+                setDeposit(res.data.payload.deposit)
+            }).catch(err => {
+                console.log(err);
+            });
+    }, [dates, account]);
     const data = {
         labels: expenses.map(e => {
             return [e.type]   //`${[e.type]}`
@@ -56,7 +56,7 @@ export default function Middle_div() {
         ),
         datasets: [{
             data: expenses.map(e => {
-                console.log(e.expense);
+                // console.log(e.expense);
                 return [e.expense]
             }),
             backgroundColor: ['#191970', '#4682B4', '#6495ED'],
@@ -117,10 +117,10 @@ export default function Middle_div() {
     return (
         <div className='middle_div'>
             <div className='dates-dashboard'>
-                <input type="date" name='date1' value={dates.date1} onChange={handleInput} />
-                <input type="date" name='date2' value={dates.date2} onChange={handleInput} />
+                <input type="date" name='startDate' value={dates.startDate} onChange={handleInput} />
+                <input type="date" name='endDate' value={dates.endDate} onChange={handleInput} />
             </div>
-            
+
             <div className='middle'>
                 <div className='Balence'>
                     <h4>Total Balence</h4>

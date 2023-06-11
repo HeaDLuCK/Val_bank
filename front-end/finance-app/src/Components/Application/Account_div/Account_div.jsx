@@ -93,7 +93,7 @@ export default function Accounts_div() {
                 <div className='accounts_body'>
                     {dataAccounts.map(e => {
                         return (
-                            <div className='square' onClick={() => handleAccount(e.id)}>
+                            <div className='square' onClick={() => handleAccount(e.account_id)}>
                                 <p>{e.account_name}</p>
                             </div>
                         )

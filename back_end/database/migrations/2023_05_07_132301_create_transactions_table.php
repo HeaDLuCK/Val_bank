@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id('transaction_id');
             $table->string("type");
-            $table->foreignId("dep_account")->constrained("finance_accounts", "account_id");
-            $table->foreignId("arr_account")->constrained("finance_accounts", 'account_id');
+            $table->foreignId("dep_account")->nullable()->constrained("finance_accounts", "account_id")->nullOnDelete();
+            $table->foreignId("arr_account")->nullable()->constrained("finance_accounts", 'account_id')->nullOnDelete();
             $table->decimal("amount", 9, 2);
             $table->string("description")->nullable();
             $table->timestamps();
