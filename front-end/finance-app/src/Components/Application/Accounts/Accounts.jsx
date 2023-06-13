@@ -48,7 +48,7 @@ export default function Accounts() {
 
     }
     return (
-        <div className='AccountsCards'>
+        <div className='AccountsCards' >
             <h3>My Accounts :</h3>
             <div className='MyAccountsDiv'>
                 {data.length >0 && data.map(e => {

@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px 20px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
 
 }
 .formHeader{
@@ -79,7 +79,7 @@
     background: #FFFFFF;
     border-radius: 5px;
     padding: 10px 20px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
 }
 .files .file{
     width: 100%;
@@ -111,7 +111,7 @@
     background: #FFFFFF;
     border-radius: 5px;
     padding: 10px 20px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
 }
 .Info_user .bottom_div .adresse .form_body{
     padding: 10px;
@@ -154,7 +154,7 @@
     border-radius: 5px;
     margin-bottom: 20px;
     padding: 10px 20px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
 
 }
 .Info_user .bottom_div .contact_div .security{
@@ -163,7 +163,7 @@
     background: #FFFFFF;
     border-radius: 5px;
     padding: 10px 20px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
 
 }
 .Info_user .files{

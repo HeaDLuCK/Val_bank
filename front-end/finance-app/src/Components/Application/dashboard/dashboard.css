@@ -1,12 +1,12 @@
 .ALL{
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
 }
 .ALL .dashbord{
     width: 100%;
-    /* height:120vh; */
+    /* height:100vh; */
     background: linear-gradient(0deg, rgba(55,100,125,1) 0%, rgba(164,223,255,1) 59%, rgba(77,189,250,0.6643032212885154) 100%);;
     display: flex;
     align-items: flex-start;
@@ -24,14 +24,21 @@
     /* align-items: center; */
     justify-content: space-between;
 }
-/* .ALL .footer{
-    width: 100%;
-    height: 200px;
-    background: red;
+/* @media only screen and (max-width: 1170px) {
+    .ALL .dashbord{
+        display: flex;
+        flex-direction: column;
+    }
+    .SideBar{
+        width: 100%;
+        display: flex;
+        height: autp;
+        margin-right: 50px;
+    }
+    .SideBar .LinksDashBoard ul{
+        display: flex;
+    }
 } */
-/* .ALL .container .aaa{
-    width: 100%;
-    height: 400px;
-    background: red;
-    margin: 20px;
-} */
+
+
+

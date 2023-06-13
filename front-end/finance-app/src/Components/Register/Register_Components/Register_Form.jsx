@@ -129,7 +129,7 @@ const RegisterForm = () => {
                 <span>{registerInput.error_list.cin}</span>
               </div>
               <div className='gp22'>
-                <input type="date" placeholder='Date of birth' name='birthday' onChange={handleInput} value={registerInput.birthday} />
+                <input type="date" className='inputDate' placeholder='Date of birth' name='birthday' onChange={handleInput} value={registerInput.birthday} />
                 <span>{registerInput.error_list.birthday}</span>
                 <input type="text" placeholder='Gender' name='gender' onChange={handleInput} value={registerInput.gender} />
                 <span>{registerInput.error_list.gender}</span>

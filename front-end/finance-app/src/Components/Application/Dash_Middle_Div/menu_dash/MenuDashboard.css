@@ -1,25 +1,25 @@
-.Accounts_div{
+.Accounts_div2{
     width: 215px;
-    height: 640px;
+    height: 120vh;
     background: #FFFFFF;
     margin: 0 0 0 40px;
     padding: 20px 15px;
     position: relative;
     flex: 1;
 }
-.Accounts_div .notifications, .Accounts_div .accounts .accounts_head{
+.Accounts_div2 .notifications, .Accounts_div2 .accounts .accounts_head{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.Accounts_div .notifications{
+.Accounts_div2 .notifications{
     padding: 0 10px 10px;
 }
-.Accounts_div .notifications img{
+.Accounts_div2 .notifications img{
     height: 25px;
     width: auto;
 }
-.Accounts_div .accounts_body{
+.Accounts_div2 .accounts_body{
     height: auto;
     display: flex;
     align-items: center;
@@ -28,7 +28,7 @@
     margin: 10px 0;
     flex-wrap: wrap;
 }
-.Accounts_div .accounts_body .square{
+.Accounts_div2 .accounts_body .square{
     height: 40px;
     width: 55px;
     border-radius: 6px;
@@ -42,13 +42,13 @@
     color: #FFFFFF;
     text-align: center;
 }
-.Accounts_div .accounts_body .square:hover p{
+.Accounts_div2 .accounts_body .square:hover p{
     font-size: 13px;
 }
-.Accounts_div .receivers{
+.Accounts_div2 .receivers{
     margin: 20px 0;
 }
-.Accounts_div .receivers .cercles{
+.Accounts_div2 .receivers .cercles{
     /* height: 70px; */
     width: 180px;
     display: flex;
@@ -62,22 +62,22 @@
 .cercles::-webkit-scrollbar {
     width: 2px;
 }
-.Accounts_div .receivers img{
+.Accounts_div2 .receivers img{
     height: 37px;
     width: auto;
 }
-.Accounts_div .recent_activity h5{
+.Accounts_div2 .recent_activity h5{
     font-size: 15px;
 }
 
-.Accounts_div .recent_activity .activities{
+.Accounts_div2 .recent_activity .activities{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 0;
     /* margin-top: 10px; */
 }
-.Accounts_div .recent_activity .activities .activity{
+.Accounts_div2 .recent_activity .activities .activity{
     display: flex;
     gap: 7px;
    

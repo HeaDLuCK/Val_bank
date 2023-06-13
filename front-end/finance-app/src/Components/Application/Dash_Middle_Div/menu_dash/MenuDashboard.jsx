@@ -1,0 +1,135 @@
+import { useEffect, useState } from 'react';
+import './MenuDashboard.css';
+import user from '../../Account_div/user.png';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+import { idAccount } from '../../../config/actions';
+import { useDispatch } from 'react-redux';
+export default function MenuDashboard() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [dataAccounts, setDataAccounts] = useState([]);
+    const [avatar, setAvatar] = useState(user);
+    const [receivers, setReceivers] = useState([]);
+    const [transactions, setTransactions] = useState([]);
+    useEffect(() => {
+        axios.get(`api/data/profile/`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => {
+                console.log(res);
+                setAvatar(res.data.payload.avatar)
+                setReceivers(res.data.payload.receivers)
+                setTransactions(res.data.payload.transactions)
+                setDataAccounts(res.data.payload.accounts)
+            }).catch(err => {
+                console.log(err);
+            });
+    }, []);
+    console.log(dataAccounts)
+
+    const profile_div = () => {
+        const div_pass = document.querySelector('.profile_div');
+        console.log(div_pass);
+        if (!div_pass.classList.contains('active')) {
+            return div_pass.classList.add('active')
+        } else {
+            return div_pass.classList.remove('active')
+        }
+    }
+    const handleLogout = () => {
+        console.log(localStorage.getItem('token'));
+        axios.delete(`api/logout/`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
+            }).then(res => {
+                console.log(res);
+                // localStorage.removeItem('token');
+                navigate('/')
+            }).catch(err => {
+                console.log(err);
+                swal('Warning', err.message, 'warning');
+            })
+    }
+
+    const handleAccount = (id) => {
+        console.log(id);
+        dispatch(
+            idAccount(id)
+        )
+    }
+
+    return (
+        <div className='Accounts_div2'>
+            {/* {users.map(u => {
+                        return ( */}
+            <div className='profile_div'>
+                <div className='body_profile_div'>
+                    <h5>Omayma ABIDY</h5>
+                    <p>User</p>
+                </div>
+                <div className='btns_profile_div'>
+                    <button onClick={() => { navigate('/settings_user') }}>Settings</button>
+                    <button className='logout_btn' onClick={handleLogout}>LogOut</button>
+                </div>
+
+            </div>
+            {/* )})}   */}
+            <div className='notifications'>
+                <i class="fa-regular fa-bell"></i>
+                <img src={`data:image/png;base64,${avatar}`} alt="user" onClick={profile_div} />
+            </div>
+            <div className='accounts'>
+                <div className='accounts_head'>
+                    <h5>My accounts</h5>
+                    <i class="fa-regular fa-square-plus" onClick={() => { navigate('/add_accounts') }}></i>
+                </div>
+                <div className='accounts_body'>
+                    {dataAccounts.map(e => {
+                        return (
+                            <div className='square' onClick={() => handleAccount(e.account_id)}>
+                                <p>{e.account_name}</p>
+                            </div>
+                        )
+                    })
+                    } 
+                </div>
+            </div>
+            <div className='receivers'>
+                <h5>Receivers</h5>
+                <div className='cercles'>
+                    {receivers.map(img => {
+                        return (
+                            <img src={`data:image/png;base64,${img.avatar}`} alt="user" />
+                        )
+                    })}
+
+                </div>
+
+            </div>
+            <div className='recent_activity'>
+                <h5>Recent Activity</h5>
+                {transactions.map(transaction => {
+                    return (
+                        <div className='activities'>
+                            <div className='activity'>
+                                <img src={`data:image/png;base64,${transaction.avatar}`} alt="user" />
+                                <div className='descreption_activity'>
+                                    <h5>{transaction.name}</h5>
+                                    <p>{transaction.date}</p>
+                                </div>
+                            </div>
+                            <span>{transaction.amount} DH</span>
+                        </div>)
+                })}
+                
+            </div>
+        </div>
+    )
+}

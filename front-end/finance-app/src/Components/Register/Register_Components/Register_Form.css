@@ -67,7 +67,7 @@
     flex-direction: column;
     padding: 20px;
 }
-.centrediv .etapeone input, .etapetwo .inputs_gp .gp1 input, .etapetwo .inputs_gp .gp2 input, .etapetree .inputs_gp .gp11 input,.etapetree .inputs_gp .gp22 input, input[type="date"] {
+.centrediv .etapeone input, .etapetwo .inputs_gp .gp1 input, .etapetwo .inputs_gp .gp2 input, .etapetree .inputs_gp .gp11 input,.etapetree .inputs_gp .gp22 input, .inputDate{
     width: 260px;
     height: 45px;
     display: flex;
@@ -79,7 +79,7 @@
     border-radius: 15px;
     font-size: 15px;
 }
-input[type="date"]{
+.inputDate{
     padding:0 20px !important;
 }
 .inputFile::-webkit-file-upload-button {
@@ -90,7 +90,7 @@ input.inputFile{
     cursor: pointer;
 }
 .inputFile::before{
-    content: 'Add File';
+    content: 'Add Avatar';
     display: flex;
     align-items: flex-start;
     justify-content: center;

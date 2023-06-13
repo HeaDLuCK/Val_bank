@@ -20,11 +20,11 @@ export default function SideBar(){
                         <li>
                             <i class="fa fa-building-columns"></i><Link to={'/accounts'}>Finance Accounts</Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <i class="fa fa-file"></i><a href="">Reports</a>
-                        </li>
+                        </li> */}
                         <li>
-                            <i class="fa-regular fa-calendar-days"></i><a href="">Calendar</a>
+                            <i class="fa-regular fa-calendar-days"></i><Link to={'/calendar'}>Calendar</Link>
                         </li>
                         <li>
                             <i class="fa-solid fa-gear"></i><Link to={'/settings_user'}>Settings</Link>

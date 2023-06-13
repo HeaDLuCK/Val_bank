@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/react": "^6.1.8",
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
     "@testing-library/jest-dom": "^5.16.5",

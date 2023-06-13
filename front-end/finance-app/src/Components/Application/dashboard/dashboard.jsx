@@ -1,6 +1,7 @@
 
 import Accounts_div from '../Account_div/Account_div';
 import Middle_div from '../Dash_Middle_Div/Dash_Middle_Div';
+import MenuDashboard from '../Dash_Middle_Div/menu_dash/MenuDashboard';
 import Footer_Dash from '../Footer_Dash/Footer_Dash';
 import Header_Dashboard from '../Header_Dash/Header_Dash';
 import Menu_Dash from '../Menu_Dash/Menu_Dash';
@@ -18,7 +19,7 @@ function Dashbord() {
           <Menu_Dash />
           <Middle_div />
         </div>
-        <Accounts_div />
+        <MenuDashboard />
       </div>
       <Footer_Dash />
 
