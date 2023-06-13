@@ -6,6 +6,7 @@
     padding: 10px;
     background: #FFFFFF;
     font-size: 14px;
+    flex: 1;
 }
 .SideBar .LogoSideBar{
     display: flex;

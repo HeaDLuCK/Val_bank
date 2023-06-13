@@ -19,30 +19,50 @@
     width: auto;
 }
 .Accounts_div .accounts_body{
+    height: auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start !important;
     gap: 10px;
     margin: 10px 0;
+    flex-wrap: wrap;
 }
 .Accounts_div .accounts_body .square{
     height: 40px;
-    width: 50px;
+    width: 55px;
     border-radius: 6px;
-    background: #37647D;
+    background: linear-gradient(#37647D, #64B6E3) !important;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.square p{
+    font-size: 11px;
+    color: #FFFFFF;
+    text-align: center;
+}
+.Accounts_div .accounts_body .square:hover p{
+    font-size: 13px;
 }
 .Accounts_div .receivers{
     margin: 20px 0;
 }
 .Accounts_div .receivers .cercles{
+    /* height: 70px; */
+    width: 180px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    /* flex-wrap: wrap; */
     margin: 10px 0;
     gap: 10px;
+    overflow-x: scroll;
+}
+.cercles::-webkit-scrollbar {
+    width: 2px;
 }
 .Accounts_div .receivers img{
-    height: 40px;
+    height: 37px;
     width: auto;
 }
 .Accounts_div .recent_activity h5{
@@ -77,7 +97,7 @@
 .profile_div{
     position: absolute;
     width: 200px;
-    height: 200px;
+    height: 160px;
     background: #FFFFFF;
     top: 50px;
     right: 20px;

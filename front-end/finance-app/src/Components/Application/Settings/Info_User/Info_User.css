@@ -1,5 +1,5 @@
 .Info_user{
-    width: 100%;
+    /* width: 100%; */
     height: 450px;
     margin: 20px;
     display: flex;
@@ -54,7 +54,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 }
 .Info_user .top_div .profile .form_body .fullname{
     gap: 17px;

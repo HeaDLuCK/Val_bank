@@ -79,38 +79,60 @@
     width: 100%;
     text-align: center;
 }
-.MyAccountsDiv .MyAccount .infos .account-solde{
-    font-size: 15px;
-}
-.MyAccountsDiv .MyAccount .infos .delete-edit-btn{
-    padding: 20px;
+.delete-edit-btn{
     display: flex;
     justify-content: space-between;
+    padding: 20px;
 }
-.MyAccountsDiv .MyAccount .infos .delete-edit-btn i{
-    color: red;
+.delete-edit-btn i{
+    color: #2e2e2e;
+    cursor: pointer;
 }
-.MyAccountsDiv .MyAccount .infos .delete-edit-btn button{
-    border: none;
-    outline: none;
-    background: none;
-    font-weight: bold;
-    font-size: 15px;
-    letter-spacing: 0.4px;
-}
-.MyAccount .infos .balance{
-    font-size: 32px;
-    margin-bottom: 70px;
-    color: #64B6E3;
-}
-.MyAccount .infos .balance span{
-    font-size: 17px;
-}
-.MyAccount .infos .userInfo{
-    margin: 10px 5px;
+.group-input-account{
+    padding:0 20px;
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
 }
-.MyAccount .infos .userInfo i{
-    margin-top:2px ;
+.label-account{
+    font-size: 14px;
+    color: #6e6e6e;
 }
+.info-account{
+    font-size: 16px;
+}
+.group-input-account-balance{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+.info-account-balance{
+    color: #64B6E3;
+    font-size: 35px;
+}
+.info-account-balance span{
+    color: #2e2e2e;
+    font-size: 14px;
+    margin-left: 3px;
+}
+@media only screen and (max-width: 1000px) {
+    .AccountsCards .MyAccountsDiv .MyAccount{
+        width: calc(100% / 2 - 10px);
+        height: 310px;
+    }
+    .LastDivAccount{
+        width: calc(100% / 2 - 10px);
+        height: 310px;
+    }
+  }
+@media only screen and (max-width: 730px) {
+    .AccountsCards .MyAccountsDiv .MyAccount{
+        width: calc(100% - 10px);
+        height: 310px;
+    }
+    .LastDivAccount{
+        width: calc(100% - 10px);
+        height: 310px;
+    }
+  }
+

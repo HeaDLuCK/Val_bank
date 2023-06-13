@@ -18,6 +18,7 @@ function Settings_User() {
             <Menu_Settings />
             <Info_User />
         </div>
+        {/* <Accounts_div /> */}
     </div>
     <Footer_Dash/> 
     

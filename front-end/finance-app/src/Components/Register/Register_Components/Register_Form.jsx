@@ -148,7 +148,7 @@ const RegisterForm = () => {
               <p>OR</p>
               <div className='line2'></div>
             </div>
-            <input type="file" placeholder='Choose image' name='avatar_image' onChange={handleInput} value={registerInput.avatar_image} />
+            <input className='inputFile' type="file" placeholder='Choose image' name='avatar_image' onChange={handleInput} value={registerInput.avatar_image} />
             <div>
               <button className='register_btn'>Submit</button>
             </div>

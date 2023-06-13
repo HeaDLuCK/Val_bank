@@ -14,16 +14,16 @@ function Dashbord() {
       <div className='dashbord'>
         <SideBar />
         <div className='container'>
-            <Header_Dashboard title='Dashboard'/>
-            <Menu_Dash/>
-            <Middle_div /> 
+          <Header_Dashboard title='Dashboard' />
+          <Menu_Dash />
+          <Middle_div />
         </div>
-        <Accounts_div/>
+        <Accounts_div />
+      </div>
+      <Footer_Dash />
+
     </div>
-    <Footer_Dash/> 
-    
-    </div>
-    
+
 
   );
 }

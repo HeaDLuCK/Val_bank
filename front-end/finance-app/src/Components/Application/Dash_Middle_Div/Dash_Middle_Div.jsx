@@ -65,7 +65,7 @@ export default function Middle_div() {
     }
 
     const options = {
-        title: "Transactions Overview",
+        title: "Expenses",
         pieHole: 0.4,
         is3D: false,
         plugins: {
@@ -109,10 +109,7 @@ export default function Middle_div() {
         return curr
     })
     const optionss = {
-        chart: {
-            title: "Company Performance",
-            subtitle: "deposit, Expenses, and Profit: 2014-2017",
-        },
+        chart: {},
     };
     return (
         <div className='middle_div'>
@@ -124,10 +121,11 @@ export default function Middle_div() {
             <div className='middle'>
                 <div className='Balence'>
                     <h4>Total Balence</h4>
-                    <h1><span>DH</span>{balance}</h1>
+                    <h1>{balance}<span>DH</span></h1>
                     <p>+3.22%</p>
                 </div>
                 <div className='Expenses'>
+                    <h1>Expenses</h1>
                     <Doughnut
                         data={data}
                         options={options}
@@ -135,6 +133,11 @@ export default function Middle_div() {
                 </div>
             </div>
             <div className='Transactions'>
+                <div className='title-chart'>
+                    <h1>Transactions Chart</h1>
+                    <p>deposits/expenses</p>
+                </div>
+                
                 <Chart
                     chartType="Bar"
                     width="100%"

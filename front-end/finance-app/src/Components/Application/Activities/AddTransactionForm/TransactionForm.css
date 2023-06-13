@@ -31,15 +31,15 @@
     justify-content: space-between;
     flex-direction: column;
 }
-.inputs-add-account .inputs-two{
+.inputs-add-account .inputs-two-transaction{
     gap: 50px;
     display: flex;
     justify-content: space-between;
 }
-.inputs-two input{
-    width: calc(100% - 30px);
+.inputs-two-transaction input{
+    width: 100%;
     height: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     font-size: 16px;
     padding: 10px 0 0;
     border: none;
@@ -47,7 +47,7 @@
     border-bottom: 2.5px solid #cfcfcf;
     text-align: center;
 }
-.inputs-two input:active, .inputs-two input:hover{
+.inputs-two-transaction input:active, .inputs-two-transaction input:hover{
     border-image:linear-gradient(to right,#4C8BAD ,#64B6E3,#4C8BAD) 1;
 }
 .btns-add-account{

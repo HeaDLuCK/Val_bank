@@ -58,7 +58,7 @@ export default function Accounts_div() {
             })
     }
 
-    const handleAccount = (id) =>{
+    const handleAccount = (id) => {
         console.log(id);
         dispatch(
             idAccount(id)
@@ -80,7 +80,7 @@ export default function Accounts_div() {
                 </div>
 
             </div>
-            {/* )})}  */}
+            {/* )})}   */}
             <div className='notifications'>
                 <i class="fa-regular fa-bell"></i>
                 <img src={`data:image/png;base64,${avatar}`} alt="user" onClick={profile_div} />
@@ -109,7 +109,9 @@ export default function Accounts_div() {
                             <img src={`data:image/png;base64,${img.avatar}`} alt="user" />
                         )
                     })}
+
                 </div>
+
             </div>
             <div className='recent_activity'>
                 <h5>Recent Activity</h5>
@@ -126,6 +128,7 @@ export default function Accounts_div() {
                             <span>{transaction.amount} DH</span>
                         </div>)
                 })}
+                
             </div>
         </div>
     )

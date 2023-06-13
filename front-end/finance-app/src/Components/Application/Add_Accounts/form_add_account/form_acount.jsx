@@ -60,15 +60,20 @@ export default function Form_account() {
     return (
         <form className='form-account' onSubmit={handleSubmit}>
                 <h3>Add New Account</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat!</p>
             <div className='inputs-add-account'>
-                <input type="text" placeholder='Account Name' name='account_name' onChange={handleInput} value={account.account_name} />
-                <input type="number" placeholder='Balance' name='balance' onChange={handleInput} value={account.balance} />
-                <input type="text" placeholder='Account Type' name='account_type' onChange={handleInput} value={account.account_type} />
-                <input type="text" placeholder='Account status' name='account_status' onChange={handleInput} value={account.account_status} />
+                <div className='inputs-two'>
+                    <input type="text" placeholder='Account Name' name='account_name' onChange={handleInput} value={account.account_name} />
+                    <input type="number" placeholder='Balance' name='balance' onChange={handleInput} value={account.balance} />
+                </div>
+                <div className='inputs-two'>
+                    <input type="text" placeholder='Account Type' name='account_type' onChange={handleInput} value={account.account_type} />
+                    <input type="text" placeholder='Account status' name='account_status' onChange={handleInput} value={account.account_status} />  
+                </div>
             </div>
             <div className='btns-add-account'>
                 <button className='btn my-accounts' onClick={() => { navigate('/accounts') }}>My Accounts</button>
-                <button className='btn add-account' type='submit'>Add</button>
+                <button className='btn add-account' type='submit'>Add Account</button>
             </div>
             
         </form>

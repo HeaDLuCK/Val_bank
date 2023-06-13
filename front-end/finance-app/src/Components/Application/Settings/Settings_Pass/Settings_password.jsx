@@ -19,7 +19,7 @@ function Settings_Password() {
             <Menu_Settings />
             <Change_Password />
         </div>
-        <Right_Bar />
+        {/* <Right_Bar /> */}
     </div>
     <Footer_Dash/> 
     

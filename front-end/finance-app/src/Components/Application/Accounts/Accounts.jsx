@@ -56,28 +56,65 @@ export default function Accounts() {
                         <div className='MyAccount'>
                             <div className='infos'>
                                 <div className="delete-edit-btn">
-                                    <Link to={`/form_update_account/${e.account_id}`}><button>Edit</button></Link>
-                                    <i class="fa fa-trash" aria-hidden="true" onClick={() => HandleDelete(e.account_id)}></i>
+                                    <Link to={`/form_update_account/${e.account_id}`}><i class='far fa-edit'></i></Link>
+                                   <i class="fa fa-remove" onClick={() => HandleDelete(e.account_id)}></i>
                                 </div>
-                                <p className='account-solde'>Solde :</p>
-                                <p className='balance'>{e.balance}<span>DH</span></p>
-                                <p className='account-type'>{e.account_type}</p>
-                            </div>
-                            <div className='dateCreation'>
-                                <p>Status: <span>{e.account_status}</span></p>
+                                <div className="group-input-account-balance">
+                                    <p className='label-account'>Solde :</p>
+                                    <p className='info-account-balance'>{e.balance}<span>DH</span></p>
+                                </div>
+                                <div className="group-input-account">
+                                    <p className="label-account">Account Type :</p>
+                                    <p className='account-type'>{e.account_type}</p>
+                                </div>
+                                <div className="group-input-account">
+                                    <p className="label-account">Account Status :</p>
+                                    <p className='account-type'>{e.account_status?'ACTIVE':'INACTIVE'}</p>
+                                </div>
+                                <div className='dateCreation'>
+                                    <p>created at: <span>{e.created_at}</span></p>
+                                </div>
                             </div>
                         </div>
+                        
+                        
                     )
 
                 })
 
                 }
+                {/* <div className='MyAccount'>
+                    <div className='infos'>
+                        <div className="delete-edit-btn">
+                            <Link to={`/form_update_account/1`}><i class='far fa-edit'></i></Link>
+                            <i class="fa fa-remove"></i>
+                        </div>
+                        <div className="group-input-account-balance">
+                            <p className='label-account'>Solde :</p>
+                            <p className='info-account-balance'>1200.00<span>DH</span></p>
+                        </div>
+                        <div className="group-input-account">
+                            <p className="label-account">Account Type :</p>
+                            <p className='info-account'>Finance</p>
+                        </div>
+                        <div className="group-input-account">
+                            <p className="label-account">Account Status :</p>
+                            <p className='info-account'>Active</p>
+                        </div>
+                        <div className='dateCreation'>
+                            <p>created at: <span>05/10/2010</span></p>
+                        </div>
+                    </div>
+                </div> */}
+                
+
+
 
                 <div className='LastDivAccount'>
-                    <div className='AddAccount' onClick={handleClick}>
-                        <i class="fa fa-plus"> </i>
+                    <div className='AddAccount' onClick={() => { navigate('/add_accounts') }}>
+                        <i class="fa fa-plus"></i>
                     </div>
-                    <div className='AjouterAccount'>
+                    <div className='AjouterAccount' onClick={() => { navigate('/add_accounts') }}>
                         <p>Add Account</p>
                     </div>
                 </div>
