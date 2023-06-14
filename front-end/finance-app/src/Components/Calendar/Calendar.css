@@ -1,0 +1,38 @@
+.calendar{
+    width: 100%;
+    height: 100%;
+}
+.react-calendar{
+    width: 100% !important;
+    height: 100vh !important;
+}
+.react-calendar__month-view__weekdays{
+    height: 100px !important;
+    background: linear-gradient(#4C8BAD ,#64B6E3) !important;
+    text-align: center !important;
+    padding-top: 30px !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    text-decoration: none !important;
+}
+.react-calendar__month-view__days{
+    height: 470px !important;
+}
+.react-calendar__tile--now {
+    background: #afd4e7 !important;
+}
+.react-calendar__tile--now:enabled:hover, .react-calendar__tile--now:enabled:focus {
+    background: #64B6E3 !important;
+}
+.react-calendar__navigation button:enabled:hover, .react-calendar__navigation button:enabled:focus {
+    background-color: #ffffff !important;
+    font-size: 22px !important;
+}
+.react-calendar__navigation__label__labelText{
+    font-size: 22px !important;
+    color: #4C8BAD !important;
+    font-weight: bold;
+}
+.react-calendar__month-view__days__day--weekend {
+    color: #707070 !important;
+}
