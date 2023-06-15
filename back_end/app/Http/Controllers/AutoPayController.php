@@ -17,9 +17,9 @@ class AutoPayController extends Controller
     public function index()
     {
         $accs = collect(auth()->user()->finance_account)->map(function ($acc) {
-            return $acc->id;
+            return $acc->account_id;
         })->toArray();
-        return response()->json(["payload" => AutoPay::whereIn('account_id', [$accs])]);
+        return response()->json(["payload" => AutoPay::whereIn('acc_id', $accs)->get()]);
     }
 
 
@@ -29,13 +29,13 @@ class AutoPayController extends Controller
     public function store(Request $request)
     {
         validator([
-            "acc_id" => "required",
+            "acc_id" => "required|exists:App/Models/Finance_account,account_id",
             "pay_code" => "required",
             "pay_day" => "required|date"
         ])->validate();
         // check first
         $accs = collect(auth()->user()->finance_account)->map(function ($acc) {
-            return $acc->id;
+            return $acc->account_id;
         })->toArray();
         if (!in_array($request->acc_id, $accs)) {
             return response()->json(["message" => "choose your account"], 401);
@@ -44,11 +44,6 @@ class AutoPayController extends Controller
         if (!$bill) {
             return response()->json(["message" => "this facture doesn't exist"], 401);
         }
-        // add auto pay in finance acc
-        $acc = finance_account::find($request->acc_id);
-
-        $acc->automatic_payment = true;
-        $acc->save();
 
         // create auto pay to work each month (first step)
         $newOne = new AutoPay();

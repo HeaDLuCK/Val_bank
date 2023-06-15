@@ -28,20 +28,40 @@ class TransactionController extends Controller
                 ->get();
             $data = $data->map(function ($elem) {
                 // reciever information
-                $elem->reciver_id = $elem->receiverAccount->user->id;
-                $receiverAccount = $elem->receiverAccount->user->user_detail;
-                $elem->reciver_name = $receiverAccount->first_name . ' ' . $receiverAccount->last_name;
-                $contents = Storage::disk('public')->get('images/' . $receiverAccount->avatar_image);
-                $base64 = base64_encode($contents);
-                $elem->reciver_avatar = $base64;
+                // return $elem;
+                if ($elem->arr_account) {
+                    $elem->reciver_id = $elem->receiverAccount->user->id;;
+                    $receiverAccount = $elem->receiverAccount->user->user_detail;
+                    $elem->reciver_name = $receiverAccount->first_name . ' ' . $receiverAccount->last_name;
+                    $contents = Storage::disk('public')->get('images/' . $receiverAccount->avatar_image);
+                    $base64 = base64_encode($contents);
+                    $elem->reciver_avatar = $base64;
+                } else {
+                    $elem->reciver_id = 0;
+                    $elem->reciver_name = "unkown";
+                    $contents = Storage::disk('public')->get('images/' . "unknown.png");
+                    $base64 = base64_encode($contents);
+                    $elem->reciver_avatar = $base64;
+                }
+
 
                 // depositor information
-                $elem->depositor_id = $elem->depositorAccount->user->id;
-                $depositorAccount = $elem->depositorAccount->user->user_detail;
-                $elem->depositor_name = $depositorAccount->first_name . ' ' . $depositorAccount->last_name;
-                $contents = Storage::disk('public')->get('images/' . $depositorAccount->avatar_image);
-                $base64 = base64_encode($contents);
-                $elem->depositor_avatar = $base64;
+                if ($elem->dep_account) {
+
+                    $elem->depositor_id = $elem->depositorAccount->user->id;
+                    $depositorAccount = $elem->depositorAccount->user->user_detail;
+                    $elem->depositor_name = $depositorAccount->first_name . ' ' . $depositorAccount->last_name;
+                    $contents = Storage::disk('public')->get('images/' . $depositorAccount->avatar_image);
+                    $base64 = base64_encode($contents);
+                    $elem->depositor_avatar = $base64;
+                } else {
+                    $elem->depositor_id = 0;
+                    $elem->depositor_name = "Unkown";
+                    $contents = Storage::disk('public')->get('images/' . "unknown.png");
+                    $base64 = base64_encode($contents);
+                    $elem->reciver_avatar = $base64;
+                }
+
 
                 return $elem->makeHidden(['receiverAccount', 'depositorAccount']);
             });
@@ -64,10 +84,10 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         validator($request->all(), [
-            "dep_account" => 'required|string',
-            "arr_account" => 'required|string',
+            "dep_account" => 'required|exists:App\Models\Finance_account,account_id',
+            "arr_account" => 'required|exists:App\Models\Finance_account,account_id',
             "amount" => 'required|decimal:1,9',
-            "type" => 'required|string',
+            "type" => 'sometimes|string',
             "description" => 'string'
         ])->validate();
         DB::beginTransaction();
@@ -75,25 +95,22 @@ class TransactionController extends Controller
             if ($request->dep_account != $request->arr_account) {
                 $dep_acc = finance_account::find($request->dep_account);
                 $arr_acc = finance_account::find($request->arr_account);
-                if (!(is_null($dep_acc)) && !(is_null($arr_acc))) {
-                    return ['message' => 'undefiend destination'];
+                if ($request->amount > $dep_acc->balance) {
+                    throw new Exception('enough  balance');
                 } else {
-                    if ($request->amount > $dep_acc->balance) {
-                        throw new Exception('enough  balance');
-                    } else {
-                        $dep_acc->balance = $dep_acc->balance - $request->amount;
-                        $arr_acc->balance = $arr_acc->balance + $request->amount;
-                        $dep_acc->save();
-                        $arr_acc->save();
-                        $transaction = new Transaction();
-                        $transaction->dep_acc = $dep_acc->account_id;
-                        $transaction->arr_acc = $arr_acc->account_id;
-                        $transaction->amount = $request->amount;
-                        $transaction->type = $request->type;
-                        $transaction->description = $request->description;
-                        DB::commit();
-                        return response()->json(["message" => 'transaction successfully done'], 200);
-                    }
+                    $dep_acc->balance = $dep_acc->balance - $request->amount;
+                    $arr_acc->balance = $arr_acc->balance + $request->amount;
+                    $dep_acc->save();
+                    $arr_acc->save();
+                    $transaction = new Transaction();
+                    $transaction->dep_account = $dep_acc->account_id;
+                    $transaction->arr_account = $arr_acc->account_id;
+                    $transaction->amount = $request->amount;
+                    $transaction->type = $request->input('type', "transaction");
+                    $transaction->description = $request->input('description', 'transaction par admin');
+                    $transaction->save();
+                    DB::commit();
+                    return response()->json(["message" => 'transaction successfully done'], 200);
                 }
             } else {
                 return response()->json(["message" => 'cant send to your self'], 500);
@@ -127,7 +144,7 @@ class TransactionController extends Controller
     {
 
         validator($request->all(), [
-            "arr_account" => 'sometimes|string',
+            "arr_account" => 'sometimes|exists:App\Models\Finance_account,account_id',
             "amount" => 'sometimes|decimal:1,9',
             "type" => 'sometimes|string',
             "description" => 'sometimes|string'
@@ -148,7 +165,7 @@ class TransactionController extends Controller
             }
 
             if ($transaction->amount != $request->input('amount', $transaction->amount)) {
-                $dep_acc = finance_account::find($transaction->dep_acount);
+                $dep_acc = finance_account::find($transaction->dep_account);
                 $rest = $request->amount - $transaction->amount;
                 if ($dep_acc->balance < $rest) {
                     throw new Exception('balance is not enough');

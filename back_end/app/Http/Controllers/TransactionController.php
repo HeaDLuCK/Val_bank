@@ -19,19 +19,14 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        validator($request->all(), [
-            "date" => 'sometimes|date',
-            "name" => 'sometimes|string',
-            "account" => 'sometimes|integer',
-        ])->validate();
         $limit = $request->limit ?? 10;
         $page = $request->page ?? 1;
         $data = User::find(Auth()->id());
         $query = Transaction::query();
-        if ($request->has('date')) {
+        if ($request->has('date') and $request->date != '') {
             $query->whereDate('created_at', "=", Carbon::parse($request->date)->toDateString());
         }
-        if ($request->has('account')) {
+        if ($request->has('account') and $request->account != '') {
             $ids = [$request->account];
             $query->where(function ($query) use ($ids) {
                 $query->whereIn('dep_account', $ids)
@@ -49,7 +44,12 @@ class TransactionController extends Controller
         $transaction = clone $query;
         $count = $query->count();
         if ($count == 0) {
-            return response()->json(["check your account select  "], 404);
+            return response()->json([
+                "payload" => [
+                    "transactions" => [],
+                    "last_page" => 1
+                ]
+            ], 200);
         }
 
         $lastPage = ceil($count / $limit);
@@ -109,10 +109,10 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         validator($request->all(), [
-            "dep_account" => 'required|integer',
-            "arr_account" => 'required|integer',
+            "dep_account" => 'required|exists:App\Models\Finance_account,account_id',
+            "arr_account" => 'required|exists:App\Models\Finance_account,account_id',
             "amount" => 'required|decimal:1,9',
-            "type" => 'required|string',
+            "type" => 'sometimes|string',
             "description" => 'string'
         ])->validate();
         $accounts = Auth()->user()->finance_account->map(function ($elem) {

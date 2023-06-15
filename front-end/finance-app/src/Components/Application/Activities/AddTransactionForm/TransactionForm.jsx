@@ -7,9 +7,9 @@ import axios from "axios";
 export default function TransactionForm() {
     const navigate = useNavigate();
     const [Transaction, setTransaction] = useState({
-        receiver: '',
-        depositor: '',
-        transaction_type: '',
+        dep_account: '',
+        arr_account: '',
+        type: '',
         amount: '',
         description: '',
     })
@@ -22,10 +22,10 @@ export default function TransactionForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
-            receiver: Transaction.receiver,
-            depositor:Transaction.depositor,
-            transaction_type: Transaction.transaction_type,
-            amount: Transaction.amount,
+            dep_account: Transaction.receiver,
+            arr_account:Transaction.depositor,
+            type: Transaction.transaction_type,
+            amount: parseInt(Transaction.amount).toFixed(2),
             description: Transaction.description,
         }
         axios.post('api/data/transaction', data, {
@@ -41,7 +41,7 @@ export default function TransactionForm() {
             }
         }).catch(err => {
             console.log(err);
-            swal('Warning', err.message, 'warning')
+            swal('Warning', err.response.data.message, 'warning')
         }
 
         )

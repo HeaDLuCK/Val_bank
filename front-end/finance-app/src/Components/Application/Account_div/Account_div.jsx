@@ -13,6 +13,7 @@ export default function Accounts_div() {
     const [avatar, setAvatar] = useState(user);
     const [receivers, setReceivers] = useState([]);
     const [transactions, setTransactions] = useState([]);
+    const [username, setUser] = useState('')
     useEffect(() => {
         axios.get(`api/data/profile/`,
             {
@@ -22,6 +23,7 @@ export default function Accounts_div() {
             })
             .then(res => {
                 console.log(res);
+                setUser(res.data.payload.username)
                 setAvatar(res.data.payload.avatar)
                 setReceivers(res.data.payload.receivers)
                 setTransactions(res.data.payload.transactions)
@@ -67,20 +69,21 @@ export default function Accounts_div() {
 
     return (
         <div className='Accounts_div'>
-            {/* {users.map(u => {
-                        return ( */}
+
             <div className='profile_div'>
                 <div className='body_profile_div'>
-                    <h5>Omayma ABIDY</h5>
-                    <p>User</p>
+                    <h5>{username}</h5>
                 </div>
                 <div className='btns_profile_div'>
+                    {localStorage.getItem('role') === 'admin' && <button onClick={() => { navigate('/admin/dashboard') }}>Control panel</button>}
+                    {localStorage.getItem('role') === 'agent' && <button onClick={() => { navigate('/agent/dashboard') }}>Agent panel</button>}
                     <button onClick={() => { navigate('/settings_user') }}>Settings</button>
                     <button className='logout_btn' onClick={handleLogout}>LogOut</button>
                 </div>
 
             </div>
-            {/* )})}   */}
+
+
             <div className='notifications'>
                 <i class="fa-regular fa-bell"></i>
                 <img src={`data:image/png;base64,${avatar}`} alt="user" onClick={profile_div} />
@@ -98,7 +101,7 @@ export default function Accounts_div() {
                             </div>
                         )
                     })
-                    } 
+                    }
                 </div>
             </div>
             <div className='receivers'>
@@ -122,13 +125,13 @@ export default function Accounts_div() {
                                 <img src={`data:image/png;base64,${transaction.avatar}`} alt="user" />
                                 <div className='descreption_activity'>
                                     <h5>{transaction.name}</h5>
-                                    <p>{transaction.date}</p>
+                                    <p>{transaction.date.slice(0, 10)}</p>
                                 </div>
                             </div>
                             <span>{transaction.amount} DH</span>
                         </div>)
                 })}
-                
+
             </div>
         </div>
     )

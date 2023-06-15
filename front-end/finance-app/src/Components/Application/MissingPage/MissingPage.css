@@ -1,0 +1,67 @@
+/* body {
+    min-height: 100vh;
+    background-image: url('./waves.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+} */
+.error {
+    min-height: 100vh;
+    background-image: url('./waves.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error>.error-container {
+    width: 600px;
+    height: 350px;
+    border-radius: 18px;
+    background: rgb(216, 228, 235);
+    background: radial-gradient(circle, rgba(216, 228, 235, 0.5) 6%, rgb(82 130 155 / 33%) 19%, rgb(255 255 255 / 50%) 87%, rgb(202 202 202) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.error>.error-container .image {
+    width: 80px;
+    margin: 0px auto;
+}
+
+.error>.error-container .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    gap: 18px;
+}
+
+.description button {
+    padding: 14px 18px;
+    border: none;
+    border-radius: 18px;
+    color: black;
+    font-size: 1.1rem;
+    background-color: #ffffff8f;
+    cursor: pointer;
+    transition-property: background-color, color;
+    transition-duration: 1s;
+}
+
+.description button:hover {
+    color: white;
+    background-color: #19516e;
+}
+
+.image>img {
+    width: 100%;
+}

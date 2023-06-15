@@ -1,0 +1,38 @@
+.menu {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    background-color: #293140;
+    padding: 5.5rem 10px 10px 10px;
+    width: 12rem;
+
+}
+
+.menu>*>a {
+    margin: 5px;
+    padding: 12px;
+    padding-left: 18px;
+    border-radius: 18px;
+    background-color: rgba(255, 255, 255, 0.486);
+    color: white;
+    transition-property: background-color, color;
+    transition-duration: 1s;
+    cursor: pointer;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+}
+
+.menu>*>a:hover {
+    color: black;
+    background-color: rgb(255, 255, 255);
+
+}
+
+.menu>*>a.active {
+    color: black;
+    background-color: rgb(255, 255, 255);
+}

@@ -1,106 +1,115 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 // import './Calendar.css';
 import Popup from './Popup/Popup';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 export default function MyAppp() {
   const navigate = useNavigate();
   const [data, setData] = useState({
-    account_id:'',
-    code_pay:'',
-    date:''
+    acc_id: '',
+    pay_code: '',
+    pay_day: ''
   });
   const [value, setValue] = useState();
-  const [event, setEvent] = useState();
+  const [event, setEvent] = useState([]);
   const [btnPopup, setBtnPopus] = useState(false);
-  const onChange = (e) =>{
+  const [info, setInfo] = useState({})
+  const onChange = (e) => {
     setBtnPopus(true)
-    console.log(e);
+    let helper = []
+    if (event.length > 0) { helper = event.filter(event => event.pay_day.slice(0, 10) == new Date(e).toJSON().slice(0, 10)) }
+    setInfo({
+      acc_id: helper[0].acc_id,
+      pay_code: helper[0].pay_code,
+      pay_day: helper[0].pay_day,
+    })
     setData({
       ...data, date: new Date(e).toJSON().slice(0, 10)
     })
   }
-  
+
   const handleInput = (e) => {
     e.persist();
     setData({
-        ...data, [e.target.name]: e.target.value
+      ...data, [e.target.name]: e.target.value
     })
-    
-}
-console.log(data);
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const dataa = {
-      account_id: data.account_id,
-      code_pay:data.code_pay,
-      date: data.date,
+
   }
-  axios.post('api/data/calendar', dataa, {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const dataa = {
+      acc_id: data.account_id,
+      pay_code: data.code_pay,
+      pay_day: data.date,
+    }
+    axios.post('api/data/autopay', dataa, {
       headers: {
-          // 'content-type': 'multipart/form-data',
-          "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        "Authorization": `Bearer ${localStorage.getItem('token')}`,
       }
-  }).then(res => {
+    }).then(res => {
       console.log(res);
-      if (res.status === 200) {
-          axios.get('api/data/calendar',{
-            headers: {
-              // 'content-type': 'multipart/form-data',
-              "Authorization": `Bearer ${localStorage.getItem('token')}`,
-          }
-          }).then(res => {
-            if(res.status === 200){
-              setEvent(res.data.code_pay)
-            }
-          }).catch(err => {
-            console.log(err);
-            swal('Warning', err.message, 'warning')
-        })}
-      
-  }).catch(err => {
+    }).catch(err => {
       console.log(err);
       swal('Warning', err.message, 'warning')
+    }
+
+    )
   }
 
-  )
-}
-const handleEvent = () =>{
-  alert(
-    `Code Pay : ${event.code_pay}`
-    `Code Account : ${event.account_id}`
-    `Date : ${event.date}`
-  )
-}
+  useEffect(() => {
+    axios.get('api/data/autopay', {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+      }
+    }).then(res => {
+      setEvent(res.data.payload);
+    }).catch(err => {
+      console.log(err);
+      // swal('Warning', err.message, 'warning')
+    })
+  }, [])
 
-const tileContent = (e) => {
-  // if (new Date(e.date).toJSON().slice(0, 10) === event.date){
-    return (<div className="special-date" onClick={handleEvent}></div>);
-  // }else{
-  //   return null
-  // }
-}
+  const handleEvent = () => {
+    alert(
+      info.pay_day + ' ' +
+      info.pay_code + ' ' +
+      info.acc_id
+    )
+    setBtnPopus(false)
+
+  }
+
+  const tileContent = (e) => {
+    let helper = false
+    event.map(event => {
+      if (event.pay_day.slice(0, 10) == new Date(e.date).toJSON().slice(0, 10)) {
+        helper = true
+      };
+    })
+    return helper ? (<div className="special-date" onClick={(e) => { e.stopPropagation(); handleEvent(); }}></div>) : null
+
+  }
   return (
     <div className='calendar'>
-      <Calendar onClickDay={(e)=>onChange(e)} value={value} tileContent={(e)=>tileContent(e)}/>
+      <Calendar onClickDay={(e) => onChange(e)} value={value} tileContent={(e) => tileContent(e)} />
       {/* <Popup trigger={btnPopup} setTrigger={event.date === data.date? setBtnPopus : false} > */}
-      <Popup trigger={btnPopup} setTrigger={setBtnPopus } >
+      <Popup trigger={btnPopup} setTrigger={setBtnPopus} >
         <h3>Add Your Event Here </h3>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, itaque esse Voluptatibus quibusdam.</p>
         <form action="POST" onSubmit={handleSubmit}>
           <div className='popup_divs'>
-            <input type="number" id='codeAcc' name='account_id' placeholder='Account Number' onChange={handleInput} value={data.account_id}/>
+            <input type="number" id='codeAcc' name='account_id' placeholder='Account Number' onChange={handleInput} value={data.account_id} />
           </div>
           <div className='popup_divs'>
-            <input type="number" id='codePay' name='code_pay' placeholder='Code pay' onChange={handleInput} value={data.code_pay}/>
+            <input type="number" id='codePay' name='code_pay' placeholder='Code pay' onChange={handleInput} value={data.code_pay} />
           </div>
           <div className='popup_btn'>
             <button type='submit'>add Event</button>
           </div>
-          
+
         </form>
       </Popup>
     </div>

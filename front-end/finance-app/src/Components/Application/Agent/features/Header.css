@@ -1,0 +1,41 @@
+header.agent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 2.5rem;
+    background-color: #293140;
+}
+header.agent-header .loT{
+    display: flex;
+    align-items: center;
+    color: white;
+}
+header.agent-header>.button>button {
+    padding: 10px 15px;
+    border-radius: 12px;
+    background-color: #ffffff44;
+    border: none;
+    color: white;
+    transition-property: background-color, color;
+    transition-duration: 1s;
+    
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+header.agent-header>.button>button:hover {
+    color: black;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+header.agent-header img {
+    width: 100%;
+
+}
+
+header.agent-header .logo {
+    width: 80px;
+}

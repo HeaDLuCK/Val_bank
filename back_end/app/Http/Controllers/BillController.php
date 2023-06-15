@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\ImportBills;
 use App\Models\Bill;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,9 +14,20 @@ class BillController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(["payload" => Bill::all()], 200);
+        $query = Bill::query();
+        if ($request->has('paid_status')) {
+            if ($request->paid_status) {
+                $query->whereNotNull('payment_date');
+            } else {
+                $query->whereNull('payment_date');
+            }
+        }
+        if ($request->has('date')) {
+            $query->whereDate('created_at', "=", Carbon::parse($request->date)->toDateString());
+        }
+        return response()->json(["payload" => $query->get()], 200);
     }
 
 
@@ -27,13 +39,12 @@ class BillController extends Controller
         validator($request->all(), [
             "facture" => 'required|file|mimes:xls,xlsx'
         ])->validate();
-        // try {
+        try {
             Excel::import(new ImportBills, $request->file('facture'));
             return response()->json(["message" => "data inserted successfully"], 200);
-        // } catch (Exception $e) {
-        //     return $e;
-        //     return response()->json(["message" => "check your file data  the column need to be company,amount,date_of_bill,payment_deadline"], 500);
-        // }
+        } catch (Exception $e) {
+            return response()->json(["message" => "check your file data  the column need to be company,amount,date_of_bill,payment_deadline"], 500);
+        }
     }
 
     /**

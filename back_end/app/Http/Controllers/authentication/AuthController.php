@@ -85,9 +85,9 @@ class AuthController extends Controller
         $user = User::where('username', request('username'))->first();
         if ($user != null and Hash::check(request('password'), $user->getAuthPassword())) {
             return response()->json([
-                "accounts" => $user->finance_account->map(function ($account) {
+                "accounts" => count($user->finance_account) ? $user->finance_account->map(function ($account) {
                     return $account->account_id;
-                })->toArray()[0],
+                })->toArray()[0] : null,
                 "user_role" => $user->role,
                 "token" => $user->createToken(time())->plainTextToken,
                 "message" => "You are successfully logged in "

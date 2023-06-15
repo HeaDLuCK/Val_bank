@@ -31,6 +31,7 @@ export default function LoginForm() {
         }).then(res => {
             if (res.status === 202) {
                 localStorage.setItem('token', res.data.token)
+                localStorage.setItem('role', res.data.user_role)
                 localStorage.setItem('accounts', res.data.accounts)
                 swal('Success', res.data.message, 'success')
                 navigate('/dashboard')
@@ -38,12 +39,17 @@ export default function LoginForm() {
 
         }).catch(err => {
             console.clear();
+            console.log(err);
+            if(err.response.status===404){
+                swal('Warning', err.response.data.message, 'warning')
+            }
             if (err.response.status === 401) {
                 swal('Warning', err.response.data.message, 'warning')
                 setLogin({
                     ...loginInput, error_list: {}
                 })
-            } else {
+            } 
+            else {
                 setLogin({
                     ...loginInput, error_list: err.response.data.errors
                 })

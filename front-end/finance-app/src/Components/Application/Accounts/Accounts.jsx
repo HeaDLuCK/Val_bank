@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function Accounts() {
     const data = useSelector((state) => state.Accounts);
+    const [loading, setLoading] = useState(true)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleClick = () => {
@@ -26,6 +27,7 @@ export default function Accounts() {
                 console.log(res);
                 console.log(data);
                 dispatch(getData(res.data.payload))
+                setLoading(false)
             }).catch(err => {
                 console.log(err);
             });
@@ -51,13 +53,13 @@ export default function Accounts() {
         <div className='AccountsCards' >
             <h3>My Accounts :</h3>
             <div className='MyAccountsDiv'>
-                {data.length >0 && data.map(e => {
+                {data.length > 0 && data.map(e => {
                     return (
                         <div className='MyAccount'>
                             <div className='infos'>
                                 <div className="delete-edit-btn">
                                     <Link to={`/form_update_account/${e.account_id}`}><i class='far fa-edit'></i></Link>
-                                   <i class="fa fa-remove" onClick={() => HandleDelete(e.account_id)}></i>
+                                    <i class="fa fa-remove" onClick={() => HandleDelete(e.account_id)}></i>
                                 </div>
                                 <div className="group-input-account-balance">
                                     <p className='label-account'>Solde :</p>
@@ -69,44 +71,22 @@ export default function Accounts() {
                                 </div>
                                 <div className="group-input-account">
                                     <p className="label-account">Account Status :</p>
-                                    <p className='account-type'>{e.account_status?'ACTIVE':'INACTIVE'}</p>
+                                    <p className='account-type'>{e.account_status ? 'ACTIVE' : 'INACTIVE'}</p>
                                 </div>
                                 <div className='dateCreation'>
-                                    <p>created at: <span>{e.created_at}</span></p>
+                                    <p>created at: <span>{e.created_at ? e.created_at.slice(0, 10) : ''}</span></p>
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                     )
 
                 })
 
                 }
-                {/* <div className='MyAccount'>
-                    <div className='infos'>
-                        <div className="delete-edit-btn">
-                            <Link to={`/form_update_account/1`}><i class='far fa-edit'></i></Link>
-                            <i class="fa fa-remove"></i>
-                        </div>
-                        <div className="group-input-account-balance">
-                            <p className='label-account'>Solde :</p>
-                            <p className='info-account-balance'>1200.00<span>DH</span></p>
-                        </div>
-                        <div className="group-input-account">
-                            <p className="label-account">Account Type :</p>
-                            <p className='info-account'>Finance</p>
-                        </div>
-                        <div className="group-input-account">
-                            <p className="label-account">Account Status :</p>
-                            <p className='info-account'>Active</p>
-                        </div>
-                        <div className='dateCreation'>
-                            <p>created at: <span>05/10/2010</span></p>
-                        </div>
-                    </div>
-                </div> */}
-                
+
+
 
 
 

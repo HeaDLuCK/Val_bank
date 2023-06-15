@@ -1,0 +1,153 @@
+.overlay {
+    background-color: #0000002a;
+    position: fixed;
+    width: 100%;
+    left: 0%;
+    top: 0%;
+    min-height: 100vh;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay>.newModel {
+    background: url('./bg.png');
+    background-size: cover;
+    width: 65%;
+    height: 70vh;
+    border-radius: 8px;
+    transform: translate(2.2rem, 0.5rem);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    padding: 18px;
+    padding-top: 25px;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    opacity: 0;
+    transition: opacity 750ms;
+}
+.overlay>.newModel.fade{
+    opacity: 1;
+}
+.overlay>.newModel .user-avn {
+    grid-row: 1/3;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-self: baseline;
+}
+
+.overlay>.newModel .user-avn img {
+    border-radius: 50%;
+    border: 3px solid #293140;
+    width: 150px;
+    height: 150px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.overlay>.newModel .user-avn>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.spec {
+    align-self: baseline;
+}
+
+.newModel .item label {
+    font-weight: 700;
+}
+
+.newModel .item.button {
+    justify-self: start;
+    padding: 8px 20px;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.newModel .item.button.left {
+    grid-column: 3/4;
+}
+
+.overlay>.newModel .item:not(.no) {
+    justify-self: center;
+}
+
+.newModel .no {
+    margin-left: 4rem;
+}
+
+.newModel .item.button.redh {
+    background-color: #E3242B;
+    transition: background-color 650ms;
+}
+
+.newModel .item.button.orange {
+    background-color: #DD571C;
+    transition: background-color 650ms;
+}
+
+.newModel .item.button.red {
+    background-color: #974245;
+    transition: background-color 650ms;
+}
+
+.newModel .item.button.grey {
+    background-color: #373737;
+    transition: background-color 650ms;
+    margin-left: 0px;
+}
+
+.newModel .item.button.green {
+    background-color: #2fec94;
+    transition: background-color 650ms;
+    justify-self: end;
+}
+
+
+.newModel .item.button.redh:hover {
+    background-color: #cc0007;
+}
+
+.newModel .item.button.orange:hover {
+    background-color: #FF9E3D;
+}
+
+.newModel .item.button.red:hover {
+    background-color: #681314;
+}
+
+.newModel .item.button.grey:hover {
+    background-color: #868686;
+    margin-left: 0px;
+}
+
+.newModel .item.button.green:hover {
+    background-color: #03ac13;
+}
+
+.newModel .item.button.enab {
+    background-color: #75d9aa;
+    transition: background-color 650ms;
+}
+
+.newModel .item.button.enab:hover {
+    background-color: #26a126;
+}
+
+.overlay>.newModel .input {
+    width: 25ch;
+}
+
+.overlay>.newModel .input>input {
+    width: calc(100% - 40px);
+}

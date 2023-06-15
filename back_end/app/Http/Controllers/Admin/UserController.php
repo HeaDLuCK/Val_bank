@@ -19,12 +19,25 @@ class UserController extends Controller
         $limit = $request->limit ?? 10;
         $page = $request->page ?? 1;
         //
-        $count = User::count();
-        $lastPage = ceil($count / $limit);
+        $query = User::query();
+        $count = clone $query;
+        $lastPage = ceil($count->count() / $limit);
         if ($request->page <= $lastPage) {
-            $data = User::with('user_detail')->offset(($page  - 1) * $limit)
+            if ($request->has('user_status') and $request->user_status != '') {
+                if ($request->user_status) {
+                    $query->where('user_status', '=', 1);
+                } else {
+                    $query->where('user_status', '=', 0);
+                }
+            }
+            if ($request->has('username') and $request->username != '') {
+                $query->where('username', 'LIKE', '%' . $request->username . '%');
+            }
+            $query->with('user_detail')->offset(($page  - 1) * $limit)
                 ->take($limit)
                 ->get();
+            $data = $query->get();
+
             // map function
             $data->map(function ($elem) {
                 $elem->user_detail->total_accounts = count($elem->finance_account);

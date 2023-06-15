@@ -1,4 +1,4 @@
-.ActivitiesTransaction{
+.ActivitiesTransaction {
     width: 100%;
     height: 540px;
     background: #FFFFFF;
@@ -6,17 +6,27 @@
     border-radius: 10px;
     /* padding: 20px; */
 }
-.ActivitiesTransaction h3{
+
+.activitiesdivs img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+
+.ActivitiesTransaction h3 {
     padding: 20px 20px 0;
     letter-spacing: 1.2px;
 }
-.ActivitiesTransaction .filterandsearch{
+
+.ActivitiesTransaction .filterandsearch {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
 }
-.ActivitiesTransaction .filterandsearch .filter{
+
+.ActivitiesTransaction .filterandsearch .filter {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -24,16 +34,19 @@
     gap: 15px;
     width: 100%;
 }
-.filterBy{
+
+.filterBy {
     display: flex;
     align-items: center;
-    gap:15px;
+    gap: 15px;
 }
-.ActivitiesTransaction .filterandsearch .filter h5{
+
+.ActivitiesTransaction .filterandsearch .filter h5 {
     font-size: 16px;
     letter-spacing: 1px;
 }
-.ActivitiesTransaction .filterandsearch .filter button{
+
+.ActivitiesTransaction .filterandsearch .filter button {
     height: 45px;
     font-size: 16px;
     width: 150px;
@@ -44,14 +57,17 @@
     color: #FFFFFF;
     cursor: pointer;
 }
-.ActivitiesTransaction .activitiesdivs, .ActivitiesTransaction .activitiesdivs .oneactivity{
+
+.ActivitiesTransaction .activitiesdivs,
+.ActivitiesTransaction .activitiesdivs .oneactivity {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
 }
-.ActivitiesTransaction .activitiesdivs .oneactivity .date_activity{
+
+.ActivitiesTransaction .activitiesdivs .oneactivity .date_activity {
     padding: 0 50px;
     width: 100%;
     display: flex;
@@ -60,7 +76,8 @@
     color: #a0a0a0;
     height: 20px;
 }
-.ActivitiesTransaction .activitiesdivs .oneactivity .user_activity{
+
+.ActivitiesTransaction .activitiesdivs .oneactivity .user_activity {
     width: 100%;
     display: flex;
     align-items: center;
@@ -69,27 +86,33 @@
     background: #acdef8;
     height: 45px;
 }
-.oneactivity .user_activity .user_profile{
+
+.oneactivity .user_activity .user_profile {
     display: flex;
     align-items: center;
     justify-content: center;
 }
- .oneactivity .user_activity .user_profile img{
+
+.oneactivity .user_activity .user_profile img {
     height: 40px;
     width: auto;
 }
- .oneactivity .user_activity .user_profile h3{
+
+.oneactivity .user_activity .user_profile h3 {
     padding: 20px;
     font-weight: 200;
 }
-.oneactivity .user_activity p{
+
+.oneactivity .user_activity p {
     font-size: 13px;
 }
-.oneactivity .user_activity span{
+
+.oneactivity .user_activity span {
     color: #20c220;
 }
-.dateTransactions{
-    background: #acdef8 ;
+
+.dateTransactions {
+    background: #acdef8;
     padding: 10px;
     font-size: 15px;
     border: 1px solid #bfe2f5;
@@ -97,7 +120,8 @@
     border-radius: 5px;
     cursor: pointer;
 }
-select{
+
+select {
     padding: 12px 50px;
     font-size: 15px;
     border: none;

@@ -73,8 +73,8 @@ abbr[title] {
     color: #ffffff !important;
 }
 .special-date{
-    height: 5px;
-    width: 5px;
+    height: 15px;
+    width: 15px;
     border-radius: 100%;
     background: red;
 }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\admin\NoCrud;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NoCrudController extends Controller
 {
@@ -21,5 +24,24 @@ class NoCrudController extends Controller
         }
         $user->save();
         return response()->json(["message" => "user status switched successfully"]);
+    }
+    function AdminDashboard()
+    {
+        $users = User::count();
+        $agents = User::where('role', 'agent')->count();
+        $register = User::whereDate('created_at', Carbon::today())->count();
+        $transactions = Transaction::orderBy('created_at')->get()->groupBy(function ($item) {
+            return $item->created_at->format('Y-m-d');
+        })->map(function ($elem) {
+            return count($elem);
+        });
+
+
+        return response()->json(["payload" => [
+            "users" => $users,
+            "agents" => $agents,
+            "register" => $register,
+            "transaction" => $transactions
+        ]], 200);
     }
 }

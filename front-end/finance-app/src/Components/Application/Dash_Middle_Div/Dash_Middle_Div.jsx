@@ -122,7 +122,6 @@ export default function Middle_div() {
                 <div className='Balence'>
                     <h4>Total Balence</h4>
                     <h1>{balance}<span>DH</span></h1>
-                    <p>+3.22%</p>
                 </div>
                 <div className='Expenses'>
                     <h1>Expenses</h1>

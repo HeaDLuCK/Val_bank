@@ -1,0 +1,207 @@
+.transaction-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 3rem 6rem 6rem;
+    background: url('../User/test.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    --raduis: 8px;
+    --border-color: #293140;
+
+
+}
+
+.scroller {
+    display: flex;
+    max-height: 75vh;
+    overflow-y: auto;
+    border-radius: calc(var(--raduis) - 3px);
+    border-top-right-radius: 0px;
+}
+
+.transaction-container>.scroller>table {
+    background-color: rgba(255, 255, 255, 0.2);
+    flex: 1;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 0px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px 0px 8px 8px;
+}
+
+.transaction-container>.scroller>table thead th:first-child {
+    border-top-left-radius: calc(var(--raduis) - 3px);
+}
+
+.transaction-container>.scroller>table tbody tr:last-child>:first-child {
+    border-bottom-left-radius: calc(var(--raduis) - 3px);
+}
+
+.transaction-container>.scroller>table tbody tr:last-child>:last-child {
+    border-bottom-right-radius: calc(var(--raduis) - 3px);
+}
+
+.transaction-container>.scroller>table th {
+
+    background-color: var(--border-color);
+}
+
+
+.transaction-container>.scroller>table td,
+.transaction-container>.scroller>table th {
+    height: 3.5rem;
+    width: 250px;
+}
+
+
+
+.transaction-container>.scroller>table td {
+    border-bottom: 2px solid var(--border-color);
+}
+
+.transaction-container>.scroller>table td:last-child {
+    border-right: 2px solid var(--border-color);
+}
+
+.transaction-container>.scroller>table td:first-child {
+    border-left: 2px solid var(--border-color);
+}
+
+.transaction-container>.scroller>table thead {
+    color: white;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+}
+
+.transaction-container>.scroller>table tbody {
+    color: black;
+}
+
+
+
+.transaction-container>.scroller button {
+    flex: 1;
+    padding: 8px 15px;
+    width: max-content;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.transaction-container>.scroller button.show {
+    background-color: #FF9E3D;
+    transition: background-color 1s;
+}
+
+.transaction-container>.scroller button.show:hover {
+    background-color: #ff8000;
+}
+
+.transaction-container .upper {
+    min-width: fit-content;
+    padding-left: 1rem;
+}
+
+.transaction-container>.upper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding-bottom: 12px;
+    justify-content: space-between;
+
+}
+
+.transaction-container>.upper button {
+    padding: 8px 15px;
+    width: max-content;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #475772;
+    cursor: pointer;
+    transition: background-color 750ms;
+}
+
+.transaction-container>.upper button:hover {
+    background-color: #293140;
+}
+
+
+
+.pagination a {
+    text-decoration: none;
+    color: black;
+}
+
+.pagination {
+    margin-top: 12px;
+    margin-right: 12px;
+    align-self: flex-end;
+    background-color: #d1dbd6;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 8px;
+    gap: 8px;
+}
+
+.pagination>li {
+    min-width: 25px;
+    text-align: center;
+    border-radius: 8px;
+    transition: background-color 450ms ease;
+    cursor: pointer;
+}
+
+.pagination>li.active {
+    background-color: #75d9aa;
+}
+
+.pagination>li:first-child,
+.pagination>li:last-child {
+    display: flex;
+    align-items: center;
+
+}
+
+.pagination>li:hover {
+    background-color: #75d9aa;
+
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #293140;
+    border-color: #293140 transparent #293140 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.transaction-container.tt {
+    align-items: center;
+    justify-content: center;
+}

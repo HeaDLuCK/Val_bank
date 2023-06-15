@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("pay_code");
             $table->foreign("pay_code")->references('pay_code')->on('bills')->onDelete('cascade');
             $table->date('pay_day');
-            $table->primary(['acc_id']);
             $table->timestamps();
         });
     }

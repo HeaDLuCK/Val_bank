@@ -1,0 +1,98 @@
+.dashboard-admin {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 4px;
+}
+
+.dashboard-admin .val-info-ad {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    flex: 1;
+    gap: 4px;
+    align-items: center;
+}
+
+
+.dashboard-admin .val-info-ad>* {
+    margin: 0.7rem;
+    min-height: fit-content;
+    height: 200px;
+    background: #293140;
+    padding: 16px;
+    border-radius: 14px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: right 750ms;
+}
+
+.dashboard-admin .val-info-ad .register h3 {
+    display: flex;
+    align-items: end;
+    gap: 3px;
+}
+
+.dashboard-admin .val-info-ad .register h3 small {
+    font-weight: lighter;
+    font-size: 12px;
+    color: #bbcdd8;
+}
+
+.val-info-ad .anim-number {
+    align-self: flex-end;
+    font-size: 2.7rem;
+}
+
+.dashboard-admin .visit-chart {
+    max-width: 100vw;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.visit-chart canvas {
+    max-height: 400px !important;
+    max-width: 100% !important;
+    background-color: #293140;
+    padding: 18px;
+    border-radius: 12px;
+    margin: 10px;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #293140;
+    border-color: #293140 transparent #293140 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.transaction-container.tt {
+    align-items: center;
+    justify-content: center;
+}

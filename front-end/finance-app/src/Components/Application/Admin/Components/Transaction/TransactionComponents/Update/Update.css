@@ -1,0 +1,79 @@
+.Trwindow {
+    width: 35%;
+    height: 45vh;
+    transform: translate(2.2rem, 0.5rem);
+    background-color: white;
+    border-radius: 6px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    opacity: 0;
+    transition: opacity 750ms;
+}
+
+.Trwindow.fade {
+    opacity: 1;
+}
+
+.Trwindow h3 {
+    text-align: center;
+}
+
+.Trwindow label {
+    font-weight: 600;
+}
+
+.Trwindow .depo,
+.Trwindow .rec,
+.Trwindow .amount {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Trwindow .depo>*:last-child,
+.Trwindow .rec>*:last-child,
+.Trwindow .amount>*:last-child {
+    align-self: flex-end;
+}
+
+
+.Trwindow .act {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Trwindow .act>button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.Trwindow .act>button.exit {
+    background-color: #373737;
+    transition: background-color 550ms;
+}
+
+.Trwindow .act>button.exit:hover {
+    background-color: #000000;
+    transition: background-color 550ms;
+}
+
+.Trwindow .act>button.save {
+    background-color: #1cff68;
+    transition: background-color 550ms;
+}
+
+.Trwindow .act>button.save:hover {
+    background-color: #00ff88;
+    transition: background-color 550ms;
+}
+
+.Trwindow .input input{
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid grey;
+}

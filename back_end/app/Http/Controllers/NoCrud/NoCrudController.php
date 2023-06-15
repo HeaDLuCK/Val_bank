@@ -8,10 +8,12 @@ use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class NoCrudController extends Controller
 {
+
     public function profile()
     {
         $data = User::find(Auth()->id());
@@ -28,7 +30,7 @@ class NoCrudController extends Controller
             ->get();
 
         $receivers = [];
-        $transaction = collect($transaction)->map(function ($elem) use ($ids,&$receivers) {
+        $transaction = collect($transaction)->map(function ($elem) use ($ids, &$receivers) {
             if (in_array($elem->depositorAccount->account_id, $ids)) {
                 $main = $elem->receiverAccount->user->user_detail;
                 $contents = Storage::disk('public')->get('images/' . $main->avatar_image);
@@ -63,6 +65,7 @@ class NoCrudController extends Controller
         });
         return response()->json([
             "payload" => [
+                "username" => auth()->user()->username,
                 "avatar" => $data->user_detail->avatar_image,
                 "accounts" => $data->finance_account->makeHidden([
                     'user_id',
@@ -126,5 +129,32 @@ class NoCrudController extends Controller
         } else {
             return response()->json(["message" => "cant reach this data"], 500);
         }
+    }
+
+    function UpdatePassword(Request $request)
+    {
+        validator($request->all(), [
+            'password' => 'required|string|confirmed|min:8|max:30',
+            "token" => "required"
+        ])->validate();
+        $resetCheck = DB::table('password_reset_tokens')->where('token', $request->token);
+        if (!$resetCheck) {
+            return response()->json(["message" => "error occurred  while updating password"], 401);
+        }
+        $user = User::join('user_details', 'user_details.user_id', '=', 'users.id')->first();
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $resetCheck->delete();
+        return response()->json(["message" => "password updated successfully"], 201);
+    }
+
+
+
+    function AccountsIds()
+    {
+        $accounts = Auth()->user()->finance_account->map(function ($elem) {
+            return $elem->account_id;
+        })->toArray();
+        return response()->json(['accounts' => $accounts]);
     }
 }
