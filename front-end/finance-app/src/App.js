@@ -13,7 +13,7 @@ import Add_Accounts from "./Components/Application/Add_Accounts/Add_Accounts";
 import Form_account from "./Components/Application/Add_Accounts/form_add_account/form_acount";
 import Update_Accounts from "./Components/Application/Add_Accounts/Update_Account";
 import AddTransaction from "./Components/Application/Activities/AddTransactionForm/AddTransaction";
-import Appp from "./Components/Calendar/Calendar";
+import CalendarApp from "./Components/Calendar/CalendarApp";
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 axios.defaults.headers.post['Accept'] = 'application/json';
@@ -35,7 +35,7 @@ function App() {
         <Route path="/form_account" element={<Form_account />} />
         <Route path="/form_update_account/:id" element={<Update_Accounts />} />
         <Route path="/addTransaction" element={<AddTransaction />} />
-        <Route path="/calendar" element={<Appp />} />
+        <Route path="/calendar" element={<CalendarApp />} />
       </Routes>
     </BrowserRouter>
 

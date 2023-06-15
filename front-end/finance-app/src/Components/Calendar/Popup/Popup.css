@@ -1,23 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Ubuntu&display=swap');
 .Popup{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .popup-inner{
+    font-family: 'Kanit', sans-serif;
     position: relative;
-    padding: 20px;
+    padding: 50px 40px 40px;
     width: 100%;
-    max-width: 640px;
+    max-width: 670px;
+    height: 430px;
     background-color: #fff;
+    border-radius: 5px;
+}
+.popup-inner h3{
+    font-family: 'Kanit', sans-serif;
+    text-align: center;
+    font-size: 22px;
+    padding: 20px 10px 10px;
+}
+.popup-inner p{
+    font-family: 'Kanit', sans-serif;
+    text-align: center;
+    color: #6b6b6b;
+    font-size: 14px;
 }
 .popup-inner i{
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 20px;
+    right: 20px;
+    font-size: 22px;
+    color: #437975;
+    cursor: pointer;
+}
+.popup-inner form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:20px ;
+}
+.popup-inner form .popup_divs{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    width: 100%;
+}
+.popup-inner form .popup_divs label{
+    padding: 10px 0;
+    font-weight: bold;
+}
+.popup-inner form .popup_divs input{
+    outline: none;
+    border: none;
+    height: 45px;
+    width: 100%;
+    padding: 20px;
+    font-size: 15px;
+    background: #ebebeb;
+    font-family: 'Kanit', sans-serif;
+}
+.popup-inner .popup_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.popup-inner form button{
+    height: 45px;
+    width: 100%;
+    margin: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #437975;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Kanit', sans-serif;
+    
 }
