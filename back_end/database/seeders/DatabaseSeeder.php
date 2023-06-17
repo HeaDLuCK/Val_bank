@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $userA = new User();
-        $userA->username = 'admi05';
+        $userA->username = 'admin05';
         $userA->password = bcrypt("xlooon10");
         $userA->role = 'admin';
         $userA->save();
