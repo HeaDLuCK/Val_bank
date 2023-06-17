@@ -24,7 +24,7 @@ class BillController extends Controller
                 $query->whereNull('payment_date');
             }
         }
-        if ($request->has('date')) {
+        if ($request->has('date') and $request->date != '') {
             $query->whereDate('created_at', "=", Carbon::parse($request->date)->toDateString());
         }
         return response()->json(["payload" => $query->get()], 200);

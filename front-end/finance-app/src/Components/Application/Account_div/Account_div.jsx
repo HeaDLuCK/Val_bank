@@ -51,8 +51,9 @@ export default function Accounts_div() {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`
                 }
             }).then(res => {
-                console.log(res);
-                // localStorage.removeItem('token');
+                localStorage.removeItem('token');
+                localStorage.removeItem('role');
+                localStorage.removeItem('accounts');
                 navigate('/')
             }).catch(err => {
                 console.log(err);

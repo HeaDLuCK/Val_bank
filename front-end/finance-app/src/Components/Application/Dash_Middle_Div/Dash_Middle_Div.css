@@ -23,15 +23,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 5px;
     
 }
-.Balence p{
-    margin: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 15px;
-    color: #20c220;
-    background: rgb(182, 233, 197);
+.Balence h2{
+    margin-top: -30px;
 }
 .Expenses{
     width: calc(50% - 5px);

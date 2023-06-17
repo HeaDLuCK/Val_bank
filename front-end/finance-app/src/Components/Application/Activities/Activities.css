@@ -5,6 +5,13 @@
     margin-left: 20px;
     border-radius: 10px;
     /* padding: 20px; */
+    /* overflow: hidden; */
+    Overflow: auto
+}
+
+.ActivitiesTransaction::-webkit-scrollbar {
+    width: 10px;
+    background-color: #64B6E3;
 }
 
 .activitiesdivs img {

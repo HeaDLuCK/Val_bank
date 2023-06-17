@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import './ResetPassword.css'
 import logo from './logo2.png';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 const ResetPassword = () => {
     let { token } = useParams();
+    const navigate=useNavigate()
     const [data, setData] = useState({ token: token })
     const [error, setError] = useState({password:[]})
     const handleChange = (e) => {
@@ -12,7 +13,7 @@ const ResetPassword = () => {
     }
     const handleSubmit = () => {
         axios.post('/api/update-password', data)
-            .then((promise) => { console.log(promise.data); })
+            .then((promise) => { console.log(promise.data); navigate('/login') })
             .catch(err => { setError(err.response.data.errors) })
     }
     console.log(error.password);

@@ -7,9 +7,9 @@ import axios from "axios";
 export default function TransactionForm() {
     const navigate = useNavigate();
     const [Transaction, setTransaction] = useState({
-        dep_account: '',
-        arr_account: '',
-        type: '',
+        receiver: '',
+        depositor: '',
+        transaction_type: '',
         amount: '',
         description: '',
     })
@@ -22,8 +22,8 @@ export default function TransactionForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
-            dep_account: Transaction.receiver,
-            arr_account:Transaction.depositor,
+            dep_account: Transaction.depositor,
+            arr_account:Transaction.receiver,
             type: Transaction.transaction_type,
             amount: parseInt(Transaction.amount).toFixed(2),
             description: Transaction.description,

@@ -5,6 +5,7 @@ import Icon from '@mdi/react'
 import { mdiClose, mdiTrayArrowUp } from '@mdi/js'
 
 const MoreInfo = (props) => {
+    const refresh = () => window.location.reload(true)
     const targetFile = useRef(null);
     const [file, setFile] = useState()
     const handleFile = () => {
@@ -22,7 +23,7 @@ const MoreInfo = (props) => {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`,
                     'content-type': 'multipart/form-data'
                 }
-            }).then(promise => { console.log(promise.data.payload) })
+            }).then(promise => { refresh(); console.log(promise.data.payload) })
             .catch(err => { console.log(err); })
     }
     if (!props.window) return null

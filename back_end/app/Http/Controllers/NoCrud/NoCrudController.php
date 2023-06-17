@@ -107,6 +107,7 @@ class NoCrudController extends Controller
                     $elem->date = Carbon::parse($elem->date)->format('Y-m-d');
                     return $elem->toArray();
                 });
+            
 
             $transactionAsDepositor = Transaction::Where("dep_account", $request->account_id)
                 ->whereBetween('created_at', [$startDate, $endDate])

@@ -51,4 +51,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(finance_account::class);
     }
+
+
+    public function userDetail()
+    {
+        return $this->hasOne(User_detail::class);
+    }
+
+    public function financeAccount()
+    {
+        return $this->hasMany(finance_account::class);
+    }
 }

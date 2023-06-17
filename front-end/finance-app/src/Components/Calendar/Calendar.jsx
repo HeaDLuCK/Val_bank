@@ -19,13 +19,13 @@ export default function MyAppp() {
   const [info, setInfo] = useState({})
   const onChange = (e) => {
     setBtnPopus(true)
-    let helper = []
-    if (event.length > 0) { helper = event.filter(event => event.pay_day.slice(0, 10) == new Date(e).toJSON().slice(0, 10)) }
-    setInfo({
-      acc_id: helper[0].acc_id,
-      pay_code: helper[0].pay_code,
-      pay_day: helper[0].pay_day,
-    })
+    // let helper = []
+    // if (event.length > 0) { helper = event.filter(event => event.pay_day.slice(0, 10) == new Date(e).toJSON().slice(0, 10)) }
+    // setInfo({
+    //   acc_id: helper[0].acc_id,
+    //   pay_code: helper[0].pay_code,
+    //   pay_day: helper[0].pay_day,
+    // })
     setData({
       ...data, date: new Date(e).toJSON().slice(0, 10)
     })
@@ -89,7 +89,7 @@ export default function MyAppp() {
         helper = true
       };
     })
-    return helper ? (<div className="special-date" onClick={(e) => { e.stopPropagation(); handleEvent(); }}></div>) : null
+    return helper ? (<div className="special-date" /*onClick={(e) => { e.stopPropagation(); handleEvent(); }}*/></div>) : null
 
   }
   return (
