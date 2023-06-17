@@ -58,10 +58,11 @@
 }
 
 .Info_user .top_div .profile .form_body {
-    gap: 100px;
+    /* gap: 100px; */
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .Info_user .top_div .profile .form_body .avatar,
@@ -73,7 +74,7 @@
 }
 
 .Info_user .top_div .profile .form_body .fullname {
-    gap: 17px;
+    /* gap: 17px; */
     padding: 15px 0;
 }
 

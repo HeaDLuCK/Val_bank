@@ -23,12 +23,16 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 5px;
     
 }
-.Balence h2{
-    margin-top: -30px;
-}
+/* .Balence p{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #20c220;
+    background: rgb(182, 233, 197);
+} */
 .Expenses{
     width: calc(50% - 5px);
     height: auto;
@@ -41,6 +45,10 @@
     font-size: 13px;
     padding: 20px 0 30px;
 
+}
+.Expenses canvas{
+    max-width: 150px;
+    max-height: 150px;
 }
 .Transactions{
     padding: 10px;
@@ -59,3 +67,49 @@
     color: #979797;
     text-align: center;
 }
+.Transactions canvas{
+    width: 100% !important;
+}
+
+@media only screen and (max-width:1038px) {
+    .middle_div{
+        margin-right: 40px;
+    }
+    .middle_div .dates-dashboard{
+        gap: 0px;
+    }
+    .dates-dashboard input{
+        margin-right: 50px;
+    }
+}
+@media only screen and (max-width:928px) {
+    .Balence h1{
+        font-size: 24px;
+    }
+}
+@media only screen and (max-width:764px) {
+    .middle_div .dates-dashboard input{
+        width: 80px;
+    }
+}
+@media only screen and (max-width:694px) {
+    .middle_div .dates-dashboard{
+        padding-left: 30px;
+        justify-content: space-between;
+    }
+    .middle_div .dates-dashboard input{
+        width: 100px;
+        margin-right: 0;
+    }
+    .Balence{
+        width: 100%;
+        height: 50%;        
+    }
+    .Expenses{
+        width: 100%;
+        height: 70%;
+    
+    }
+}
+
+

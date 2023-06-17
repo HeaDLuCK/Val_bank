@@ -10,16 +10,38 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 90px;
+    
+    padding: 18px 70px;
 }
 .Header_Dash_Links ul li{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     font-size: 14px;
 }
 .Header_Dash_Links ul li a{
     text-decoration: none;
     color: black;
+}
+@media only screen and (max-width:1038px) {
+    .Header_Dash_Links{
+        width: calc(100% - 40px);
+    }
+    .Header_Dash_Links ul{
+        padding: 18px 50px;
+    }
+}
+@media only screen and (max-width:694px) {
+    .Header_Dash_Links{
+        margin-top:40px ;
+    }
+    .Header_Dash_Links ul li{
+        margin-top: 7px;
+        font-size: 17px;
+    }
+    .Header_Dash_Links ul li a{
+        display: none;
+    }
 }

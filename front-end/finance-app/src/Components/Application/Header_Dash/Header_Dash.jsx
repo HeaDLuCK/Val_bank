@@ -5,6 +5,7 @@ export default function Header_Dashboard(props){
     return(
         <div className='Header_Dashboard'>
             <h1>{props.title}</h1>
+            <button class="btnBars"><i class="fa fa-bars"></i></button>
         </div>
     )
 }

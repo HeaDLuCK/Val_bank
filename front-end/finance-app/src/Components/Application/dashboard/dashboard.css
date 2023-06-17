@@ -21,24 +21,17 @@
     width: 100%;
     height: 200px;
     display: flex;
-    /* align-items: center; */
     justify-content: space-between;
 }
-/* @media only screen and (max-width: 1170px) {
-    .ALL .dashbord{
-        display: flex;
+@media only screen and (max-width:694px) {
+    .dashbord .container .middle{
         flex-direction: column;
-    }
-    .SideBar{
         width: 100%;
-        display: flex;
-        height: autp;
-        margin-right: 50px;
+        height: 400px;
+        gap: 10px
     }
-    .SideBar .LinksDashBoard ul{
-        display: flex;
-    }
-} */
+}
+
 
 
 

@@ -1,5 +1,5 @@
 .Accounts_div {
-    width: 215px;
+    /* width: 215px; */
     /* height: 640px; */
     background: #FFFFFF;
     margin: 0 0 0 40px;
@@ -174,4 +174,27 @@
 
 .btns_profile_div .logout_btn {
     background: rgba(55, 100, 125, 1);
+}
+@media only screen and (max-width:1038px) {
+    /* .Accounts_div .recent_activity .activities{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+    .Accounts_div .recent_activity .activities .activity{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+    }
+    .recent_activity .activities img{
+        width: 50px;
+        height: auto;
+    } */
+    .Accounts_div{
+        display: none;
+    }
+
 }

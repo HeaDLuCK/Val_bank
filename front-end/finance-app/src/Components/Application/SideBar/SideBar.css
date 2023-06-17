@@ -35,6 +35,47 @@
 .LinksDashBoard ul li svg{
     margin-bottom: -3px;
 }
-@media only screen and (max-width:1090px) {
-    
+/* @media only screen and (max-width:1016px) {
+    .LinksDashBoard ul li{
+        font-size: 12px;
+    }
+    .SideBar .LogoSideBar img{
+        width: 80px;
+        height: auto;
+    }
+} */
+@media only screen and (max-width:914px) {
+    /* .LinksDashBoard ul li{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .SideBar .LogoSideBar img{
+        width: 60px;
+        height: auto;
+    } */
+    .LinksDashBoard ul li{
+        font-size: 12px;
+    }
+    .SideBar .LogoSideBar img{
+        width: 100px;
+        height: auto;
+    }
+}
+@media only screen and (max-width:500px) {
+    .LinksDashBoard ul li{
+        font-size: 18px;
+        align-items: flex-start;
+    }
+    .LinksDashBoard ul li a{
+        display: none;
+    }
+    .SideBar .LogoSideBar{
+        justify-content: flex-start;
+    }
+    .SideBar .LogoSideBar img{
+        width: 40px;
+        height: auto;
+    }
 }

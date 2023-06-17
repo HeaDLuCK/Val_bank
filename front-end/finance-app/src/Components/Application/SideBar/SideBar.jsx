@@ -18,7 +18,7 @@ export default function SideBar(){
                             <i class="fa fa-arrow-right-arrow-left"></i><Link to={'/transaction'}>Transactions</Link>
                         </li>
                         <li>
-                            <i class="fa fa-building-columns"></i><Link to={'/accounts'}>Finance Accounts</Link>
+                            <i class="fa fa-building-columns"></i><Link to={'/accounts'}>Accounts</Link>
                         </li>
                         {/* <li>
                             <i class="fa fa-file"></i><a href="">Reports</a>
