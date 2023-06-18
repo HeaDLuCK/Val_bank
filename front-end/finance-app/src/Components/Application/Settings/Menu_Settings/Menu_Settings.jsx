@@ -7,13 +7,13 @@ export default function Menu_Settings() {
         <div className='Header_Settings_Links'>
             <ul>
                 <li onClick={() => { navigate('/settings_password') }}>
-                    <i class="fa-regular fa-share-from-square"></i>Change Password
+                    <i className="fa-regular fa-share-from-square"></i>Change Password
                 </li>
                 <li onClick={() => { navigate('/settings_user') }}>
-                    <i class="fa-solid fa-bars"></i>Infos Personnel
+                    <i className="fa-solid fa-bars"></i>Infos Personnel
                 </li>
                 <li>
-                    <i class="fa-regular fa-square-plus"></i><a href="">More</a>
+                    <i className="fa-regular fa-square-plus"></i><a href="">More</a>
                 </li>
             </ul>
         </div>

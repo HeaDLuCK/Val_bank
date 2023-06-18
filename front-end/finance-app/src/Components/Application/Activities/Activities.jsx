@@ -40,7 +40,7 @@ function Activities() {
                 console.log(err);
             });
     }, []);
-    
+
     return (
         <div className='ActivitiesTransaction'>
 
@@ -50,11 +50,11 @@ function Activities() {
                     <div className='filterBy'>
                         <h5>Filter by:</h5>
                         <input type="date" className='dateTransactions' name='date' onChange={handleInput} value={options.date} />
-                        <label for="accounts"></label>
+                        <label htmlFor="accounts"></label>
                         <select name="account" id="accounts" onChange={handleInput}>
-                            <option value="" selected></option>
-                            {accounts.length > 0 && accounts.map(a => {
-                                return <option value={a}>{a}</option>
+                            <option value="" defaultValue>acc</option>
+                            {accounts.length > 0 && accounts.map((a,index) => {
+                                return <option key={index} value={a}>{a}</option>
                             })
                             }
 
@@ -66,7 +66,7 @@ function Activities() {
             <div className='activitiesdivs'>
                 {transaction.map(t => {
                     return (
-                        <div className='oneactivity'>
+                        <div key={t.transaction_id} className='oneactivity'>
                             <div className='date_activity'>
                                 <span>{t.date.slice(0, 10)}</span>
                             </div>

@@ -8,8 +8,7 @@ export default function LoginForm() {
     const navigate = useNavigate();
     const [loginInput, setLogin] = useState({
         username: '',
-        password: '',
-        error_list: {}
+        password: ''
     })
     const handleInput = (e) => {
         e.persist();
@@ -38,21 +37,11 @@ export default function LoginForm() {
             }
 
         }).catch(err => {
-            console.clear();
-            console.log(err);
-            if(err.response.status===404){
+            if (err.response.status === 404) {
                 swal('Warning', err.response.data.message, 'warning')
             }
-            if (err.response.status === 401) {
+            else if (err.response.status === 401) {
                 swal('Warning', err.response.data.message, 'warning')
-                setLogin({
-                    ...loginInput, error_list: {}
-                })
-            } 
-            else {
-                setLogin({
-                    ...loginInput, error_list: err.response.data.errors
-                })
             }
         })
     };
@@ -63,12 +52,10 @@ export default function LoginForm() {
                     <h3>Login To Your Account</h3>
                     <div className='inputs'>
                         <input type="text" placeholder='username' name='username' onChange={handleInput} value={loginInput.username} />
-                        <span>{loginInput.error_list.username}</span>
                         <input type="password" placeholder='password' name='password' onChange={handleInput} value={loginInput.password} />
-                        <span>{loginInput.error_list.password}</span>
                         <button className='btn1'>forgot password ?</button>
                         <button type="submit" className='btn2'>SIGN IN</button>
-                        <i class='far fa-eye'></i>
+                        <i className='far fa-eye'></i>
                     </div>
                 </form>
                 <div className='signup'>

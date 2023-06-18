@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './Accounts_div.css';
-import user from './user.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
@@ -10,7 +9,7 @@ export default function Accounts_div() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [dataAccounts, setDataAccounts] = useState([]);
-    const [avatar, setAvatar] = useState(user);
+    const [avatar, setAvatar] = useState(null);
     const [receivers, setReceivers] = useState([]);
     const [transactions, setTransactions] = useState([]);
     const [username, setUser] = useState('')
@@ -86,18 +85,18 @@ export default function Accounts_div() {
 
 
             <div className='notifications'>
-                <i class="fa-regular fa-bell"></i>
+                <i className="fa-regular fa-bell"></i>
                 <img src={`data:image/png;base64,${avatar}`} alt="user" onClick={profile_div} />
             </div>
             <div className='accounts'>
                 <div className='accounts_head'>
                     <h5>My accounts</h5>
-                    <i class="fa-regular fa-square-plus" onClick={() => { navigate('/add_accounts') }}></i>
+                    <i className="fa-regular fa-square-plus" onClick={() => { navigate('/add_accounts') }}></i>
                 </div>
                 <div className='accounts_body'>
                     {dataAccounts.map(e => {
                         return (
-                            <div className='square' onClick={() => handleAccount(e.account_id)}>
+                            <div key={e.account_id} className='square' onClick={() => handleAccount(e.account_id)}>
                                 <p>{e.account_name}</p>
                             </div>
                         )
@@ -108,9 +107,9 @@ export default function Accounts_div() {
             <div className='receivers'>
                 <h5>Receivers</h5>
                 <div className='cercles'>
-                    {receivers.map(img => {
+                    {receivers.map((img, index) => {
                         return (
-                            <img src={`data:image/png;base64,${img.avatar}`} alt="user" />
+                            <img key={index} src={`data:image/png;base64,${img.avatar}`} alt="user" />
                         )
                     })}
 
@@ -121,7 +120,7 @@ export default function Accounts_div() {
                 <h5>Recent Activity</h5>
                 {transactions.map(transaction => {
                     return (
-                        <div className='activities'>
+                        <div key={transaction.transaction_id} className='activities'>
                             <div className='activity'>
                                 <img src={`data:image/png;base64,${transaction.avatar}`} alt="user" />
                                 <div className='descreption_activity'>
@@ -129,7 +128,7 @@ export default function Accounts_div() {
                                     <p>{transaction.date.slice(0, 10)}</p>
                                 </div>
                             </div>
-                            <span>{transaction.amount} DH</span>
+                            <span className={transaction.amount.slice(0, 1) === '+' ? 'added' : 'minus'}>{transaction.amount} DH</span>
                         </div>)
                 })}
 

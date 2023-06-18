@@ -55,11 +55,11 @@ export default function Accounts() {
             <div className='MyAccountsDiv'>
                 {data.length > 0 && data.map(e => {
                     return (
-                        <div className='MyAccount'>
+                        <div key={e.account_id} className='MyAccount'>
                             <div className='infos'>
                                 <div className="delete-edit-btn">
-                                    <Link to={`/form_update_account/${e.account_id}`}><i class='far fa-edit'></i></Link>
-                                    <i class="fa fa-remove" onClick={() => HandleDelete(e.account_id)}></i>
+                                    <Link to={`/form_update_account/${e.account_id}`}><i className='far fa-edit'></i></Link>
+                                    <i className="fa fa-remove" onClick={() => HandleDelete(e.account_id)}></i>
                                 </div>
                                 <div className="group-input-account-balance">
                                     <p className='label-account'>Solde :</p>
@@ -85,14 +85,9 @@ export default function Accounts() {
                 })
 
                 }
-
-
-
-
-
                 <div className='LastDivAccount'>
                     <div className='AddAccount' onClick={() => { navigate('/add_accounts') }}>
-                        <i class="fa fa-plus"></i>
+                        <i className="fa fa-plus"></i>
                     </div>
                     <div className='AjouterAccount' onClick={() => { navigate('/add_accounts') }}>
                         <p>Add Account</p>

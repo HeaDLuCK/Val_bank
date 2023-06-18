@@ -8,7 +8,6 @@ import axios from 'axios';
 export default function Form_Update_account() {
     const { id } = useParams();
     const account = useSelector(data => data.Accounts.find((u) => u.account_id === parseInt(id)))
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -62,7 +61,6 @@ export default function Form_Update_account() {
         <form className='form-account' onSubmit={handleSubmit}>
             <div className='header-add-account'>
                 <h3>Update Account</h3>
-                <button onClick={() => { navigate('/accounts') }}>My Accounts</button>
             </div>
             <div className='inputs-add-account'>
                 <div className='inputs-two'>

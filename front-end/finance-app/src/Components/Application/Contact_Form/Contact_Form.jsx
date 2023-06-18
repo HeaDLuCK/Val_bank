@@ -5,17 +5,17 @@ export default function Contact_Form(){
             <div className='form'>
                 <div className='contactSide'>
                     <div className='divs'>
-                        <i class='fas fa-map-marker-alt'></i>
+                        <i className='fas fa-map-marker-alt'></i>
                         <h5>Adresse</h5>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
                     </div>
                     <div className='divs'>
-                        <i class="fa fa-phone"></i>
+                        <i className="fa fa-phone"></i>
                         <h5>Phone</h5>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                     <div className='divs'>
-                        <i class="fa fa-envelope"></i>
+                        <i className="fa fa-envelope"></i>
                         <h5>Email</h5>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>

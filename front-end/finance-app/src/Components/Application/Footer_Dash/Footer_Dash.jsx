@@ -17,10 +17,10 @@ export default function Footer_Dash(){
                 <div className='footer_dash_rights'>
                     <h4>Follow us</h4> 
                     <div className='icons_dash'>
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-linkedin-in"></i>
-                            <i class="fa-brands fa-youtube"></i>
-                            <i class="fa-brands fa-twitter"></i>
+                            <i className="fa-brands fa-facebook"></i>
+                            <i className="fa-brands fa-linkedin-in"></i>
+                            <i className="fa-brands fa-youtube"></i>
+                            <i className="fa-brands fa-twitter"></i>
                     </div>
                 </div>
             </div>

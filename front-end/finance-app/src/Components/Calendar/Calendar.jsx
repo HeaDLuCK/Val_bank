@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
 export default function MyAppp() {
-  const navigate = useNavigate();
+  const refresh = () => window.location.reload(true)
   const [data, setData] = useState({
     acc_id: '',
     pay_code: '',
@@ -51,6 +51,7 @@ export default function MyAppp() {
       }
     }).then(res => {
       console.log(res);
+      refresh()
     }).catch(err => {
       console.log(err);
       swal('Warning', err.message, 'warning')
@@ -85,7 +86,7 @@ export default function MyAppp() {
   const tileContent = (e) => {
     let helper = false
     event.map(event => {
-      if (event.pay_day.slice(0, 10) == new Date(e.date).toJSON().slice(0, 10)) {
+      if (event.pay_day.slice(0, 10) === new Date(e.date).toJSON().slice(0, 10)) {
         helper = true
       };
     })

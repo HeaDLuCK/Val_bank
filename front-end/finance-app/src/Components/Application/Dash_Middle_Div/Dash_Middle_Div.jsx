@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Dash_Middle_Div.css';
 import { Chart } from "react-google-charts";
 import axios from 'axios';
@@ -26,14 +26,15 @@ ChartJS.register(
 
 )
 
-export default function Middle_div() {
+export default function Middle_div(props) {
     const dateH = new Date().setMonth(new Date().getMonth() - 1)
     const [dates, setDates] = useState({ startDate: new Date(dateH).toJSON().slice(0, 10), endDate: new Date().toJSON().slice(0, 10) });
-    const [balance, setBalance] = useState();
+    const [balance, setBalance] = useState(0);
     const [recieve, setRecieve] = useState([]);
     const [deposit, setDeposit] = useState([]);
     const account = useSelector(state => state.idAccount);
     const [expenses, setExpenses] = useState([]);
+    const [loading, setLoading] = useState(true)
     const handleInput = (e) => {
         setDates({ ...dates, [e.target.name]: e.target.value })
         console.log(dates);
@@ -77,10 +78,26 @@ export default function Middle_div() {
         })
         return dataa.sort((a, b) => { return new Date(a[0]) > new Date(b[0]) ? 1 : -1 });
     }
-
+    const canvasRef = useRef(null)
+    const plugins = [
+        {
+            afterDraw: function (chart) {
+                if (chart.data.datasets[0].data.length < 1) {
+                    let ctx = chart.ctx;
+                    let width = chart.width;
+                    let height = chart.height;
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    ctx.font = "30px Jost";
+                    ctx.fillText("No data to display", width / 2, height / 2);
+                    ctx.restore();
+                }
+            },
+        },
+    ];
     useEffect(() => {
         console.log("change");
-        axios.post(`/api/data/dashboard/${account}`, dates,
+        axios.post(`/api/data/dashboard/${!account ? localStorage.getItem('accounts') : account}`, dates,
             {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('token')}`,
@@ -96,6 +113,7 @@ export default function Middle_div() {
             }).catch(err => {
                 console.log(err);
             });
+            setLoading(false)
     }, [dates, account]);
 
     const data1 = {
@@ -179,15 +197,16 @@ export default function Middle_div() {
 
             <div className='middle'>
                 <div className='Balence'>
-                    <h2>Total Balance</h2>
+                    <h2>Balance</h2>
                     <h1>{balance}<span>DH</span></h1>
                 </div>
                 <div className='Expenses'>
                     <h1>Expenses</h1>
-                    <Doughnut
+                    {!loading ? expenses.length > 0 ? <Doughnut
                         data={data1}
                         options={options1}
-                    />
+                    /> : <h2>NO DATA</h2>:
+                    <div></div>}
                 </div>
             </div>
             <div className='Transactions'>
@@ -195,7 +214,7 @@ export default function Middle_div() {
                     <h1>Transactions Chart</h1>
                     <p>deposits/expenses</p>
                 </div>
-                <Bar data={data2} options={options2}/>
+                {!loading ? <Bar data={data2} options={options2} plugins={plugins} /> : <canvas></canvas>}
             </div>
         </div>
     )

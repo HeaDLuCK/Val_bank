@@ -15,22 +15,22 @@ export default function SideBar(){
                             <Icon  path={mdiViewDashboard} size={0.7} /><Link to={'/dashboard'}>Dashboard</Link>
                         </li>
                         <li>
-                            <i class="fa fa-arrow-right-arrow-left"></i><Link to={'/transaction'}>Transactions</Link>
+                            <i className="fa fa-arrow-right-arrow-left"></i><Link to={'/transaction'}>Transactions</Link>
                         </li>
                         <li>
-                            <i class="fa fa-building-columns"></i><Link to={'/accounts'}>Accounts</Link>
+                            <i className="fa fa-building-columns"></i><Link to={'/accounts'}>Accounts</Link>
                         </li>
                         {/* <li>
                             <i class="fa fa-file"></i><a href="">Reports</a>
                         </li> */}
                         <li>
-                            <i class="fa-regular fa-calendar-days"></i><Link to={'/calendar'}>Calendar</Link>
+                            <i className="fa-regular fa-calendar-days"></i><Link to={'/calendar'}>Calendar</Link>
                         </li>
                         <li>
-                            <i class="fa-solid fa-gear"></i><Link to={'/settings_user'}>Settings</Link>
+                            <i className="fa-solid fa-gear"></i><Link to={'/settings_user'}>Settings</Link>
                         </li>
                         <li>
-                            <i class="fa-solid fa-comment-dots"></i><Link to={'/contact'}>Contact Us</Link>
+                            <i className="fa-solid fa-comment-dots"></i><Link to={'/contact'}>Contact Us</Link>
                         </li>
                     </ul>
                     <a href=""></a>
