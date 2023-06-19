@@ -70,6 +70,7 @@ class TransactionController extends Controller
                         "name" => $fullname,
                         "avatar" => $base64,
                         "amount" => "-" . $elem->amount,
+                        "description" => $elem->description,
                         "date" => $elem->created_at
                     ];
                 } elseif (in_array($elem->receiverAccount->account_id, $ids)) {

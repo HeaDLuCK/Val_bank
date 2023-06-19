@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\AutoPayActivated;
+use App\Mail\NotificationMail;
 use App\Models\AutoPay;
 use App\Models\Bill;
 use App\Models\finance_account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AutoPayController extends Controller
 {
@@ -53,6 +55,7 @@ class AutoPayController extends Controller
         $newOne->save();
 
         event(new AutoPayActivated($newOne));
+        Mail::to(auth()->user()->user_detail->email)->send(new NotificationMail());
         return response()->json(["message" => "auto pay activated successfully"]);
     }
 

@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         $user_detail->code_postal = fake()->postcode();
         $user_detail->address = fake()->address();
         $user_detail->cin = fake()->numberBetween($min = 1000, $max = 9000);
-        $user_detail->avatar_image = '1.png';
+        $user_detail->avatar_image = '3.jpg';
         $user_detail->save();
 
         $userB = new User();
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
         $user_detail->code_postal = fake()->postcode();
         $user_detail->address = fake()->address();
         $user_detail->cin = fake()->numberBetween($min = 1000, $max = 9000);
-        $user_detail->avatar_image = '1.png';
+        $user_detail->avatar_image = '3.jpg';
         $user_detail->save();
 
         $finance_account= new finance_account();

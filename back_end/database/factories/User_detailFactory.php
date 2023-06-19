@@ -18,18 +18,17 @@ class User_detailFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'user_id'=>User::factory()->create()->id,
-            'first_name'=>fake()->firstName(),
-            'last_name'=>fake()->lastName(),
-            'birthday'=>fake()->date('Y-m-d'),
-            'email'=>fake()->email(),
-            'phone_number'=>fake()->phoneNumber(),
-            'gender'=>'male',
-            'city'=>fake()->city(),
-            'code_postal'=>fake()->postcode(),
-            'address'=>fake()->address(),
-            'cin'=>fake()->numberBetween($min = 1000, $max = 9000) ,
-            'avatar_image'=>'1.png',
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'birthday' => fake()->date('Y-m-d'),
+            'email' => fake()->email(),
+            'phone_number' => fake()->phoneNumber(),
+            'gender' => 'male',
+            'city' => fake()->city(),
+            'code_postal' => fake()->postcode(),
+            'address' => fake()->address(),
+            'cin' => fake()->numberBetween($min = 1000, $max = 9000),
+            'avatar_image' => fake()->numberBetween(1, 10) .'.jpg'
         ];
     }
 }

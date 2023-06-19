@@ -20,7 +20,7 @@ class finance_accountFactory extends Factory
         return [
             'user_id' => fake()->numberBetween(1, 10),
             'account_name' => fake()->word(),
-            'balance' => fake()->numberBetween(50, 200000),
+            'balance' => fake()->numberBetween(50, 20000),
             'account_type' => fake()->word(),
             'account_status' => fake()->boolean()
         ];

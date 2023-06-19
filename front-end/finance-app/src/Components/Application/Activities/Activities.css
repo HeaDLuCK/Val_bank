@@ -93,6 +93,14 @@
     background: #acdef8;
     height: 45px;
 }
+.ActivitiesTransaction .user_activity span.added {
+    color: #308052;
+}
+
+.ActivitiesTransaction .user_activity span.minus {
+    color: #e32428;
+}
+
 
 .oneactivity .user_activity .user_profile {
     display: flex;

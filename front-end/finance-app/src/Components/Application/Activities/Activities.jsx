@@ -77,7 +77,7 @@ function Activities() {
                                 </div>
 
                                 <p>{t.description}</p>
-                                <span>{t.amount}dh</span>
+                                <span className={t.amount.slice(0,1)==='+'?'added':'minus'}>{t.amount}dh</span>
                             </div>
                         </div>
                     )
